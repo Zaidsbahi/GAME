@@ -14,11 +14,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_MainMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_MainMenu.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +29,10 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../../../UnrealEngine/UE_5.5/Engine/Source/Runtime/CoreOnline/Public/Online/CoreOnline.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Private/GameplayStatics.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.h" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -172,7 +170,7 @@
       <option name="presentableId" value="Default" />
       <updated>1734411077970</updated>
       <workItem from="1734411082031" duration="10427000" />
-      <workItem from="1734427449003" duration="10835000" />
+      <workItem from="1734427449003" duration="11480000" />
     </task>
     <servers />
   </component>
