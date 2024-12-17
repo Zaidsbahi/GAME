@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "k:\\unrealengineprojects\\collabprojectnetwork\\game\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\game\\permoduleinline.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "k:\\unrealengineprojects\\collabprojectnetwork\\game\\intermediate\\build\\win64\\x64\\gameeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.inclorderunreal5_3.h.pch",
+        "Includes": [
+            "k:\\unrealengineprojects\\collabprojectnetwork\\game\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\game\\definitions.game.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\source\\runtime\\core\\public\\hal\\permoduleinline.inl"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

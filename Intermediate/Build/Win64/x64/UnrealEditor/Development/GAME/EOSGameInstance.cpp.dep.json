@@ -1,0 +1,35 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "k:\\unrealengineprojects\\collabprojectnetwork\\game\\source\\game\\multiplayer\\eosgameinstance\\eosgameinstance.cpp",
+        "ProvidedModule": "",
+        "PCH": "k:\\unrealengineprojects\\collabprojectnetwork\\game\\intermediate\\build\\win64\\x64\\gameeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.inclorderunreal5_3.h.pch",
+        "Includes": [
+            "k:\\unrealengineprojects\\collabprojectnetwork\\game\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\game\\definitions.game.h",
+            "k:\\unrealengineprojects\\collabprojectnetwork\\game\\source\\game\\multiplayer\\eosgameinstance\\eosgameinstance.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\interfaces\\onlinesessioninterface.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinesubsystemtypes.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinesubsystemnames.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinedelegatemacros.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\interfaces\\onlinesessiondelegates.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinekeyvaluepair.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinesessionsettings.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinesubsystem.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinesubsystemmodule.h",
+            "k:\\unrealengineprojects\\collabprojectnetwork\\game\\intermediate\\build\\win64\\unrealeditor\\inc\\game\\uht\\eosgameinstance.generated.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\interfaces\\onlineidentityinterface.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\kismet\\gameplaystatics.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\kismet\\kismetsystemlibrary.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\source\\runtime\\coreuobject\\public\\uobject\\propertyaccessutil.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\kismetsystemlibrary.generated.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\sound\\dialoguetypes.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\dialoguetypes.generated.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\kismet\\gameplaystaticstypes.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gameplaystaticstypes.generated.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gameplaystatics.generated.h",
+            "k:\\unrealengine\\ue_5.5\\engine\\plugins\\online\\onlinebase\\source\\public\\online\\onlinesessionnames.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

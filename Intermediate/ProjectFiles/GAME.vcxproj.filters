@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\GAME.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\GAME.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\GAMEEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.gitattributes" />
+    <None Include="..\..\.gitignore" />
+    <None Include="..\..\.vsconfig" />
+    <None Include="..\..\GAME.sln.DotSettings.user" />
+    <None Include="..\..\KhaledLaunchGame.bat" />
+    <None Include="..\..\LaunchGame.bat" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultDeviceProfiles.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGameplayTags.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\GAME">
+      <UniqueIdentifier>{0C47DC27-B2C1-3CE9-89E6-B13EB0F6F28B}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\GAME\GAME.Build.cs">
+      <Filter>Source\GAME</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\GAME\GAME.cpp">
+      <Filter>Source\GAME</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GAME\GAME.h">
+      <Filter>Source\GAME</Filter>
+    </ClCompile>
+    <Filter Include="Source\GAME\Multiplayer">
+      <UniqueIdentifier>{68138E22-BDED-3019-B141-A0078972C74A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GAME\Multiplayer\EOSGameInstance">
+      <UniqueIdentifier>{09584637-BD57-3437-8045-32073A65D6B2}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GAME\Multiplayer\EOSGameInstance\EOSGameInstance.cpp">
+      <Filter>Source\GAME\Multiplayer\EOSGameInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GAME\Multiplayer\EOSGameInstance\EOSGameInstance.h">
+      <Filter>Source\GAME\Multiplayer\EOSGameInstance</Filter>
+    </ClCompile>
+    <Filter Include="Source\GAME\Multiplayer\MainMenu">
+      <UniqueIdentifier>{21D44042-FFDA-304A-A0C6-912E24E6A699}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GAME\Multiplayer\MainMenu\MainMenu.cpp">
+      <Filter>Source\GAME\Multiplayer\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GAME\Multiplayer\MainMenu\MainMenu.h">
+      <Filter>Source\GAME\Multiplayer\MainMenu</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

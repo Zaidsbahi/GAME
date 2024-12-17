@@ -1,0 +1,13 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "k:\\unrealengineprojects\\collabprojectnetwork\\game\\intermediate\\build\\win64\\unrealeditor\\inc\\game\\uht\\game.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "k:\\unrealengineprojects\\collabprojectnetwork\\game\\intermediate\\build\\win64\\x64\\gameeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.inclorderunreal5_3.h.pch",
+        "Includes": [
+            "k:\\unrealengineprojects\\collabprojectnetwork\\game\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\game\\definitions.game.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
