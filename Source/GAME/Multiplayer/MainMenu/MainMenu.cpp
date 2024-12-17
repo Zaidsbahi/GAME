@@ -8,6 +8,7 @@ void UMainMenu::NativeConstruct()
 	GameInst = GetGameInstance<UEOSGameInstance>();
 	
 	LoginBtn->OnClicked.AddDynamic(this, &UMainMenu::LoginBtnClicked);
+	CreateSessionBtn->OnClicked.AddDynamic(this, &UMainMenu::CreateSessionBtnClicked);
 }
 
 void UMainMenu::LoginBtnClicked()
@@ -15,5 +16,13 @@ void UMainMenu::LoginBtnClicked()
 	if (GameInst)
 	{
 		GameInst->Login();
+	}
+}
+
+void UMainMenu::CreateSessionBtnClicked()
+{
+	if (GameInst)
+	{
+		GameInst->CreateSession();
 	}
 }
