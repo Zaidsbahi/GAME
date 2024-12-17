@@ -2,8 +2,10 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
+#include "Interfaces/OnlineSessionInterface.h"
+#include "OnlineSessionSettings.h"
+#include "Interfaces/OnlineSessionInterface.h"
 #include "EOSGameInstance.generated.h"
-
 
 UCLASS()
 class GAME_API UEOSGameInstance : public UGameInstance
@@ -13,10 +15,14 @@ class GAME_API UEOSGameInstance : public UGameInstance
 public:
 
 	UFUNCTION(BlueprintCallable)
-	void Login();	
+	void Login();
+	
 	UFUNCTION(BlueprintCallable)
 	void CreateSession();
 
+	UFUNCTION(BlueprintCallable)
+	void FindSession();
+	
 protected:
 	
 	virtual void Init() override;
@@ -30,8 +36,12 @@ private:
 	
 	void LoginComplete(int NumOfPlayers,bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error);
 	void CreateSessionComplete(FName name, bool bWasSuccessful);
+	void FindSessionComplete(bool bWasSuccessful);
+	void JoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result);
 
 	UPROPERTY(EditDefaultsOnly)
 	TSoftObjectPtr<UWorld> GameLevel;
+
+	TSharedPtr<class FOnlineSessionSearch> SessionSearch;
 	
 };
