@@ -1,1 +1,1 @@
-"C:\Program Files\Epic Games\UE_5.5\Engine\Binaries\Win64\UnrealEditor.exe" "E:\CGL\BA3\Semester Project BA3\GAME\GAME.uproject" -game -log
+"C:\Program Files\Epic Games\UE_5.5\Engine\Binaries\Win64\UnrealEditor.exe" "E:\CGL\BA3\SemesterProjectBA3\GAME\GAME.uproject" -game -log
