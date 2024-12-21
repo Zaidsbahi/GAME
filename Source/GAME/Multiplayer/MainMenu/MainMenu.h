@@ -2,6 +2,8 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "GAME/Multiplayer/EOSGameInstance/EOSGameInstance.h"
+#include "OnlineSessionSettings.h"
 #include "MainMenu.generated.h"
 
 
@@ -28,6 +30,15 @@ private:
 	UPROPERTY(meta = (BindWidget))
 	class UEditableText* SessionNameTextBox;
 
+	UPROPERTY(meta = (BindWidget))
+	class UScrollBox* LobbyListScrollBox;
+	
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<class ULobbyEntry> LobbyEntryClass;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* JoinLobbyBtn;
+
 	UFUNCTION()
 	void LoginBtnClicked();
 	
@@ -40,4 +51,17 @@ private:
 	UFUNCTION()
 	void SessionNameChanged(const FText& Text);
 
+	UFUNCTION()
+	void LobbyEntrySelected(int LobbyEntryIndex);
+
+	UFUNCTION()
+	void JoinLobbyBtnClicked();
+	
+	void SessionSearchCompleted(const TArray<FOnlineSessionSearchResult>& SearchResults);
+
+	int SelectLobbyEntryIndex = -1;
+
 };
+
+
+

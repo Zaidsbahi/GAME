@@ -26,7 +26,7 @@ private:
 	UFUNCTION()
 	void LobbyBtnClicked();
 
-	int LobbyIndex;
+	int LobbyIndex = -1;
 
 protected:
 	virtual void NativeConstruct() override;

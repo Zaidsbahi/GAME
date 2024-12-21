@@ -4,7 +4,6 @@
 #include "Engine/GameInstance.h"
 #include "Interfaces/OnlineSessionInterface.h"
 #include "OnlineSessionSettings.h"
-#include "Interfaces/OnlineSessionInterface.h"
 #include "EOSGameInstance.generated.h"
 
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnSessionSearchCompleted, const TArray<FOnlineSessionSearchResult>&/*SearchResults*/);
@@ -16,6 +15,8 @@ class GAME_API UEOSGameInstance : public UGameInstance
 
 public:
 
+	void JoinLobbyBySearchResultIndex(int Index);
+
 	FOnSessionSearchCompleted SearchCompleted;
 
 	UFUNCTION(BlueprintCallable)
@@ -26,6 +27,7 @@ public:
 
 	UFUNCTION()
 	void FindSession();
+	
 	FORCEINLINE FName GetSessionName() const {return SessionNameKey;}
 	FString GetSessionName(const FOnlineSessionSearchResult& SearchResult) const;
 	

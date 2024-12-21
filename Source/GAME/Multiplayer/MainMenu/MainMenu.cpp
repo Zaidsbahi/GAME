@@ -2,6 +2,8 @@
 #include "GAME/Multiplayer/EOSGameInstance/EOSGameInstance.h"
 #include "Components/Button.h"
 #include "Components/EditableText.h"
+#include "Components/ScrollBox.h"
+#include "GAME/Multiplayer/LobbyEntry/LobbyEntry.h"
 
 void UMainMenu::NativeConstruct()
 {
@@ -13,6 +15,9 @@ void UMainMenu::NativeConstruct()
 	CreateSessionBtn->SetIsEnabled(false);
 	FindSessionBtn->OnClicked.AddDynamic(this, &UMainMenu::FindSessionBtnClicked);
 	SessionNameTextBox->OnTextChanged.AddDynamic(this, &UMainMenu::SessionNameChanged);
+	JoinLobbyBtn->OnClicked.AddDynamic(this, &UMainMenu::JoinLobbyBtnClicked);
+	JoinLobbyBtn->SetIsEnabled(false);
+	GameInst->SearchCompleted.AddUObject(this, &UMainMenu::SessionSearchCompleted);
 }
 
 void UMainMenu::LoginBtnClicked()
@@ -42,4 +47,40 @@ void UMainMenu::FindSessionBtnClicked()
 void UMainMenu::SessionNameChanged(const FText& Text)
 {
 	CreateSessionBtn->SetIsEnabled(!Text.IsEmpty());
+}
+
+void UMainMenu::LobbyEntrySelected(int LobbyEntryIndex)
+{
+	SelectLobbyEntryIndex = LobbyEntryIndex;
+	if (SelectLobbyEntryIndex != -1)
+	{
+		JoinLobbyBtn->SetIsEnabled(true);
+	}
+}
+
+void UMainMenu::JoinLobbyBtnClicked()
+{
+	if (GameInst)
+	{
+		GameInst->JoinLobbyBySearchResultIndex(SelectLobbyEntryIndex);
+	}
+}
+
+
+
+void UMainMenu::SessionSearchCompleted(const TArray<FOnlineSessionSearchResult>& SearchResults)
+{
+	LobbyListScrollBox->ClearChildren();
+	int Index = 0;
+	for (const FOnlineSessionSearchResult& SearchResult : SearchResults)
+	{
+		FString SessionName = GameInst->GetSessionName(SearchResult);
+
+		ULobbyEntry* LobbyEntry = CreateWidget<ULobbyEntry>(LobbyListScrollBox, LobbyEntryClass);
+		LobbyEntry->InitLobbyEntry(FName(SessionName), Index);
+		LobbyListScrollBox->AddChild(LobbyEntry);
+		LobbyEntry->OnLobbyEntrySelected.AddDynamic(this, &UMainMenu::LobbyEntrySelected);
+		++Index;
+		
+	}
 }
