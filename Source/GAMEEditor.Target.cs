@@ -9,6 +9,7 @@ public class GAMEEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
+		
 
 		ExtraModuleNames.AddRange( new string[] { "GAME" } );
 	}

@@ -25,6 +25,9 @@ private:
 	UPROPERTY(meta = (BindWidget))
 	class UButton* FindSessionBtn;
 
+	UPROPERTY(meta = (BindWidget))
+	class UEditableText* SessionNameTextBox;
+
 	UFUNCTION()
 	void LoginBtnClicked();
 	
@@ -33,5 +36,8 @@ private:
 
 	UFUNCTION()
 	void FindSessionBtnClicked();
+
+	UFUNCTION()
+	void SessionNameChanged(const FText& Text);
 
 };

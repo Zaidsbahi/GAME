@@ -15,6 +15,16 @@
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/GI_EOS.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/GI_EOS.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/KhaledTestLevel_02.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/KhaledTestLevel_02.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/MainMenu.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/MainMenu.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_MainMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_MainMenu.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GAME.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GAME.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAMEEditor.Target.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAMEEditor.Target.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +42,8 @@
     <setting file="file://$PROJECT_DIR$/../../../UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Private/GameplayStatics.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/LobbyEntry/LobbyEntry.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/LobbyEntry/LobbyEntry.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.h" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -192,6 +204,7 @@
       <workItem from="1734457403559" duration="1780000" />
       <workItem from="1734553950165" duration="432000" />
       <workItem from="1734558229938" duration="54000" />
+      <workItem from="1734738806539" duration="12236000" />
     </task>
     <servers />
   </component>

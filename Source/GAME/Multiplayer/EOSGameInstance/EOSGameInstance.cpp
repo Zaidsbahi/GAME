@@ -16,7 +16,7 @@ void UEOSGameInstance::Login()
 	}
 }
 
-void UEOSGameInstance::CreateSession()
+void UEOSGameInstance::CreateSession(const FName& SessionName)
 {
 	if (SessionPtr)
 	{
@@ -33,7 +33,7 @@ void UEOSGameInstance::CreateSession()
 		SessionSettings.NumPublicConnections = 10;
 
 		//Passing an Arbitrary Data, and make it available to be read on the client.
-		SessionSettings.Set(FName("LobbyName"), FString("MyFunLobby"), EOnlineDataAdvertisementType::ViaOnlineServiceAndPing);
+		SessionSettings.Set(SessionNameKey, SessionName.ToString(), EOnlineDataAdvertisementType::ViaOnlineServiceAndPing);
 		
 		SessionPtr->CreateSession(0,"FunSession",SessionSettings);
 	}
@@ -51,6 +51,13 @@ void UEOSGameInstance::FindSession()
 		
 		SessionPtr->FindSessions(0, SessionSearch.ToSharedRef());
 	}
+}
+
+FString UEOSGameInstance::GetSessionName(const FOnlineSessionSearchResult& SearchResult) const
+{
+	FString OutValue = {"Name None"};
+	SearchResult.Session.SessionSettings.Get(SessionNameKey, OutValue);
+	return OutValue;
 }
 
 void UEOSGameInstance::Init()
@@ -107,11 +114,11 @@ void UEOSGameInstance::FindSessionComplete(bool bWasSuccessful)
 	{
 		for (const FOnlineSessionSearchResult& LobbyFound : SessionSearch->SearchResults)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Found Session With id: %s"), *LobbyFound.GetSessionIdStr());
+			FString LobbyName = GetSessionName(LobbyFound);
+			UE_LOG(LogTemp, Warning, TEXT("Found Session With id: %s"), *LobbyName);
 		}
-
-		const FOnlineSessionSearchResult SearchResult = SessionSearch->SearchResults[0];
-		SessionPtr->JoinSession(0, "", SearchResult);
+	
+		SearchCompleted.Broadcast(SessionSearch->SearchResults);
 	}
 }
 
@@ -121,6 +128,6 @@ void UEOSGameInstance::JoinSessionComplete(FName SessionName, EOnJoinSessionComp
 	{
 		FString TravelUrl;
 		SessionPtr->GetResolvedConnectString("", TravelUrl);
-		GetFirstLocalPlayerController(GetWorld())->ClientTravel(TravelUrl, TRAVEL_Absolute);
+		GetFirstLocalPlayerController(GetWorld())->ClientTravel(TravelUrl, ETravelType::TRAVEL_Absolute);
 	}
 }

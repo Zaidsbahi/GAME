@@ -7,6 +7,8 @@
 #include "Interfaces/OnlineSessionInterface.h"
 #include "EOSGameInstance.generated.h"
 
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnSessionSearchCompleted, const TArray<FOnlineSessionSearchResult>&/*SearchResults*/);
+
 UCLASS()
 class GAME_API UEOSGameInstance : public UGameInstance
 {
@@ -14,14 +16,18 @@ class GAME_API UEOSGameInstance : public UGameInstance
 
 public:
 
+	FOnSessionSearchCompleted SearchCompleted;
+
 	UFUNCTION(BlueprintCallable)
 	void Login();
 	
 	UFUNCTION(BlueprintCallable)
-	void CreateSession();
+	void CreateSession(const FName& SessionName);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	void FindSession();
+	FORCEINLINE FName GetSessionName() const {return SessionNameKey;}
+	FString GetSessionName(const FOnlineSessionSearchResult& SearchResult) const;
 	
 protected:
 	
@@ -43,5 +49,7 @@ private:
 	TSoftObjectPtr<UWorld> GameLevel;
 
 	TSharedPtr<class FOnlineSessionSearch> SessionSearch;
+
+	const FName SessionNameKey{"SessionNameKey"};
 	
 };
