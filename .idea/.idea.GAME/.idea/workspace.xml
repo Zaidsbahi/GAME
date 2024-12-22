@@ -16,10 +16,15 @@
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/CBP_SandboxCharacter_Echo.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/CBP_SandboxCharacter_Echo.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/CBP_SandboxCharacter_Manny.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/CBP_SandboxCharacter_Manny.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/CBP_SandboxCharacter_Metahuman_Kellan.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/CBP_SandboxCharacter_Metahuman_Kellan.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/CBP_SandboxCharacter_Quinn.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/CBP_SandboxCharacter_Quinn.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/CBP_SandboxCharacter_TwinBlast.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/CBP_SandboxCharacter_TwinBlast.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/CBP_SandboxCharacter_UE4_Mannequin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/CBP_SandboxCharacter_UE4_Mannequin.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_Menu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_Menu.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GAME.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/GAME.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,6 +229,8 @@
       <workItem from="1734772226348" duration="25751000" />
       <workItem from="1734829864659" duration="298000" />
       <workItem from="1734830335448" duration="3220000" />
+      <workItem from="1734835132102" duration="622000" />
+      <workItem from="1734838596458" duration="1644000" />
     </task>
     <servers />
   </component>
