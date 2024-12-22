@@ -17,20 +17,9 @@
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/DefaultLevel.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/DefaultLevel.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/KhaledTestLevel_02.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/KhaledTestLevel_02.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/MainMenu.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/MainMenu.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_MainMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_MainMenu.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Widgets/WidgetData/EUW_SimpleConsoleButton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WidgetData/EUW_SimpleConsoleButton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Widgets/WidgetData/EUW_SimpleConsoleSpinBox.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WidgetData/EUW_SimpleConsoleSpinBox.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LaunchGame.bat" beforeDir="false" afterPath="$PROJECT_DIR$/LaunchGame.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/GAME.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/GAME.Build.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multiplayer/EOSGameInstance/EOSGameInstance.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multiplayer/LobbyEntry/LobbyEntry.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multiplayer/LobbyEntry/LobbyEntry.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_Menu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_Menu.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GAME.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/GAME.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,12 +43,13 @@
     <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/LobbyEntry/LobbyEntry.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Programs/AutomationTool/Scripts/CheckCsprojDotNetVersion.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Core/Public/Templates/SharedPointer.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Classes/Engine/GameInstance.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Classes/Engine/World.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="Toolset" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -232,6 +222,8 @@
       <workItem from="1734753367296" duration="6934000" />
       <workItem from="1734761323885" duration="10010000" />
       <workItem from="1734772226348" duration="25751000" />
+      <workItem from="1734829864659" duration="298000" />
+      <workItem from="1734830335448" duration="3220000" />
     </task>
     <servers />
   </component>

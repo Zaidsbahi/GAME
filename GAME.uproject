@@ -89,6 +89,10 @@
 		{
 			"Name": "EOSOverlayInputProvider",
 			"Enabled": true
+		},
+		{
+			"Name": "OnlineServicesOSSAdapter",
+			"Enabled": true
 		}
 	],
 	"EpicSampleNameHash": "1673045636"
