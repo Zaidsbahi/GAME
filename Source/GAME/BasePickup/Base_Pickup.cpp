@@ -1,0 +1,54 @@
+#include "Base_Pickup.h"
+#include "GameFramework/Character.h"
+#include "Components/SphereComponent.h"
+
+
+ABase_Pickup::ABase_Pickup()
+{
+
+	PrimaryActorTick.bCanEverTick = true;
+
+	SphereCollision = CreateDefaultSubobject<USphereComponent>("Collision");
+	RootComponent = SphereCollision;
+	SphereCollision->SetGenerateOverlapEvents(true);
+	SphereCollision->SetSphereRadius(200.0f);
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
+	Mesh->SetupAttachment(SphereCollision);
+	Mesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	bReplicates = true;
+
+}
+
+
+void ABase_Pickup::BeginPlay()
+{
+	
+	Super::BeginPlay();
+	
+	SphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABase_Pickup::OnBeginOverlap);
+
+}
+
+void ABase_Pickup::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (const auto Character = Cast<ACharacter>(OtherActor))
+	{
+		Pickup(Character);
+	}
+}
+
+void ABase_Pickup::Pickup_Implementation(class ACharacter* OwningCharacter)
+{
+	SetOwner(OwningCharacter);
+}
+
+
+void ABase_Pickup::Tick(float DeltaTime)
+{
+	
+	Super::Tick(DeltaTime);
+
+}
+

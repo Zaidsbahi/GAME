@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "EOS_GameMode.h"
 #include "OnlineSubsystem.h"
 #include "OnlineSubsystemUtils.h"
