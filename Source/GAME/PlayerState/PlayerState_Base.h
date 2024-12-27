@@ -29,4 +29,8 @@ public:
 	void AddJumpCount(int32 Value);
 
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
+
+	UFUNCTION(BlueprintCallable)
+	int ReturnJumpCount();
+
 };

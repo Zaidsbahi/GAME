@@ -19,3 +19,8 @@ void APlayerState_Base::GetLifetimeReplicatedProps(TArray<class FLifetimePropert
 
 	DOREPLIFETIME_CONDITION(APlayerState_Base, JumpCount, COND_OwnerOnly);
 }
+
+int APlayerState_Base::ReturnJumpCount()
+{
+	return JumpCount;
+}

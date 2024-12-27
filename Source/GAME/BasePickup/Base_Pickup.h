@@ -28,6 +28,9 @@ protected:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category ="Pickup", meta=(DisplayName="Pickup"))
 	void Pickup(class ACharacter* OwningCharacter);
 
+	virtual void Pickup_Implementation(class ACharacter* OwningCharacter);
+
+
 public:
 
 	ABase_Pickup();
