@@ -1,6 +1,7 @@
 #include "Base_Pickup.h"
 #include "GameFramework/Character.h"
 #include "Components/SphereComponent.h"
+#include "GAME/PlayerCharacter/PlayerCharacter_Base.h"
 
 
 ABase_Pickup::ABase_Pickup()
@@ -33,15 +34,28 @@ void ABase_Pickup::BeginPlay()
 void ABase_Pickup::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (const auto Character = Cast<ACharacter>(OtherActor))
+	if (APlayerCharacter_Base* PlayerCharacter = Cast<APlayerCharacter_Base>(OtherActor))
 	{
-		Pickup(Character);
+		Pickup(PlayerCharacter);
+
+		        // Destroy the pickup after applying the effect
+        Destroy();
 	}
 }
 
 void ABase_Pickup::Pickup_Implementation(class ACharacter* OwningCharacter)
 {
-	SetOwner(OwningCharacter);
+	if (APlayerCharacter_Base* PlayerCharacter = Cast<APlayerCharacter_Base>(OwningCharacter))
+	{
+		if (PlayerCharacter->HasAuthority())
+		{
+			// Call the CollectPickup function on the player character
+			PlayerCharacter->CollectPickup();
+		}
+
+		SetOwner(PlayerCharacter);
+	}
+	
 }
 
 
