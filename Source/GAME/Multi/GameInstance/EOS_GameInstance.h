@@ -5,7 +5,6 @@
 #include "Interfaces/OnlineSessionInterface.h"
 #include "EOS_GameInstance.generated.h"
 
-
 UCLASS()
 class GAME_API UEOS_GameInstance : public UGameInstance
 {

@@ -1,20 +1,53 @@
 #include "PlayerCharacter_Base.h"
 #include "GAME/PlayerState/PlayerState_Base.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Components/InputComponent.h"
+#include "GameFramework/Controller.h"
+#include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
 #include "Net/UnrealNetwork.h"
 
+////////////////////////////////////////
+///  Constructor & BeginPlay & TICK  ///
+////////////////////////////////////////
 APlayerCharacter_Base::APlayerCharacter_Base()
 {
     PrimaryActorTick.bCanEverTick = true;
 
+    ////////////////////////////////////////
+    //////  Setting Main Variables  ////////
+    ////////////////////////////////////////
+
+    //////  Jump Variables  ////////
     MaxJumpCount = 1;  // Default to 1 jump
     CurrentJumpCount = 1;
     bIsGrounded = true;
+
+    //////  Jump Variables  ////////
+    AirDashSpeed = 1500.f;
+    AirDashDuration = 0.5f;
+    bIsAirDashing = false;
+
+    ////////////////////////////////////////
+    ////////////////////////////////////////
+    ////////////////////////////////////////
+    
+    // Replication
     bReplicates = true;
 }
-
 void APlayerCharacter_Base::BeginPlay()
 {
     Super::BeginPlay();
+
+    // Adding the MappingContext
+    if(APlayerController* PlayerController = Cast<APlayerController>(Controller))
+    {
+        if(UEnhancedInputLocalPlayerSubsystem* Subsystem =
+            ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+        {
+            Subsystem->AddMappingContext(MechanicsMappingContext, 0);
+        }
+    }
     
 
     // Configure the maximum allowed jumps using JumpMaxCount
@@ -22,17 +55,14 @@ void APlayerCharacter_Base::BeginPlay()
 
     UE_LOG(LogTemp, Log, TEXT("BeginPlay: JumpMaxCount set to %d"), JumpMaxCount);
 }
-
 void APlayerCharacter_Base::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 }
 
-void APlayerCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-    Super::SetupPlayerInputComponent(PlayerInputComponent);
-}
-
+////////////////////////////////////////
+///////////  Jump Logic  ///////////////
+////////////////////////////////////////
 void APlayerCharacter_Base::PrintJumpCount()
 {
     if (APlayerState_Base* PS = Cast<APlayerState_Base>(GetPlayerState()))
@@ -48,7 +78,6 @@ void APlayerCharacter_Base::PrintJumpCount()
         }
     }
 }
-
 void APlayerCharacter_Base::Jump()
 {
     if (!CanJump())
@@ -86,8 +115,66 @@ void APlayerCharacter_Base::Jump()
         }
     }
 }
+void APlayerCharacter_Base::ResetJumpCount()
+{
+    // Reset the current jump count to the maximum
+    CurrentJumpCount = MaxJumpCount;
+}
 
+////////////////////////////////////////
+//////////  AirDash Logic  /////////////
+////////////////////////////////////////
+void APlayerCharacter_Base::PerformAirDash()
+{
+    // Return if AirDashing
+    if (bIsAirDashing) return;
+    
+    // Setting is Dashing true
+    bIsAirDashing = true;
 
+    // Calculating The AirDash Direction based on Input
+    FVector DashDirection = GetActorForwardVector() * AirDashSpeed;
+
+    // Apply the dash using LaucnhCharacter
+    LaunchCharacter(DashDirection, true, true);
+
+    //Notify the Server
+    if (HasAuthority())
+    {
+        PerformAirDash_NetMulticast();
+    }
+    else
+    {
+        PerformAirDash_Server();
+    }
+
+    // Starting the timer to end the dash
+    GetWorldTimerManager().SetTimer(AirDashTimerHandle, this, &APlayerCharacter_Base::EndAirDash, AirDashDuration, false);
+    
+}
+void APlayerCharacter_Base::EndAirDash()
+{
+    bIsAirDashing = false;
+
+    //Stop Any Remaining Movement Applied During the Dash
+    GetCharacterMovement()->StopMovementImmediately();
+    
+}
+void APlayerCharacter_Base::PerformAirDash_NetMulticast_Implementation()
+{
+    if (!HasAuthority())
+    {
+        PerformAirDash();
+    }
+}
+void APlayerCharacter_Base::PerformAirDash_Server_Implementation()
+{
+    PerformAirDash();
+}
+
+////////////////////////////////////////
+//////      Pickup Logic        ////////
+////////////////////////////////////////
 void APlayerCharacter_Base::CollectPickup_Implementation()
 {
     if (HasAuthority())
@@ -105,18 +192,23 @@ void APlayerCharacter_Base::CollectPickup_Implementation()
         }
     }
 }
-
 bool APlayerCharacter_Base::CollectPickup_Validate()
 {
     return true;  // Validation always succeeds
 }
 
-void APlayerCharacter_Base::ResetJumpCount()
+////////////////////////////////////////
+////  PlayerInput And Replication  /////
+////////////////////////////////////////
+void APlayerCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-    // Reset the current jump count to the maximum
-    CurrentJumpCount = MaxJumpCount;
-}
+    Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+    if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+    {
+        EnhancedInputComponent->BindAction(AirDash, ETriggerEvent::Started, this, &APlayerCharacter_Base::PerformAirDash);
+    }
+}
 void APlayerCharacter_Base::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -124,4 +216,7 @@ void APlayerCharacter_Base::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
     // Replicate jump-related variables
     DOREPLIFETIME(APlayerCharacter_Base, MaxJumpCount);
     DOREPLIFETIME(APlayerCharacter_Base, CurrentJumpCount);
+
+    // Replicate AirDash Variables
+    DOREPLIFETIME(APlayerCharacter_Base, bIsAirDashing);
 }
