@@ -80,10 +80,8 @@ void APlayerCharacter_Base::PrintJumpCount()
 }
 void APlayerCharacter_Base::Jump()
 {
-    if (!CanJump())
-    {
-        return;
-    }
+    if (!CanJump()) return;
+    
     
     if (APlayerState_Base* PS = Cast<APlayerState_Base>(GetPlayerState()))
     {
@@ -124,40 +122,51 @@ void APlayerCharacter_Base::ResetJumpCount()
 ////////////////////////////////////////
 //////////  AirDash Logic  /////////////
 ////////////////////////////////////////
-void APlayerCharacter_Base::PerformAirDash()
+void APlayerCharacter_Base::PerformAirDash()    
 {
     // Return if AirDashing
     if (bIsAirDashing) return;
     
-    // Setting is Dashing true
-    bIsAirDashing = true;
-
-    // Calculating The AirDash Direction based on Input
-    FVector DashDirection = GetActorForwardVector() * AirDashSpeed;
-
-    // Apply the dash using LaucnhCharacter
-    LaunchCharacter(DashDirection, true, true);
-
-    //Notify the Server
-    if (HasAuthority())
+    if (APlayerState_Base* PS = Cast<APlayerState_Base>(GetPlayerState()))
     {
-        PerformAirDash_NetMulticast();
-    }
-    else
-    {
-        PerformAirDash_Server();
-    }
-
-    // Starting the timer to end the dash
-    GetWorldTimerManager().SetTimer(AirDashTimerHandle, this, &APlayerCharacter_Base::EndAirDash, AirDashDuration, false);
+        int32 DashCountFromState = PS->ReturnDashCount();
     
+        if (DashCountFromState > 0)
+        {
+            
+            // Setting is Dashing true
+            bIsAirDashing = true;
+
+            PS->AddDashCount(-1);
+
+            // Calculating The AirDash Direction based on Input
+            FVector DashDirection = GetActorForwardVector() * AirDashSpeed;
+
+            // Apply the dash using LaucnhCharacter
+            LaunchCharacter(DashDirection, true, true);
+
+            //Notify the Server
+            if (HasAuthority())
+            {
+                PerformAirDash_NetMulticast();
+            }
+            else
+            {
+                PerformAirDash_Server();
+            }
+
+            // Starting the timer to end the dash
+            GetWorldTimerManager().SetTimer(AirDashTimerHandle, this, &APlayerCharacter_Base::EndAirDash, AirDashDuration, false);
+
+        }
+    }
 }
 void APlayerCharacter_Base::EndAirDash()
 {
     bIsAirDashing = false;
 
     //Stop Any Remaining Movement Applied During the Dash
-    GetCharacterMovement()->StopMovementImmediately();
+    //GetCharacterMovement()->StopMovementImmediately();
     
 }
 void APlayerCharacter_Base::PerformAirDash_NetMulticast_Implementation()

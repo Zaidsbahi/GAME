@@ -9,7 +9,6 @@ class GAME_API APlayerCharacter_Base : public ACharacter
 {
 
 	GENERATED_BODY()
-
 	
 	///// Timer /////
 	FTimerHandle AirDashTimerHandle;
