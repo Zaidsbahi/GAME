@@ -5,6 +5,7 @@
 #include "GameFramework/Controller.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "GAME/ProximityBoost/ProximityBoost_Component.h"
 #include "Net/UnrealNetwork.h"
 
 ////////////////////////////////////////
@@ -28,6 +29,9 @@ APlayerCharacter_Base::APlayerCharacter_Base()
     AirDashDuration = 0.5f;
     bIsAirDashing = false;
 
+    //////  Proximity Boost Component  ////////
+    ProximityBoostComponent = CreateDefaultSubobject<UProximityBoost_Component>(TEXT("ProximityBoostComponent"));
+    
     ////////////////////////////////////////
     ////////////////////////////////////////
     ////////////////////////////////////////
@@ -207,6 +211,21 @@ bool APlayerCharacter_Base::CollectPickup_Validate()
 }
 
 ////////////////////////////////////////
+//////      Proximity Logic  ///////////
+////////////////////////////////////////
+void APlayerCharacter_Base::EnableSuperJump(bool bEnable)
+{
+    if (bEnable)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Enable super jump"));
+    }
+    else
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Disable super jump"));
+    }
+}
+
+////////////////////////////////////////
 ////  PlayerInput And Replication  /////
 ////////////////////////////////////////
 void APlayerCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -228,4 +247,7 @@ void APlayerCharacter_Base::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 
     // Replicate AirDash Variables
     DOREPLIFETIME(APlayerCharacter_Base, bIsAirDashing);
+    DOREPLIFETIME(APlayerCharacter_Base, AirDashSpeed);
 }
+
+
