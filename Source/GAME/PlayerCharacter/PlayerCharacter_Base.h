@@ -10,30 +10,33 @@ class GAME_API APlayerCharacter_Base : public ACharacter
 {
 
 	GENERATED_BODY()
-	
-	///// Timer /////
-	FTimerHandle AirDashTimerHandle;
 
-	////////////////////////////////
-	/// Inputs & MappingContext  ///
-	////////////////////////////////
+	////  PRIVATE  ////
+	
+	////////////////////////////////////////
+	/// Inputs & MappingContext & Timer  ///
+	////////////////////////////////////////
 	UPROPERTY(EditAnywhere,BlueprintReadOnly, Category= "Input", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class UInputAction> AirDash;
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= "Input",meta=(AllowPrivateAccess = "true"))
 	TObjectPtr<class UInputMappingContext> MechanicsMappingContext;
+
+	///// Timer /////
+	FTimerHandle AirDashTimerHandle;
 
 	UPROPERTY()
 	UProximityBoost_Component* ProximityBoostComponent;
 
+
+	////  Protected  ////
 protected:
 
+	// Begin Play
 	virtual void BeginPlay() override;
 
 	////////////////////////////////
 	//////  JUMP Variables  ////////
 	////////////////////////////////
-	
 	// Track the maximum jump count based on pickups
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Jump")
 	int32 MaxJumpCount;
@@ -42,7 +45,6 @@ protected:
 	int32 CurrentJumpCount;
 	// Flag to track if the character is on the ground
 	bool bIsGrounded;
-
 	
 	////////////////////////////////
 	//////  Dash Variables  ////////
@@ -53,9 +55,11 @@ protected:
 	// ?bIsAirDashing is the Character AirDashing
 	UPROPERTY(Replicated)
 	bool bIsAirDashing;
-	
+
+	////  PUBLIC  ////
 public:
 
+	// Constructor
 	APlayerCharacter_Base();
 
 	////////////////////////////////
@@ -68,7 +72,6 @@ public:
 	////////////////////////////////
 	//////  JUMP Functions  ////////
 	////////////////////////////////
-	
 	// Function to handle jumps
 	virtual void Jump() override;
 	UFUNCTION(BlueprintCallable, Category = "Jump")
@@ -79,7 +82,6 @@ public:
 	///////////////////////////////
 	////  AirDash Functions ///////
 	///////////////////////////////
-	
 	// AirDash Normal Function
 	void PerformAirDash();
 	// AirDash Server Function

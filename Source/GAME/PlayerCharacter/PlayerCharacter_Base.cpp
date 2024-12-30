@@ -249,5 +249,3 @@ void APlayerCharacter_Base::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
     DOREPLIFETIME(APlayerCharacter_Base, bIsAirDashing);
     DOREPLIFETIME(APlayerCharacter_Base, AirDashSpeed);
 }
-
-

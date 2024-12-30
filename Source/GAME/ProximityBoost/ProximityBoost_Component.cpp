@@ -16,6 +16,7 @@ UProximityBoost_Component::UProximityBoost_Component()
 	SphereRadius = 300.0f; 
 	EffectDuration = 2.0f; 
 	bCanInfiniteDashAndDoubleJump = false;
+	bIsStillInRangeOfProximity = false;
 	SetIsReplicatedByDefault(true);
 
 	// Add a sphere component to detect proximity
@@ -83,6 +84,9 @@ void UProximityBoost_Component::OnSphereOverlapBegin(UPrimitiveComponent* Overla
 			{
 				ActivateProximityBoost();
 
+				// Set is still in range active
+				bIsStillInRangeOfProximity = true;
+				
 				// Changing Colors to Green for the Static Mesh
 				if (StaticMesh)
 				{
@@ -108,6 +112,7 @@ void UProximityBoost_Component::OnSphereOverlapEnd(UPrimitiveComponent* Overlapp
 			{
 				// Start a timer to deactivate the boost after the delay
 				GetWorld()->GetTimerManager().SetTimer(ProximityEffectTimer, this, &UProximityBoost_Component::DeactivateProximityBoost, EffectDuration, false);
+				bIsStillInRangeOfProximity = false;
 			}
 		}
 	}
@@ -124,7 +129,6 @@ void UProximityBoost_Component::OnRep_ProximityState()
 		Character->EnableSuperJump(bCanInfiniteDashAndDoubleJump);
 	}
 }
-
 
 ////////////////////////////////////////////////
 ////  Activate & Deactivate ProximityBoost  ////
@@ -143,6 +147,7 @@ void UProximityBoost_Component::ActivateProximityBoost()
 void UProximityBoost_Component::DeactivateProximityBoost()
 {
 	if (!bCanInfiniteDashAndDoubleJump) return;
+	if (bIsStillInRangeOfProximity) return;
 	
 	bCanInfiniteDashAndDoubleJump = false;
 	
@@ -172,4 +177,5 @@ void UProximityBoost_Component::GetLifetimeReplicatedProps(TArray<FLifetimePrope
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(UProximityBoost_Component, bCanInfiniteDashAndDoubleJump);
+	DOREPLIFETIME(UProximityBoost_Component, bIsStillInRangeOfProximity);
 }

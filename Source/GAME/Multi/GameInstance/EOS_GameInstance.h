@@ -8,6 +8,7 @@
 UCLASS()
 class GAME_API UEOS_GameInstance : public UGameInstance
 {
+	
 	GENERATED_BODY()
 
 public:
@@ -20,12 +21,10 @@ public:
 
 	UFUNCTION(BlueprintCallable,BlueprintPure, Category= "EOS Function")
 	bool IsPlayerLoggedIn();
-
-
+	
 	UFUNCTION(BlueprintCallable, Category= "EOS Function")
 	void CreateEOSSession(bool bIsDeticatedServer, bool bIsLanServer, int32 NumberOfPublicConnections);
-
-
+	
 	UFUNCTION(BlueprintCallable, Category= "EOS Function")
 	void FindSessionAndJoin();
 	
