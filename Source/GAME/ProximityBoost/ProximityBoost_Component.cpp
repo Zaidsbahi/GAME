@@ -4,7 +4,9 @@
 #include "TimerManager.h"
 #include "GAME/PlayerCharacter/PlayerCharacter_Base.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Game/PlayerState/PlayerState_Base.h"
 #include "Net/UnrealNetwork.h"
+
 
 ///////////////////////////////////////////////////
 ////  Constructor & BeginPlay & TickComponent  ////
@@ -31,7 +33,6 @@ UProximityBoost_Component::UProximityBoost_Component()
 	StaticMesh->SetupAttachment(Sphere);
 	StaticMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision); // Disable collision
 	StaticMesh->SetVisibility(true); // Ensure it's visible
-
 	
 }
 void UProximityBoost_Component::BeginPlay()
@@ -75,6 +76,7 @@ void UProximityBoost_Component::TickComponent(float DeltaTime, ELevelTick TickTy
 void UProximityBoost_Component::OnSphereOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	
 	if (OtherActor && OtherActor != GetOwner())
 	{
 		if (APlayerCharacter_Base* OtherPlayer = Cast<APlayerCharacter_Base>(OtherActor))
@@ -135,10 +137,12 @@ void UProximityBoost_Component::OnRep_ProximityState()
 ////////////////////////////////////////////////
 void UProximityBoost_Component::ActivateProximityBoost()
 {
+	
 	if (bCanInfiniteDashAndDoubleJump) return;
 	bCanInfiniteDashAndDoubleJump = true;
 	if (APlayerCharacter_Base* PlayerCharacter = Cast<APlayerCharacter_Base>(GetOwner()))
 	{
+		if (PlayerCharacter->IsPlayerStateActiaveBool() == false)return;
 		PlayerCharacter->GetCharacterMovement()->JumpZVelocity = 1000;
 		PlayerCharacter->AirDashSpeed = 3000.0f;
 	}
@@ -148,9 +152,8 @@ void UProximityBoost_Component::DeactivateProximityBoost()
 {
 	if (!bCanInfiniteDashAndDoubleJump) return;
 	if (bIsStillInRangeOfProximity) return;
-	
 	bCanInfiniteDashAndDoubleJump = false;
-	
+
 	// Changing Colors to Green for the Static Mesh
 	if (StaticMesh)
 	{
@@ -163,9 +166,15 @@ void UProximityBoost_Component::DeactivateProximityBoost()
 
 	if (APlayerCharacter_Base* PlayerCharacter = Cast<APlayerCharacter_Base>(GetOwner()))
 	{
+		if (PlayerCharacter->IsPlayerStateActiaveBool() == false)return;
 		PlayerCharacter->GetCharacterMovement()->JumpZVelocity = 500;
 		PlayerCharacter->AirDashSpeed = 1500.0f;
 	}
+
+
+	
+
+
 	
 	OnRep_ProximityState(); //For Clients
 }

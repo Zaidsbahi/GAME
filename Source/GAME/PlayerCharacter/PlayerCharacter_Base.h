@@ -115,6 +115,14 @@ public:
 	//////////////////////////////
 
 	virtual void Landed(const FHitResult& Hit) override;
+
+
+	//////////////////////
+	//////  Getters //////
+	//////////////////////
+
+	UFUNCTION()
+	bool IsPlayerStateActiaveBool();
 };
 
 inline void APlayerCharacter_Base::Landed(const FHitResult& Hit)

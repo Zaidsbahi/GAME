@@ -249,3 +249,16 @@ void APlayerCharacter_Base::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
     DOREPLIFETIME(APlayerCharacter_Base, bIsAirDashing);
     DOREPLIFETIME(APlayerCharacter_Base, AirDashSpeed);
 }
+
+
+bool APlayerCharacter_Base::IsPlayerStateActiaveBool()
+{
+    if (APlayerState_Base* PS = Cast<APlayerState_Base>(GetPlayerState()))
+    {
+        return PS->ReturnActivateProximityBoostBool(); 
+    }
+    else
+    {
+        return false;
+    }
+}
