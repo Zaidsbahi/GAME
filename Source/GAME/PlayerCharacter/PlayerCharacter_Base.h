@@ -18,6 +18,8 @@ class GAME_API APlayerCharacter_Base : public ACharacter
 	////////////////////////////////////////
 	UPROPERTY(EditAnywhere,BlueprintReadOnly, Category= "Input", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class UInputAction> AirDash;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UInputAction> RestartLevelAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= "Input",meta=(AllowPrivateAccess = "true"))
 	TObjectPtr<class UInputMappingContext> MechanicsMappingContext;
 
@@ -116,7 +118,10 @@ public:
 
 	virtual void Landed(const FHitResult& Hit) override;
 
+	///Restart
+	void RestartLevel();
 
+	
 	//////////////////////
 	//////  Getters //////
 	//////////////////////

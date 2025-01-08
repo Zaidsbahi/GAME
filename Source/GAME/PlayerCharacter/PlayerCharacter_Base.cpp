@@ -6,6 +6,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GAME/ProximityBoost/ProximityBoost_Component.h"
+#include "GAME/Multi/GameMode/EOS_GameMode.h"
 #include "Net/UnrealNetwork.h"
 
 ////////////////////////////////////////
@@ -239,6 +240,7 @@ void APlayerCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInp
     if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
     {
         EnhancedInputComponent->BindAction(AirDash, ETriggerEvent::Started, this, &APlayerCharacter_Base::PerformAirDash);
+        EnhancedInputComponent->BindAction(RestartLevelAction, ETriggerEvent::Triggered, this, &APlayerCharacter_Base::RestartLevel);
     }
 }
 void APlayerCharacter_Base::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -254,6 +256,23 @@ void APlayerCharacter_Base::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
     DOREPLIFETIME(APlayerCharacter_Base, AirDashSpeed);
 }
 
+
+void APlayerCharacter_Base::RestartLevel()
+{
+    if (HasAuthority()) // Only the host can restart
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Server is restarting the level."));
+        if (AEOS_GameMode* GameMode = Cast<AEOS_GameMode>(GetWorld()->GetAuthGameMode()))
+        {
+            UE_LOG(LogTemp, Warning, TEXT("CastedGameMode"));
+            GameMode->RestartCurrentLevel();
+        }
+    }
+    else
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Only the server/host can restart the level."));
+    }
+}
 
 //////////////////
 ////  Returns  ///

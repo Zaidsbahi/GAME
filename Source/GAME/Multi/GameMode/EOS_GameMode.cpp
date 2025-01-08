@@ -2,6 +2,8 @@
 #include "OnlineSubsystem.h"
 #include "OnlineSubsystemUtils.h"
 #include "Interfaces/OnlineIdentityInterface.h"
+#include "Kismet/GameplayStatics.h"
+#include "GAME/Multi/GameInstance/EOS_GameInstance.h"
 #include "Interfaces/OnlineSessionInterface.h"
 
 void AEOS_GameMode::PostLogin(APlayerController* NewPlayer)
@@ -62,3 +64,31 @@ void AEOS_GameMode::PostLogin(APlayerController* NewPlayer)
 	}
 	
 }
+
+void AEOS_GameMode::RestartCurrentLevel()
+{
+	// Check if the world exists
+	if (GetWorld())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("RestartCurrentLevel called on the server."));
+		// Use the OpenLevelText stored in your game instance
+		UEOS_GameInstance* GameInstance = Cast<UEOS_GameInstance>(GetGameInstance());
+		if (GameInstance)
+		{
+			FString CurrentLevelName = GameInstance->OpenLevelText;
+
+			if (!CurrentLevelName.IsEmpty())
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Restarting level: %s"), *CurrentLevelName);
+				// Restart the level by using ServerTravel with the level name
+				GetWorld()->ServerTravel(CurrentLevelName);
+			}
+			else
+			{
+				UE_LOG(LogTemp, Error, TEXT("Level name is empty! Cannot restart the level."));
+			}
+		}
+	}
+}
+
+
