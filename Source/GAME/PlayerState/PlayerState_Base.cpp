@@ -13,12 +13,10 @@ void APlayerState_Base::OnRep_DashCount(int32 OldValue) const
 {
 	OnDashCountChanged.Broadcast(DashCount);
 }
-
 void APlayerState_Base::OnRep_ActivateProximityBoostJump(bool OldValue) const
 {
 	OnActivateProximityBoostJump.Broadcast(bIsActivateProximityBoostJump);
 }
-
 void APlayerState_Base::OnRep_ActivateProximityBoostDash(bool OldValue) const
 {
 	OnActivateProximityBoostDash.Broadcast(bIsActivateProximityBoostDash);
@@ -40,7 +38,6 @@ void APlayerState_Base::AddDashCount(int32 Value)
 	OnDashCountChanged.Broadcast(DashCount);
 	SetActivateProximityBoostDash();
 }
-
 void APlayerState_Base::SetActivateProximityBoostJump()
 {
 	if (JumpCount > 0)
@@ -54,9 +51,6 @@ void APlayerState_Base::SetActivateProximityBoostJump()
 	
 	OnActivateProximityBoostJump.Broadcast(bIsActivateProximityBoostJump);
 }
-
-
-
 void APlayerState_Base::SetActivateProximityBoostDash()
 {
 	if (DashCount > 0)
@@ -82,12 +76,10 @@ int APlayerState_Base::ReturnDashCount()
 {
 	return DashCount;
 }
-
 bool APlayerState_Base::ReturnActiveProxJump()
 {
 	return bIsActivateProximityBoostJump;
 }
-
 bool APlayerState_Base::ReturnActiveProxDash()
 {
 	return bIsActivateProximityBoostDash;

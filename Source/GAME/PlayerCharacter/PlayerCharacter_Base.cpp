@@ -84,9 +84,9 @@ void APlayerCharacter_Base::PrintJumpCount()
 }
 void APlayerCharacter_Base::Jump()
 {
-    if (!CanJump()) return;
-    
-    
+    //UE_LOG(LogTemp, Log, TEXT("Cant Jump:"));
+   // if (!CanJump()) return;
+    //UE_LOG(LogTemp, Log, TEXT("Can Jump:"));
     if (APlayerState_Base* PS = Cast<APlayerState_Base>(GetPlayerState()))
     {
         int32 JumpCountFromState = PS->ReturnJumpCount();
@@ -114,9 +114,11 @@ void APlayerCharacter_Base::Jump()
         else if (JumpCountFromState == 0 && bIsGrounded)
         {
             Super::Jump();
+            bIsGrounded = false;
             JumpMaxCount = 1; // Reset to single jump
         }
     }
+    UE_LOG(LogTemp, Log, TEXT("Jump() called. JumpCountFromState: %d"), JumpMaxCount);
 }
 void APlayerCharacter_Base::ResetJumpCount()
 {
