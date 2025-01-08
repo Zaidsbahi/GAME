@@ -13,28 +13,62 @@ void APlayerState_Base::OnRep_DashCount(int32 OldValue) const
 {
 	OnDashCountChanged.Broadcast(DashCount);
 }
-void APlayerState_Base::OnRep_ActivateProximityBoost(bool OldValue) const
+
+void APlayerState_Base::OnRep_ActivateProximityBoostJump(bool OldValue) const
 {
-	OnActivateProximityBoost.Broadcast(bIsActivateProximityBoost);
+	OnActivateProximityBoostJump.Broadcast(bIsActivateProximityBoostJump);
 }
 
+void APlayerState_Base::OnRep_ActivateProximityBoostDash(bool OldValue) const
+{
+	OnActivateProximityBoostDash.Broadcast(bIsActivateProximityBoostDash);
+}
+
+
 //////////////////////
-/// Adding Values ////
+/// Setting Values ////
 //////////////////////
 void APlayerState_Base::AddJumpCount(int32 Value)
 {
 	JumpCount += Value;
 	OnJumpCountChanged.Broadcast(JumpCount);
+	SetActivateProximityBoostJump();
 }
 void APlayerState_Base::AddDashCount(int32 Value)
 {
 	DashCount += Value;
 	OnDashCountChanged.Broadcast(DashCount);
+	SetActivateProximityBoostDash();
 }
-void APlayerState_Base::SetActivateProximityBoost(bool Value)
+
+void APlayerState_Base::SetActivateProximityBoostJump()
 {
-	bIsActivateProximityBoost = Value;
-	OnActivateProximityBoost.Broadcast(bIsActivateProximityBoost);
+	if (JumpCount > 0)
+	{
+		bIsActivateProximityBoostJump = true;
+	}
+	else
+	{
+		bIsActivateProximityBoostJump = false;
+	}
+	
+	OnActivateProximityBoostJump.Broadcast(bIsActivateProximityBoostJump);
+}
+
+
+
+void APlayerState_Base::SetActivateProximityBoostDash()
+{
+	if (DashCount > 0)
+	{
+		bIsActivateProximityBoostDash = true;
+	}
+	else
+	{
+		bIsActivateProximityBoostDash = false;
+	}
+
+	OnActivateProximityBoostDash.Broadcast(bIsActivateProximityBoostDash);
 }
 
 ///////////////
@@ -48,9 +82,15 @@ int APlayerState_Base::ReturnDashCount()
 {
 	return DashCount;
 }
-bool APlayerState_Base::ReturnActivateProximityBoostBool()
+
+bool APlayerState_Base::ReturnActiveProxJump()
 {
-	return bIsActivateProximityBoost;
+	return bIsActivateProximityBoostJump;
+}
+
+bool APlayerState_Base::ReturnActiveProxDash()
+{
+	return bIsActivateProximityBoostDash;
 }
 
 /////////////////////
@@ -62,5 +102,6 @@ void APlayerState_Base::GetLifetimeReplicatedProps(TArray<class FLifetimePropert
 
 	DOREPLIFETIME_CONDITION(APlayerState_Base, JumpCount, COND_OwnerOnly);
 	DOREPLIFETIME_CONDITION(APlayerState_Base, DashCount, COND_OwnerOnly);
-	DOREPLIFETIME_CONDITION(APlayerState_Base, bIsActivateProximityBoost, COND_OwnerOnly);
+	DOREPLIFETIME_CONDITION(APlayerState_Base, bIsActivateProximityBoostJump, COND_OwnerOnly);
+	DOREPLIFETIME_CONDITION(APlayerState_Base, bIsActivateProximityBoostDash, COND_OwnerOnly);
 }

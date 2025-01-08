@@ -120,10 +120,13 @@ public:
 	//////////////////////
 	//////  Getters //////
 	//////////////////////
-
 	UFUNCTION()
-	bool IsPlayerStateActiaveBool();
+	bool ReturnPlayerJumpActiveBool() const;
+	UFUNCTION()
+	bool ReturnPlayerDashActiveBool() const;
+	
 };
+
 
 inline void APlayerCharacter_Base::Landed(const FHitResult& Hit)
 {

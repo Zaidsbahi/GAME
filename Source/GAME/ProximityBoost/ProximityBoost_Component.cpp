@@ -142,9 +142,14 @@ void UProximityBoost_Component::ActivateProximityBoost()
 	bCanInfiniteDashAndDoubleJump = true;
 	if (APlayerCharacter_Base* PlayerCharacter = Cast<APlayerCharacter_Base>(GetOwner()))
 	{
-		if (PlayerCharacter->IsPlayerStateActiaveBool() == false)return;
+		if (PlayerCharacter->ReturnPlayerJumpActiveBool() == true)
+		{
 		PlayerCharacter->GetCharacterMovement()->JumpZVelocity = 1000;
+		}
+		if (PlayerCharacter->ReturnPlayerDashActiveBool() == true)
+		{
 		PlayerCharacter->AirDashSpeed = 3000.0f;
+		}
 	}
 	OnRep_ProximityState(); //For Clients
 }
@@ -166,16 +171,10 @@ void UProximityBoost_Component::DeactivateProximityBoost()
 
 	if (APlayerCharacter_Base* PlayerCharacter = Cast<APlayerCharacter_Base>(GetOwner()))
 	{
-		if (PlayerCharacter->IsPlayerStateActiaveBool() == false)return;
 		PlayerCharacter->GetCharacterMovement()->JumpZVelocity = 500;
 		PlayerCharacter->AirDashSpeed = 1500.0f;
 	}
 
-
-	
-
-
-	
 	OnRep_ProximityState(); //For Clients
 }
 

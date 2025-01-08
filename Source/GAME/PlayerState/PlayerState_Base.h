@@ -6,7 +6,9 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnJumpCountChanged, int32, NewJumpCount);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDashCountChanged, int32, NewDashCount);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnActivateProximityBoost, bool, NewActivateProximity);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnActivateProximityBoostJump, bool, NewActivateProximityJump);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnActivateProximityBoostDash, bool, NewActivateProximityDash);
+
 
 UCLASS()
 class GAME_API APlayerState_Base : public APlayerState
@@ -21,9 +23,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, ReplicatedUsing="OnRep_DashCount", Category = "Stats")
 	int DashCount = 0;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, ReplicatedUsing="OnRep_ActivateProximityBoost", Category = "Stats")
-	bool bIsActivateProximityBoost = false;
-
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, ReplicatedUsing="OnRep_ActivateProximityBoostJump", Category = "Stats")
+	bool bIsActivateProximityBoostJump = false;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, ReplicatedUsing="OnRep_ActivateProximityBoostDash", Category = "Stats")
+	bool bIsActivateProximityBoostDash = false;
+	
 	UFUNCTION()
 	void OnRep_JumpCount(int32 OldValue) const;
 
@@ -31,7 +36,10 @@ protected:
 	void OnRep_DashCount(int32 OldValue) const;
 
 	UFUNCTION()
-	void OnRep_ActivateProximityBoost(bool OldValue) const;
+	void OnRep_ActivateProximityBoostJump(bool OldValue) const;
+	
+	UFUNCTION()
+	void OnRep_ActivateProximityBoostDash(bool OldValue) const;
 	
 	UPROPERTY(BlueprintAssignable, Category="Events")
 	FOnJumpCountChanged OnJumpCountChanged;
@@ -40,7 +48,11 @@ protected:
 	FOnDashCountChanged OnDashCountChanged;
 
 	UPROPERTY(BlueprintAssignable, Category="Events")
-	FOnActivateProximityBoost OnActivateProximityBoost;
+	FOnActivateProximityBoostJump OnActivateProximityBoostJump;
+	
+	UPROPERTY(BlueprintAssignable, Category="Events")
+	FOnActivateProximityBoostDash OnActivateProximityBoostDash;
+
 	
 public:
 
@@ -53,7 +65,10 @@ public:
 	void AddDashCount(int32 Value);
 
 	UFUNCTION(BlueprintCallable, Category = "Stats")
-	void SetActivateProximityBoost(bool Value);
+	void SetActivateProximityBoostJump();
+	
+	UFUNCTION(BlueprintCallable, Category = "Stats")
+	void SetActivateProximityBoostDash();
 	
 	UFUNCTION(BlueprintCallable)
 	int ReturnJumpCount();
@@ -61,6 +76,13 @@ public:
 	UFUNCTION(BlueprintCallable)
 	int ReturnDashCount();
 
-	UFUNCTION()
-	bool ReturnActivateProximityBoostBool();
+	UFUNCTION(BlueprintCallable)
+	bool ReturnActiveProxJump();
+
+	UFUNCTION(BlueprintCallable)
+	bool ReturnActiveProxDash();
+
+	
 };
+
+

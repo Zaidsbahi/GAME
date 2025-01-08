@@ -106,6 +106,7 @@ void APlayerCharacter_Base::Jump()
             {
                 Super::Jump();
                 PS->AddJumpCount(-1); // Decrement jump count
+                PS->SetActivateProximityBoostJump();
                 JumpMaxCount = JumpMaxCount + 1;
                 UE_LOG(LogTemp, Log, TEXT("Decrementing JumpCount. Remaining: %d"), PS->ReturnJumpCount());
             }
@@ -142,6 +143,7 @@ void APlayerCharacter_Base::PerformAirDash()
             bIsAirDashing = true;
 
             PS->AddDashCount(-1);
+            PS->SetActivateProximityBoostDash();
 
             // Calculating The AirDash Direction based on Input
             FVector DashDirection = GetActorForwardVector() * AirDashSpeed;
@@ -251,14 +253,30 @@ void APlayerCharacter_Base::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 }
 
 
-bool APlayerCharacter_Base::IsPlayerStateActiaveBool()
+//////////////////
+////  Returns  ///
+//////////////////
+bool APlayerCharacter_Base::ReturnPlayerJumpActiveBool() const
 {
-    if (APlayerState_Base* PS = Cast<APlayerState_Base>(GetPlayerState()))
+    if (APlayerState_Base* PlayerState_Base = Cast<APlayerState_Base>(GetPlayerState()))
     {
-        return PS->ReturnActivateProximityBoostBool(); 
+        const bool JumpActiveBool = PlayerState_Base->ReturnActiveProxJump();
+        return JumpActiveBool;
     }
     else
     {
-        return false;
+    return false; 
+    }
+}
+bool APlayerCharacter_Base::ReturnPlayerDashActiveBool() const
+{
+    if (APlayerState_Base* PlayerState_Base = Cast<APlayerState_Base>(GetPlayerState()))
+    {
+        const bool DashActiveBool = PlayerState_Base->ReturnActiveProxDash();
+        return DashActiveBool;
+    }
+    else
+    {
+        return false; 
     }
 }

@@ -16,9 +16,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/KhaledTestLevel_02.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/KhaledTestLevel_02.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_MainGameWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_MainGameWidget.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerState/PlayerState_Base.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerState/PlayerState_Base.cpp" afterDir="false" />
@@ -248,6 +245,7 @@
       <workItem from="1735460320820" duration="2818000" />
       <workItem from="1735528736560" duration="9309000" />
       <workItem from="1736280130091" duration="7614000" />
+      <workItem from="1736290197544" duration="6652000" />
     </task>
     <servers />
   </component>
