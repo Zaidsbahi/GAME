@@ -14,7 +14,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="" />
+    <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Input/IMC_Mechanics.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Input/IMC_Mechanics.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -243,6 +249,7 @@
       <workItem from="1735528736560" duration="9309000" />
       <workItem from="1736280130091" duration="7614000" />
       <workItem from="1736290197544" duration="10765000" />
+      <workItem from="1736318192906" duration="4618000" />
     </task>
     <servers />
   </component>
