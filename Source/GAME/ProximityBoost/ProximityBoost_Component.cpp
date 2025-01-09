@@ -15,7 +15,7 @@ UProximityBoost_Component::UProximityBoost_Component()
 {
 	PrimaryComponentTick.bCanEverTick = false;
 
-	SphereRadius = 50.0f; 
+	SphereRadius = 500.0f; 
 	EffectDuration = 2.0f; 
 	bCanInfiniteDashAndDoubleJump = false;
 	bIsStillInRangeOfProximity = false;

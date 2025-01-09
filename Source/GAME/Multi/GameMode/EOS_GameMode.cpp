@@ -5,6 +5,14 @@
 #include "Kismet/GameplayStatics.h"
 #include "GAME/Multi/GameInstance/EOS_GameInstance.h"
 #include "Interfaces/OnlineSessionInterface.h"
+#include "Net/UnrealNetwork.h"
+#include "GAME/Multi/GameState/EOS_GameState.h"
+
+
+AEOS_GameMode::AEOS_GameMode()
+{
+	GameStateClass = AEOS_GameState::StaticClass();
+}
 
 void AEOS_GameMode::PostLogin(APlayerController* NewPlayer)
 {
@@ -88,6 +96,45 @@ void AEOS_GameMode::RestartCurrentLevel()
 				UE_LOG(LogTemp, Error, TEXT("Level name is empty! Cannot restart the level."));
 			}
 		}
+	}
+}
+
+void AEOS_GameMode::StartTrackTimer()
+{
+	GetWorld()->GetTimerManager().SetTimer(TrackTimerHandle, this, &AEOS_GameMode::UpdateElapsedTime, 1.0f, true);
+}
+
+void AEOS_GameMode::StopTrackTimer()
+{
+	GetWorld()->GetTimerManager().ClearTimer(TrackTimerHandle);
+	UE_LOG(LogTemp, Log, TEXT("Track timer stopped. Elapsed Time: %f seconds"), ElapsedTime);
+
+}
+
+void AEOS_GameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// Start the track timer when the game begins
+	StartTrackTimer();
+	UE_LOG(LogTemp, Log, TEXT("Track timer started in BeginPlay."));
+}
+
+void AEOS_GameMode::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	// Replicate the elapsed time to clients
+	DOREPLIFETIME(AEOS_GameMode, ElapsedTime);
+}
+
+void AEOS_GameMode::UpdateElapsedTime()
+{
+	// Get the GameState
+	AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>();
+	if (GameState)
+	{
+		GameStateRef->ElapsedTime += 1.0f;
 	}
 }
 
