@@ -250,13 +250,12 @@ void APlayerCharacter_Base::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
     // Replicate jump-related variables
     DOREPLIFETIME(APlayerCharacter_Base, MaxJumpCount);
     DOREPLIFETIME(APlayerCharacter_Base, CurrentJumpCount);
+    DOREPLIFETIME(APlayerCharacter_Base, bIsGrounded);
 
     // Replicate AirDash Variables
     DOREPLIFETIME(APlayerCharacter_Base, bIsAirDashing);
     DOREPLIFETIME(APlayerCharacter_Base, AirDashSpeed);
 }
-
-
 void APlayerCharacter_Base::RestartLevel()
 {
     if (HasAuthority()) // Only the host can restart

@@ -46,6 +46,7 @@ protected:
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Jump")
 	int32 CurrentJumpCount;
 	// Flag to track if the character is on the ground
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "Jump")
 	bool bIsGrounded;
 	
 	////////////////////////////////
