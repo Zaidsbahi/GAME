@@ -1,4 +1,6 @@
 #include "EOS_GameMode.h"
+
+#include "OnlineSessionSettings.h"
 #include "OnlineSubsystem.h"
 #include "OnlineSubsystemUtils.h"
 #include "Interfaces/OnlineIdentityInterface.h"
@@ -7,11 +9,16 @@
 #include "Interfaces/OnlineSessionInterface.h"
 #include "Net/UnrealNetwork.h"
 #include "GAME/Multi/GameState/EOS_GameState.h"
+#include "GameFramework/PlayerState.h"
 
 
 AEOS_GameMode::AEOS_GameMode()
 {
 	GameStateClass = AEOS_GameState::StaticClass();
+
+	// Add track levels to the list
+	TrackLevels = {TEXT("Track1"), TEXT("Track2"), TEXT("Track3")};
+	CurrentTrackIndex = 0; // Start with the first track
 }
 
 void AEOS_GameMode::PostLogin(APlayerController* NewPlayer)
@@ -138,4 +145,71 @@ void AEOS_GameMode::UpdateElapsedTime()
 	}
 }
 
+void AEOS_GameMode::CompleteTrack()
+{
+	// Stop the timer
+	GetWorld()->GetTimerManager().ClearTimer(TrackTimerHandle);
 
+	// Log the final elapsed time
+	if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
+	{
+		UE_LOG(LogTemp, Log, TEXT("Track completed in %f seconds"), GameStateRef->ElapsedTime);
+	}
+
+	// Transition to the next track after 5 seconds
+	FTimerHandle TransitionHandle;
+	GetWorld()->GetTimerManager().SetTimer(TransitionHandle, this, &AEOS_GameMode::LoadNextTrack, 5.0f, false);
+
+}
+
+void AEOS_GameMode::LoadNextTrack()
+{
+	if (CurrentTrackIndex + 1 < TrackLevels.Num())
+	{
+		CurrentTrackIndex++;
+
+		FString NextTrackName = TrackLevels[CurrentTrackIndex].ToString();
+
+		if (HasAuthority()) // Ensure this is called on the server
+		{
+			FString TravelCommand = FString::Printf(TEXT("%s?listen"), *NextTrackName);
+			GetWorld()->ServerTravel(TravelCommand, false, false); // Use ServerTravel to maintain multiplayer state
+			UE_LOG(LogTemp, Log, TEXT("Loading next track: %s with ServerTravel"), *NextTrackName);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("LoadNextTrack called on the client. This should only happen on the server."));
+		}
+		
+		//UGameplayStatics::OpenLevel(GetWorld(), TrackLevels[CurrentTrackIndex]);
+		//UE_LOG(LogTemp, Log, TEXT("Loading next track: %s"), *TrackLevels[CurrentTrackIndex].ToString());
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("No more tracks. Game complete!"));
+		// TODO: End game logic
+	}
+}
+
+void AEOS_GameMode::RestartCurrentTrack()
+{
+	FString CurrentLevelName = GetWorld()->GetMapName();
+	CurrentLevelName.RemoveFromStart(GetWorld()->StreamingLevelsPrefix); // Remove prefix if any
+
+	// Unpause the game to reset input mode
+	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+	if (PlayerController)
+	{
+		PlayerController->SetPause(false);
+		PlayerController->bShowMouseCursor = false;
+		PlayerController->SetInputMode(FInputModeGameOnly());
+	}
+	
+	FString TravelCommand = FString::Printf(TEXT("%s?listen"), *CurrentLevelName);
+	GetWorld()->ServerTravel(TravelCommand, false, false);
+}
+
+void AEOS_GameMode::LoadMainMenu()
+{
+	UGameplayStatics::OpenLevel(GetWorld(), "ZaidTestStart"); // Replace "MainMenu" with the actual level name
+}

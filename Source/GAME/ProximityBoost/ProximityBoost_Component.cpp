@@ -15,7 +15,7 @@ UProximityBoost_Component::UProximityBoost_Component()
 {
 	PrimaryComponentTick.bCanEverTick = false;
 
-	SphereRadius = 500.0f; 
+	SphereRadius = 200.0f; 
 	EffectDuration = 2.0f; 
 	bCanInfiniteDashAndDoubleJump = false;
 	bIsStillInRangeOfProximity = false;
@@ -25,8 +25,11 @@ UProximityBoost_Component::UProximityBoost_Component()
 	Sphere = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
 	Sphere->SetSphereRadius(SphereRadius);
 	Sphere->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-	Sphere->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
-	Sphere->SetCollisionResponseToAllChannels(ECR_Overlap);
+	//Sphere->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
+	//Sphere->SetCollisionResponseToAllChannels(ECR_Overlap);
+	Sphere->SetCollisionObjectType(ECollisionChannel::ECC_GameTraceChannel1); // ProximityBoost channel
+	Sphere->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore); // Ignore all other channels
+	Sphere->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Overlap); // Overlap with other ProximityBoost components
 
 	// Static Mesh Component
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));

@@ -135,6 +135,10 @@ void UEOS_GameInstance::OnJoinSessionCompleted(FName SessionName, EOnJoinSession
 			}
 		}
 	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to join session."));
+	}
 }
 
 void UEOS_GameInstance::CreateEOSSession(bool bIsDeticatedServer, bool bIsLanServer, int32 NumberOfPublicConnections)

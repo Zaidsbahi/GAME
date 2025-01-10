@@ -21,6 +21,7 @@ public:
 	// Function to start the timer
 	void StartTrackTimer();
 
+	UFUNCTION(BlueprintCallable, Category = "Game")
 	void StopTrackTimer();
 
 	virtual void BeginPlay() override;
@@ -29,6 +30,17 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Timer")
 	float GetElapsedTime() const { return ElapsedTime; }
+
+	UFUNCTION(BlueprintCallable, Category = "Timer")
+	void CompleteTrack();
+	
+	void LoadNextTrack();
+	
+	UFUNCTION(BlueprintCallable, Category = "Game")
+	void RestartCurrentTrack();
+	
+	UFUNCTION(BlueprintCallable, Category = "Game")
+	void LoadMainMenu();
 	
 protected:
 
@@ -40,5 +52,11 @@ protected:
 	// Function to update the timer every second
 	void UpdateElapsedTime();
 
+	TArray<FName> TrackLevels; // List of track level names
+	int32 CurrentTrackIndex;  // Current track index
+
+
 
 };
+
+
