@@ -2,6 +2,7 @@
 #include "GameFramework/Character.h"
 #include "Components/SphereComponent.h"
 #include "GAME/PlayerCharacter/PlayerCharacter_Base.h"
+#include "TimerManager.h"
 
 
 ABase_Pickup::ABase_Pickup()
@@ -18,6 +19,9 @@ ABase_Pickup::ABase_Pickup()
 	Mesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	bReplicates = true;
+
+	// Default Respawn Time
+	RespawnTime = 10.0f;
 
 }
 
@@ -38,8 +42,16 @@ void ABase_Pickup::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 	{
 		Pickup(PlayerCharacter);
 
-		        // Destroy the pickup after applying the effect
-        Destroy();
+		// Destroy the pickup after applying the effect
+       // Destroy();
+
+		
+		// Disable the pickup temporarily instead of destroying it
+		SetActorEnableCollision(false);
+		SetActorHiddenInGame(true);
+
+		// Start the respawn timer
+		GetWorldTimerManager().SetTimer(RespawnTimerHandle, this, &ABase_Pickup::RespawnPickup, RespawnTime, false);
 	}
 }
 
@@ -57,6 +69,15 @@ void ABase_Pickup::Pickup_Implementation(class ACharacter* OwningCharacter)
 		SetOwner(PlayerCharacter);
 	}
 	
+}
+
+void ABase_Pickup::RespawnPickup()
+{
+	// Re-enable the pickup
+	SetActorEnableCollision(true);
+	SetActorHiddenInGame(false);
+
+	UE_LOG(LogTemp, Warning, TEXT("Pickup has respawned!"));
 }
 
 
