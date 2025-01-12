@@ -18,7 +18,7 @@ AEOS_GameMode::AEOS_GameMode()
 
 	// Add track levels to the list
 	TrackLevels = {TEXT("Track1"), TEXT("Track2"), TEXT("Track3")};
-	CurrentTrackIndex = 0; // Start with the first track
+	CurrentTrackIndex = 1; // Start with the first track
 }
 
 void AEOS_GameMode::PostLogin(APlayerController* NewPlayer)
