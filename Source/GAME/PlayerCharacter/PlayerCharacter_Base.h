@@ -135,6 +135,10 @@ public:
 
 //	UFUNCTION(Blueprintable)
 //	void CheckingActivateProximityFromCharacter();
+
+	// Fixing the Landing Bug
+	UFUNCTION(BlueprintCallable)
+	void ResetJumpHeightAfterLanding();
 	
 };
 

@@ -326,3 +326,18 @@ bool APlayerCharacter_Base::ReturnPlayerDashActiveBool() const
         return false; 
     }
 }
+
+void APlayerCharacter_Base::ResetJumpHeightAfterLanding()
+{
+    if (APlayerState_Base* PS = Cast<APlayerState_Base>(GetPlayerState()))
+    {
+        int32 JumpCountFromState = PS->ReturnJumpCount();
+
+        UE_LOG(LogTemp, Log, TEXT("Resetting Jump Height After Landing "));
+
+        if (JumpCountFromState == 0)
+        {
+            GetCharacterMovement()->JumpZVelocity = 500;
+        }
+    }
+}
