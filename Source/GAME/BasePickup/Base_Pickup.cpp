@@ -64,6 +64,7 @@ void ABase_Pickup::Pickup_Implementation(class ACharacter* OwningCharacter)
 			// Call the CollectPickup function on the player character
 			PlayerCharacter->CollectPickup();
 
+			
 		}
 
 		SetOwner(PlayerCharacter);

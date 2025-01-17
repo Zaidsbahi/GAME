@@ -62,7 +62,13 @@ public:
 	bool bCanInfiniteDashAndDoubleJump;
 	UPROPERTY(Replicated)
 	bool bIsStillInRangeOfProximity;
+	UPROPERTY(Replicated)
+	bool bIsActivatedProximity;
+
+	
 	//Functions
 	void ActivateProximityBoost();
 	void DeactivateProximityBoost();
+	bool IsProximityBoostActive() const; 
+
 };

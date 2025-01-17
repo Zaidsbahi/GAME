@@ -76,10 +76,34 @@ void APlayerCharacter_Base::PrintJumpCount()
         if (HasAuthority())
         {
             UE_LOG(LogTemp, Log, TEXT("Server Jump Count: %d"), JumpCount);
+            if (ProximityBoostComponent)
+            {
+                if (ProximityBoostComponent->bIsActivatedProximity == true)
+                {
+                    ProximityBoostComponent->bCanInfiniteDashAndDoubleJump = false;
+                    ProximityBoostComponent->ActivateProximityBoost();
+                    UE_LOG(LogTemp, Log, TEXT("The Activated Proximity Is True"))
+                }
+                else
+                {
+                    UE_LOG(LogTemp, Log, TEXT("The Activated Proximity Is False"))
+                }
+            }
         }
         else
         {
             UE_LOG(LogTemp, Log, TEXT("Client Jump Count: %d"), JumpCount);
+            if (ProximityBoostComponent)
+            {
+                if (ProximityBoostComponent->bIsActivatedProximity == true)
+                {
+                    ProximityBoostComponent->ActivateProximityBoost();
+                }
+                else
+                {
+                    UE_LOG(LogTemp, Log, TEXT("The Activated Proximity Is False"))
+                }
+            }
         }
     }
 }
@@ -197,13 +221,15 @@ void APlayerCharacter_Base::CollectPickup_Implementation()
 {
     if (HasAuthority())
     {
+        UE_LOG(LogTemp, Log, TEXT("Collect Pickup Entered"))
         if (APlayerState_Base* PS = Cast<APlayerState_Base>(GetPlayerState()))
         {
-            PS->AddJumpCount(1); // Add jump count to PlayerState
+           // PS->AddJumpCount(1); // Add jump count to PlayerState
 
             // Update JumpMaxCount dynamically
             //JumpMaxCount = (PS->ReturnJumpCount() > 1) ? 2 : 1;
 
+            
             UE_LOG(LogTemp, Log, TEXT("Pickup collected. JumpCount: %d, JumpMaxCount: %d"),
                 PS->ReturnJumpCount(),
                 JumpMaxCount);

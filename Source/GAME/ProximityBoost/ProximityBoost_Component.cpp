@@ -19,6 +19,7 @@ UProximityBoost_Component::UProximityBoost_Component()
 	EffectDuration = 2.0f; 
 	bCanInfiniteDashAndDoubleJump = false;
 	bIsStillInRangeOfProximity = false;
+	bIsActivatedProximity = false;
 	SetIsReplicatedByDefault(true);
 
 	// Add a sphere component to detect proximity
@@ -87,10 +88,12 @@ void UProximityBoost_Component::OnSphereOverlapBegin(UPrimitiveComponent* Overla
 			// Check if the overlapping component is the other player's SphereComponent
 			if (OtherComp == OtherPlayer->FindComponentByClass<UProximityBoost_Component>()->Sphere)
 			{
-				ActivateProximityBoost();
 
 				// Set is still in range active
 				bIsStillInRangeOfProximity = true;
+				bIsActivatedProximity = true;
+				
+				ActivateProximityBoost();
 				
 				// Changing Colors to Green for the Static Mesh
 				if (StaticMesh)
@@ -147,14 +150,16 @@ void UProximityBoost_Component::ActivateProximityBoost()
 	{
 		if (PlayerCharacter->ReturnPlayerJumpActiveBool() == true)
 		{
-		PlayerCharacter->GetCharacterMovement()->JumpZVelocity = 1000;
+			PlayerCharacter->GetCharacterMovement()->JumpZVelocity = 1000;
 		}
 		if (PlayerCharacter->ReturnPlayerDashActiveBool() == true)
 		{
-		PlayerCharacter->AirDashSpeed = 3000.0f;
+			PlayerCharacter->AirDashSpeed = 3000.0f;
 		}
 	}
+	
 	OnRep_ProximityState(); //For Clients
+	
 }
 void UProximityBoost_Component::DeactivateProximityBoost()
 {
@@ -162,6 +167,8 @@ void UProximityBoost_Component::DeactivateProximityBoost()
 	if (bIsStillInRangeOfProximity) return;
 	bCanInfiniteDashAndDoubleJump = false;
 
+	bIsActivatedProximity = false;
+	
 	// Changing Colors to Green for the Static Mesh
 	if (StaticMesh)
 	{
@@ -181,6 +188,11 @@ void UProximityBoost_Component::DeactivateProximityBoost()
 	OnRep_ProximityState(); //For Clients
 }
 
+bool UProximityBoost_Component::IsProximityBoostActive() const
+{
+	return bCanInfiniteDashAndDoubleJump;
+}
+
 ////////////////////////////////////////////////
 ///////////       Replication      /////////////
 ////////////////////////////////////////////////
@@ -189,4 +201,5 @@ void UProximityBoost_Component::GetLifetimeReplicatedProps(TArray<FLifetimePrope
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(UProximityBoost_Component, bCanInfiniteDashAndDoubleJump);
 	DOREPLIFETIME(UProximityBoost_Component, bIsStillInRangeOfProximity);
+	DOREPLIFETIME(UProximityBoost_Component, bIsActivatedProximity);
 }

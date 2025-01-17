@@ -26,8 +26,6 @@ class GAME_API APlayerCharacter_Base : public ACharacter
 	///// Timer /////
 	FTimerHandle AirDashTimerHandle;
 
-	UPROPERTY()
-	UProximityBoost_Component* ProximityBoostComponent;
 
 
 	////  Protected  ////
@@ -122,6 +120,10 @@ public:
 	///Restart
 	void RestartLevel();
 
+
+	UPROPERTY()
+	UProximityBoost_Component* ProximityBoostComponent;
+	
 	
 	//////////////////////
 	//////  Getters //////
@@ -130,6 +132,9 @@ public:
 	bool ReturnPlayerJumpActiveBool() const;
 	UFUNCTION()
 	bool ReturnPlayerDashActiveBool() const;
+
+//	UFUNCTION(Blueprintable)
+//	void CheckingActivateProximityFromCharacter();
 	
 };
 
