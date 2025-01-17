@@ -17,8 +17,8 @@ AEOS_GameMode::AEOS_GameMode()
 	GameStateClass = AEOS_GameState::StaticClass();
 
 	// Add track levels to the list
-	TrackLevels = {TEXT("Track1"), TEXT("Track2"), TEXT("Track3")};
-	CurrentTrackIndex = 2; // Start with the first track
+	TrackLevels = {TEXT("Track1"), TEXT("Track2"), TEXT("Track3") , TEXT("Track4")};
+	CurrentTrackIndex = 0; // Start with the first track
 }
 
 void AEOS_GameMode::PostLogin(APlayerController* NewPlayer)
@@ -125,6 +125,13 @@ void AEOS_GameMode::BeginPlay()
 	// Start the track timer when the game begins
 	StartTrackTimer();
 	UE_LOG(LogTemp, Log, TEXT("Track timer started in BeginPlay."));
+
+	UEOS_GameInstance* GameInstance = Cast<UEOS_GameInstance>(GetGameInstance());
+	if (GameInstance)
+	{
+		CurrentTrackIndex = GameInstance->CurrentTrackIndex;
+		UE_LOG(LogTemp, Log, TEXT("GameMode: Retrieved CurrentTrackIndex = %d from GameInstance"), CurrentTrackIndex);
+	}
 }
 
 void AEOS_GameMode::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -166,7 +173,17 @@ void AEOS_GameMode::LoadNextTrack()
 {
 	if (CurrentTrackIndex + 1 < TrackLevels.Num())
 	{
+
+		UE_LOG(LogTemp, Log, TEXT("LoadNextTrack: CurrentTrackIndex before increment: %d"), CurrentTrackIndex);
+		
 		CurrentTrackIndex++;
+
+		// Save the updated CurrentTrackIndex back to GameInstance:
+		UEOS_GameInstance* GameInstance = Cast<UEOS_GameInstance>(GetGameInstance());
+		if (GameInstance)
+		{
+			GameInstance->CurrentTrackIndex = CurrentTrackIndex;
+		}
 
 		FString NextTrackName = TrackLevels[CurrentTrackIndex].ToString();
 
