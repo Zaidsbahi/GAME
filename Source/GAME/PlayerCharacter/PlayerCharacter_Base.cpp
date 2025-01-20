@@ -129,18 +129,23 @@ void APlayerCharacter_Base::Jump()
             if (bIsGrounded)
             {
                 Super::Jump();
-                SpawnTrailActors();
                 bIsGrounded = false;
                 JumpMaxCount = 2; // Set max allowed jumps while airborne
+
+                // Start trail spawning
+                bIsGeneratingTrail = true;
+                GetWorld()->GetTimerManager().SetTimer(TrailSpawnTimerHandle, this, &APlayerCharacter_Base::SpawnTrailRepeatedly, 0.2f, true);
             }
             else
             {
                 Super::Jump();
-                SpawnTrailActors();
                 PS->AddJumpCount(-1); // Decrement jump count
                 PS->SetActivateProximityBoostJump();
                 JumpMaxCount = JumpMaxCount + 1;
                 UE_LOG(LogTemp, Log, TEXT("Decrementing JumpCount. Remaining: %d"), PS->ReturnJumpCount());
+
+                bIsGeneratingTrail = true;
+                GetWorld()->GetTimerManager().SetTimer(TrailSpawnTimerHandle, this, &APlayerCharacter_Base::SpawnTrailRepeatedly, 0.2f, true);
             }
         }
         else if (JumpCountFromState == 0 && bIsGrounded)
@@ -184,7 +189,8 @@ void APlayerCharacter_Base::PerformAirDash()
             // Calculating The AirDash Direction based on Input
             FVector DashDirection = GetActorForwardVector() * AirDashSpeed;
 
-            SpawnTrailActors();
+            bIsGeneratingTrail = true;
+            GetWorld()->GetTimerManager().SetTimer(TrailSpawnTimerHandle, this, &APlayerCharacter_Base::SpawnTrailRepeatedly, 0.2f, true);
 
             // Apply the dash using LaucnhCharacter
             LaunchCharacter(DashDirection, true, true);
@@ -297,6 +303,7 @@ void APlayerCharacter_Base::RestartLevel()
 {
     if (HasAuthority()) // Only the host can restart
     {
+        StopTrailSpawning();
         UE_LOG(LogTemp, Warning, TEXT("Server is restarting the level."));
         if (AEOS_GameMode* GameMode = Cast<AEOS_GameMode>(GetWorld()->GetAuthGameMode()))
         {
@@ -379,6 +386,10 @@ void APlayerCharacter_Base::DeActivatePlayersProximityBoost()
 }
 void APlayerCharacter_Base::SpawnTrailActors()
 {
+
+    if (!bIsGeneratingTrail) return;  // Stop if no longer needed
+
+    
     if (HasAuthority())  // Ensure this runs only on the server for replication purposes
     {
         if (UWorld* World = GetWorld())
@@ -417,4 +428,48 @@ void APlayerCharacter_Base::SpawnTrailActors()
             }
         }
     }
+}
+
+void APlayerCharacter_Base::SpawnTrailRepeatedly()
+{
+    if (!bIsGeneratingTrail) return;  // Stop if no longer needed
+
+    if (HasAuthority())  // Ensure this runs only on the server for replication purposes
+    {
+        if (UWorld* World = GetWorld())
+        {
+            FActorSpawnParameters SpawnParams;
+            SpawnParams.Owner = this;  
+            SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+            FVector SpawnLocation = GetActorLocation() - GetActorForwardVector() * 50.0f;  // Slight offset behind player
+            FRotator SpawnRotation = GetActorRotation();
+
+            ATrailActor* SpawnedTrail = World->SpawnActor<ATrailActor>(ATrailActor::StaticClass(), SpawnLocation, SpawnRotation, SpawnParams);
+
+            if (SpawnedTrail)
+            {
+                UE_LOG(LogTemp, Log, TEXT("Trail Actor Spawned: %s"), *SpawnedTrail->GetName());
+                SpawnedTrail->SetOwner(nullptr);
+                SpawnedTrail->Sphere->IgnoreActorWhenMoving(this, true);
+
+                // Schedule destruction after 5 seconds
+                World->GetTimerManager().SetTimer(
+                    SpawnedTrail->DestructionTimerHandle,
+                    SpawnedTrail,
+                    &ATrailActor::DestroySelf,
+                    5.0f,
+                    false
+                );
+            }
+        }
+    }
+}
+
+void APlayerCharacter_Base::StopTrailSpawning()
+{
+    bIsGeneratingTrail = false;
+    GetWorld()->GetTimerManager().ClearTimer(TrailSpawnTimerHandle);
+
+    UE_LOG(LogTemp, Log, TEXT("Trail spawning stopped."));
 }

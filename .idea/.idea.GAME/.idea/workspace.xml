@@ -16,12 +16,10 @@
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_ActivateProximityPickup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_ActivateProximityPickup.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/TrailActor/TrailActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/TrailActor/TrailActor.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

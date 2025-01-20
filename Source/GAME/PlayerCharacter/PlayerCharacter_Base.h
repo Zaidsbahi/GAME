@@ -146,6 +146,18 @@ public:
 	void DeActivatePlayersProximityBoost();
 	UFUNCTION()
 	void SpawnTrailActors();
+
+	// Timer handle for continuous trail spawning
+	FTimerHandle TrailSpawnTimerHandle;
+    
+	// Boolean to track if the trail should continue spawning
+	bool bIsGeneratingTrail;
+
+	// Function to spawn trail continuously
+	void SpawnTrailRepeatedly();
+
+	// Function to stop trail spawning
+	void StopTrailSpawning();
 	
 };
 
@@ -154,7 +166,7 @@ inline void APlayerCharacter_Base::Landed(const FHitResult& Hit)
 {
 	Super::Landed(Hit);
 	bIsGrounded = true;
-
+	StopTrailSpawning();
 	UE_LOG(LogTemp, Log , TEXT("Landed Bro!"))
 }
 

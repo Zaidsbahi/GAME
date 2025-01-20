@@ -11,7 +11,7 @@ ATrailActor::ATrailActor()
 
 	PrimaryActorTick.bCanEverTick = false;
 
-	SphereRadius = 300.0f; 
+	SphereRadius = 100.0f; 
 
 	// Add a sphere component to detect proximity
 	Sphere = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
@@ -28,17 +28,6 @@ ATrailActor::ATrailActor()
 	StaticMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision); // Disable collision
 	StaticMesh->SetVisibility(true); // Ensure it's visible
 	
-
-	// Optionally set a material
-	static ConstructorHelpers::FObjectFinder<UMaterialInterface> MaterialAsset(TEXT("/Game/Widgets/TrailActorMaterial.TrailActorMaterial"));
-	if (MaterialAsset.Succeeded())
-	{
-		StaticMesh->SetMaterial(0, MaterialAsset.Object);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Failed to load material asset."));
-	}
 	
 	bReplicates = true;
 	
