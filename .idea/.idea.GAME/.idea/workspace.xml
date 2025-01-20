@@ -16,11 +16,12 @@
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_ActivateProximityPickup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_ActivateProximityPickup.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +51,8 @@
     <setting file="file://$PROJECT_DIR$/Source/GAME/Multiplayer/MainMenu/MainMenu.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/GAME/TrailActor/TrailActor.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/GAME/TrailActor/TrailActor.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Programs/AutomationTool/Scripts/CheckCsprojDotNetVersion.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Core/Public/Templates/SharedPointer.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/CoreUObject/Public/UObject/CoreNetTypes.h" root0="FORCE_HIGHLIGHTING" />
@@ -77,22 +80,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "C/C++ Project.GAME.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "RiderNuGetOptionsPageId",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C/C++ Project.GAME.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;RiderNuGetOptionsPageId&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RiderProblemsViewState">
     <option name="proportion" value="0.34128746" />
   </component>
@@ -270,7 +273,12 @@
       <workItem from="1737129370325" duration="7710000" />
       <workItem from="1737153585535" duration="141000" />
       <workItem from="1737153747564" duration="139000" />
-      <workItem from="1737153908859" duration="2845000" />
+      <workItem from="1737153908859" duration="5842000" />
+      <workItem from="1737203303757" duration="3511000" />
+      <workItem from="1737247114922" duration="7689000" />
+      <workItem from="1737292896563" duration="3056000" />
+      <workItem from="1737333721783" duration="6392000" />
+      <workItem from="1737386467933" duration="14159000" />
     </task>
     <servers />
   </component>

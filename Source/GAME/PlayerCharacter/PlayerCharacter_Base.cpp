@@ -7,6 +7,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "GAME/ProximityBoost/ProximityBoost_Component.h"
 #include "GAME/Multi/GameMode/EOS_GameMode.h"
+#include "GAME/TrailActor/TrailActor.h"
 #include "Net/UnrealNetwork.h"
 
 ////////////////////////////////////////
@@ -39,6 +40,10 @@ APlayerCharacter_Base::APlayerCharacter_Base()
     
     // Replication
     bReplicates = true;
+    bAlwaysRelevant = true;
+    SetReplicates(true);
+    ACharacter::SetReplicateMovement(true);
+    
 }
 void APlayerCharacter_Base::BeginPlay()
 {
@@ -124,12 +129,14 @@ void APlayerCharacter_Base::Jump()
             if (bIsGrounded)
             {
                 Super::Jump();
+                SpawnTrailActors();
                 bIsGrounded = false;
                 JumpMaxCount = 2; // Set max allowed jumps while airborne
             }
             else
             {
                 Super::Jump();
+                SpawnTrailActors();
                 PS->AddJumpCount(-1); // Decrement jump count
                 PS->SetActivateProximityBoostJump();
                 JumpMaxCount = JumpMaxCount + 1;
@@ -142,6 +149,8 @@ void APlayerCharacter_Base::Jump()
             bIsGrounded = false;
             JumpMaxCount = 1; // Reset to single jump
         }
+        
+        
     }
     UE_LOG(LogTemp, Log, TEXT("Jump() called. JumpCountFromState: %d"), JumpMaxCount);
 }
@@ -174,6 +183,8 @@ void APlayerCharacter_Base::PerformAirDash()
 
             // Calculating The AirDash Direction based on Input
             FVector DashDirection = GetActorForwardVector() * AirDashSpeed;
+
+            SpawnTrailActors();
 
             // Apply the dash using LaucnhCharacter
             LaunchCharacter(DashDirection, true, true);
@@ -326,7 +337,6 @@ bool APlayerCharacter_Base::ReturnPlayerDashActiveBool() const
         return false; 
     }
 }
-
 void APlayerCharacter_Base::ResetJumpHeightAfterLanding()
 {
     if (APlayerState_Base* PS = Cast<APlayerState_Base>(GetPlayerState()))
@@ -338,6 +348,73 @@ void APlayerCharacter_Base::ResetJumpHeightAfterLanding()
         if (JumpCountFromState == 0)
         {
             GetCharacterMovement()->JumpZVelocity = 500;
+        }
+    }
+}
+
+
+//////////////////////////
+///  Trail Actor Logic ///
+//////////////////////////
+void APlayerCharacter_Base::ActivatePlayersProximityBoost()
+{
+    if (HasAuthority())
+    {
+        if (ProximityBoostComponent)
+        {
+            ProximityBoostComponent->ServerActivateProximityBoost();
+        }
+    }
+}
+void APlayerCharacter_Base::DeActivatePlayersProximityBoost()
+{
+    if (HasAuthority())
+    {
+        if (ProximityBoostComponent)
+        {
+            ProximityBoostComponent->bIsStillInRangeOfProximity = false;
+            ProximityBoostComponent->ServerDeActivateProximityBoost();
+        }
+    }
+}
+void APlayerCharacter_Base::SpawnTrailActors()
+{
+    if (HasAuthority())  // Ensure this runs only on the server for replication purposes
+    {
+        if (UWorld* World = GetWorld())
+        {
+            FActorSpawnParameters SpawnParams;
+            SpawnParams.Owner = this;  // Assign the owner to the player
+            SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+            FVector SpawnLocation = GetActorLocation() + 200 * GetActorForwardVector();
+            FRotator SpawnRotation = GetActorRotation();
+
+            ATrailActor* SpawnedTrail = World->SpawnActor<ATrailActor>(ATrailActor::StaticClass(), SpawnLocation, SpawnRotation, SpawnParams);
+
+            if (SpawnedTrail)
+            {
+                UE_LOG(LogTemp, Log, TEXT("Successfully spawned TrailActor: %s"), *SpawnedTrail->GetName());
+                SpawnedTrail->SetOwner(nullptr); // Ensuring it has no Dependency on the player
+                
+                // Ignore collisions with the owner
+                SpawnedTrail->Sphere->IgnoreActorWhenMoving(this, true);
+
+                
+                // Schedule the trail actor to be destroyed after 5 seconds
+                World->GetTimerManager().SetTimer(
+                    SpawnedTrail->DestructionTimerHandle,  // Use a FTimerHandle within TrailActor class
+                    SpawnedTrail,
+                    &ATrailActor::DestroySelf,  // Function to destroy itself
+                    5.0f,  // Time in seconds before destruction
+                    false  // Do not loop
+                    );
+                
+            }
+            else
+            {
+                UE_LOG(LogTemp, Error, TEXT("Failed to spawn TrailActor"));
+            }
         }
     }
 }

@@ -139,6 +139,13 @@ public:
 	// Fixing the Landing Bug
 	UFUNCTION(BlueprintCallable)
 	void ResetJumpHeightAfterLanding();
+
+	UFUNCTION()
+	void ActivatePlayersProximityBoost();
+	UFUNCTION()
+	void DeActivatePlayersProximityBoost();
+	UFUNCTION()
+	void SpawnTrailActors();
 	
 };
 
@@ -147,6 +154,8 @@ inline void APlayerCharacter_Base::Landed(const FHitResult& Hit)
 {
 	Super::Landed(Hit);
 	bIsGrounded = true;
+
+	UE_LOG(LogTemp, Log , TEXT("Landed Bro!"))
 }
 
 

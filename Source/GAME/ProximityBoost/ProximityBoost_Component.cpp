@@ -119,7 +119,7 @@ void UProximityBoost_Component::OnSphereOverlapEnd(UPrimitiveComponent* Overlapp
 			if (OtherComp == OtherPlayer->FindComponentByClass<UProximityBoost_Component>()->Sphere)
 			{
 				// Start a timer to deactivate the boost after the delay
-				GetWorld()->GetTimerManager().SetTimer(ProximityEffectTimer, this, &UProximityBoost_Component::DeactivateProximityBoost, EffectDuration, false);
+				GetWorld()->GetTimerManager().SetTimer(ProximityEffectTimer, this, &UProximityBoost_Component::ServerDeActivateProximityBoost, EffectDuration, false);
 				bIsStillInRangeOfProximity = false;
 			}
 		}
@@ -187,10 +187,127 @@ void UProximityBoost_Component::DeactivateProximityBoost()
 
 	OnRep_ProximityState(); //For Clients
 }
-
 bool UProximityBoost_Component::IsProximityBoostActive() const
 {
 	return bCanInfiniteDashAndDoubleJump;
+}
+
+//////////////////
+/// Templates ////
+//////////////////
+void UProximityBoost_Component::ActivateProximityOnBeginOverlap()
+{
+	// Set is still in range active
+	bIsStillInRangeOfProximity = true;
+	bIsActivatedProximity = true;
+				
+	ActivateProximityBoost();
+				
+	// Changing Colors to Green for the Static Mesh
+	if (StaticMesh)
+	{
+		UMaterialInstanceDynamic* DynamicMaterial = StaticMesh->CreateAndSetMaterialInstanceDynamic(0);
+		if (DynamicMaterial)
+		{
+			DynamicMaterial->SetVectorParameterValue("BaseColor", FColor::Green);
+		}
+	}
+}
+void UProximityBoost_Component::DeActivateProximityOnEndOverlap()
+{
+	// Start a timer to deactivate the boost after the delay
+	GetWorld()->GetTimerManager().SetTimer(ProximityEffectTimer, this, &UProximityBoost_Component::DeactivateProximityBoost, EffectDuration, false);
+	bIsStillInRangeOfProximity = false;
+}
+
+////////////////////////////////
+/// Activate Proximity Boost ///
+////////////////////////////////
+void UProximityBoost_Component::ServerActivateProximityBoost_Implementation()
+{
+	// Set is still in range active
+	bIsStillInRangeOfProximity = true;
+	bIsActivatedProximity = true;
+				
+	ActivateProximityBoost();
+	MulticastActivateProximityBoost();
+	
+	// Changing Colors to Green for the Static Mesh
+	if (StaticMesh)
+	{
+		UMaterialInstanceDynamic* DynamicMaterial = StaticMesh->CreateAndSetMaterialInstanceDynamic(0);
+		if (DynamicMaterial)
+		{
+			DynamicMaterial->SetVectorParameterValue("BaseColor", FColor::Green);
+		}
+	}
+}
+bool UProximityBoost_Component::ServerActivateProximityBoost_Validate()
+{
+	return true;
+}
+void UProximityBoost_Component::MulticastActivateProximityBoost_Implementation()
+{
+	// Set is still in range active
+	bIsStillInRangeOfProximity = true;
+	bIsActivatedProximity = true;
+				
+	ActivateProximityBoost();
+	
+	// Changing Colors to Green for the Static Mesh
+	if (StaticMesh)
+	{
+		UMaterialInstanceDynamic* DynamicMaterial = StaticMesh->CreateAndSetMaterialInstanceDynamic(0);
+		if (DynamicMaterial)
+		{
+			DynamicMaterial->SetVectorParameterValue("BaseColor", FColor::Green);
+		}
+	}
+}
+
+//////////////////////////////////
+/// DeActivate Proximity Boost ///
+//////////////////////////////////
+void UProximityBoost_Component::ServerDeActivateProximityBoost_Implementation()
+{
+	if (!bCanInfiniteDashAndDoubleJump) return;
+	if (bIsStillInRangeOfProximity) return;  // If player is still in range, cancel deactivation
+
+	bCanInfiniteDashAndDoubleJump = false;
+	bIsActivatedProximity = false;
+
+	// Call multicast to update all clients
+	MulticastDeActivateProximityBoost();
+}
+bool UProximityBoost_Component::ServerDeActivateProximityBoost_Validate()
+{
+	return true;
+}
+
+void UProximityBoost_Component::MulticastDeActivateProximityBoost_Implementation()
+{
+	bCanInfiniteDashAndDoubleJump = false;
+	bIsActivatedProximity = false;
+
+	// Change color to red when the effect ends
+	if (StaticMesh)
+	{
+		UMaterialInstanceDynamic* DynamicMaterial = StaticMesh->CreateAndSetMaterialInstanceDynamic(0);
+		if (DynamicMaterial)
+		{
+			DynamicMaterial->SetVectorParameterValue("BaseColor", FColor::Red);
+		}
+	}
+
+	UE_LOG(LogTemp, Log, TEXT("Proximity Boost deactivated for all clients."));
+
+	if (APlayerCharacter_Base* PlayerCharacter = Cast<APlayerCharacter_Base>(GetOwner()))
+	{
+		PlayerCharacter->GetCharacterMovement()->JumpZVelocity = 500;
+		PlayerCharacter->AirDashSpeed = 1500.0f;
+	}
+
+	OnRep_ProximityState(); //For Clients
 }
 
 ////////////////////////////////////////////////

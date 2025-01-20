@@ -17,9 +17,11 @@ class GAME_API UProximityBoost_Component : public UActorComponent
 	////  Timer & SphereOverlap Begin & End  ////
 	/////////////////////////////////////////////
 	FTimerHandle ProximityEffectTimer;
+
 	UFUNCTION()
 	void OnSphereOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,
 							  const FHitResult& SweepResult);
+
 	UFUNCTION()
 	void OnSphereOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
@@ -28,8 +30,7 @@ class GAME_API UProximityBoost_Component : public UActorComponent
 	/////////////////////////////////////////////////////////////////
 	UFUNCTION()
 	void OnRep_ProximityState();
-	UPROPERTY()
-	USphereComponent* Sphere;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Components", meta=(AllowPrivateAccess=true))
 	UStaticMeshComponent* StaticMesh;
 	
@@ -69,6 +70,38 @@ public:
 	//Functions
 	void ActivateProximityBoost();
 	void DeactivateProximityBoost();
-	bool IsProximityBoostActive() const; 
+	bool IsProximityBoostActive() const;
 
+	UPROPERTY()
+	USphereComponent* Sphere;
+
+	UFUNCTION()
+	void ActivateProximityOnBeginOverlap();
+	UFUNCTION()
+	void DeActivateProximityOnEndOverlap();
+
+
+	//////////////////////////////////////
+	/////  Trail Actor Server Logic //////
+	//////////////////////////////////////
+
+	// Activate Proximity Boost
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerActivateProximityBoost();
+	void ServerActivateProximityBoost_Implementation();
+	bool ServerActivateProximityBoost_Validate();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastActivateProximityBoost();
+
+	// Deactivate Proximity Boost
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerDeActivateProximityBoost();
+	void ServerDeActivateProximityBoost_Implementation();
+	bool ServerDeActivateProximityBoost_Validate();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastDeActivateProximityBoost();
+	
+	
 };
