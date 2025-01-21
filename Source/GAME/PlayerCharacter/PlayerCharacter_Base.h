@@ -158,6 +158,21 @@ public:
 
 	// Function to stop trail spawning
 	void StopTrailSpawning();
+
+	////////////////
+	///  Coyote  ///
+	////////////////
+	// Timer for Coyote Time
+	FTimerHandle CoyoteTimeTimerHandle;
+	// Boolean to track if Coyote Time is active
+	bool bCanUseCoyoteTime;
+	// Duration of Coyote Time (e.g., 0.2 seconds)
+	float CoyoteTimeDuration = 0.4f;
+	// Function to start the coyote time timer
+	void StartCoyoteTime();
+	// Function to disable coyote time after it expires
+	void DisableCoyoteTime();
+
 	
 };
 
@@ -168,6 +183,10 @@ inline void APlayerCharacter_Base::Landed(const FHitResult& Hit)
 	bIsGrounded = true;
 	StopTrailSpawning();
 	UE_LOG(LogTemp, Log , TEXT("Landed Bro!"))
+
+	// Reset coyote time availability
+	bCanUseCoyoteTime = false;
+	GetWorld()->GetTimerManager().ClearTimer(CoyoteTimeTimerHandle);
 }
 
 

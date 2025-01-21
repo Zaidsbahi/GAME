@@ -68,6 +68,12 @@ void APlayerCharacter_Base::BeginPlay()
 void APlayerCharacter_Base::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+
+    if (!GetCharacterMovement()->IsMovingOnGround() && bIsGrounded)
+    {
+        bIsGrounded = false;
+        StartCoyoteTime();
+    }
 }
 
 ////////////////////////////////////////
@@ -123,10 +129,10 @@ void APlayerCharacter_Base::Jump()
 
         UE_LOG(LogTemp, Log, TEXT("Jump() called. JumpCountFromState: %d"), JumpCountFromState);
 
-        if (JumpCountFromState > 0)
+        if (JumpCountFromState > 0 || bCanUseCoyoteTime) // Allow jump if coyote time is active
         {
               
-            if (bIsGrounded)
+            if (bIsGrounded || bCanUseCoyoteTime)
             {
                 Super::Jump();
                 bIsGrounded = false;
@@ -135,6 +141,9 @@ void APlayerCharacter_Base::Jump()
                 // Start trail spawning
                 bIsGeneratingTrail = true;
                 GetWorld()->GetTimerManager().SetTimer(TrailSpawnTimerHandle, this, &APlayerCharacter_Base::SpawnTrailRepeatedly, 0.2f, true);
+
+                // Disable coyote time after jumping
+                DisableCoyoteTime();
             }
             else
             {
@@ -472,4 +481,31 @@ void APlayerCharacter_Base::StopTrailSpawning()
     GetWorld()->GetTimerManager().ClearTimer(TrailSpawnTimerHandle);
 
     UE_LOG(LogTemp, Log, TEXT("Trail spawning stopped."));
+}
+
+
+////////////////
+///  Coyote  ///
+////////////////
+void APlayerCharacter_Base::StartCoyoteTime()
+{
+    if (bCanUseCoyoteTime) return;  // Already active, no need to restart
+
+    UE_LOG(LogTemp, Log, TEXT("Coyote time started!"));
+
+    bCanUseCoyoteTime = true;
+
+    // Start the timer to disable coyote time after the duration
+    GetWorld()->GetTimerManager().SetTimer(
+        CoyoteTimeTimerHandle,
+        this,
+        &APlayerCharacter_Base::DisableCoyoteTime,
+        CoyoteTimeDuration,
+        false  // Do not loop
+    );
+}
+void APlayerCharacter_Base::DisableCoyoteTime()
+{
+    bCanUseCoyoteTime = false;
+    UE_LOG(LogTemp, Log, TEXT("Coyote time ended."));
 }
