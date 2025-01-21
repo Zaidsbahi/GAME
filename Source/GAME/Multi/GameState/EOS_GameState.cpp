@@ -1,6 +1,11 @@
 #include "EOS_GameState.h"
 #include "Net/UnrealNetwork.h"
 
+void AEOS_GameState::ClientSyncElapsedTime_Implementation(float Time)
+{
+	ElapsedTime = Time;
+}
+
 void AEOS_GameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);

@@ -19,6 +19,10 @@ AEOS_GameMode::AEOS_GameMode()
 	// Add track levels to the list
 	TrackLevels = {TEXT("Track1"), TEXT("Track2"), TEXT("Track3") , TEXT("Track4")};
 	CurrentTrackIndex = 0; // Start with the first track
+
+	ElapsedTime = 0.0f;
+	
+	bReplicates = true;
 }
 
 void AEOS_GameMode::PostLogin(APlayerController* NewPlayer)
@@ -76,6 +80,18 @@ void AEOS_GameMode::PostLogin(APlayerController* NewPlayer)
 		{
 			UE_LOG(LogTemp, Error, TEXT("Failed to register the session."));
 		}
+
+		// Synchronize the elapsed time for newly joined clients
+		if (HasAuthority())
+		{
+			if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
+			{
+				GameStateRef->ElapsedTime = FMath::Max(GameStateRef->ElapsedTime, 0.0f);
+				GameStateRef->ClientSyncElapsedTime(GameStateRef->ElapsedTime);
+				UE_LOG(LogTemp, Log, TEXT("Sent elapsed time to client: %f"), GameStateRef->ElapsedTime);
+			}
+		}
+		
 	}
 	
 }
@@ -86,6 +102,12 @@ void AEOS_GameMode::RestartCurrentLevel()
 	if (GetWorld())
 	{
 		UE_LOG(LogTemp, Warning, TEXT("RestartCurrentLevel called on the server."));
+
+		if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
+		{
+			GameStateRef->ElapsedTime = 0.0f;
+		}
+		
 		// Use the OpenLevelText stored in your game instance
 		UEOS_GameInstance* GameInstance = Cast<UEOS_GameInstance>(GetGameInstance());
 		if (GameInstance)
@@ -108,7 +130,7 @@ void AEOS_GameMode::RestartCurrentLevel()
 
 void AEOS_GameMode::StartTrackTimer()
 {
-	GetWorld()->GetTimerManager().SetTimer(TrackTimerHandle, this, &AEOS_GameMode::UpdateElapsedTime, 1.0f, true);
+	GetWorld()->GetTimerManager().SetTimer(TrackTimerHandle, this, &AEOS_GameMode::UpdateElapsedTime, 0.01f, true);
 }
 
 void AEOS_GameMode::StopTrackTimer()
@@ -123,8 +145,19 @@ void AEOS_GameMode::BeginPlay()
 	Super::BeginPlay();
 
 	// Start the track timer when the game begins
-	StartTrackTimer();
-	UE_LOG(LogTemp, Log, TEXT("Track timer started in BeginPlay."));
+	if (HasAuthority()) 
+	{
+		if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
+		{
+			GameStateRef->ElapsedTime = 0.0f;  // Reset the timer at start
+		}
+		
+		if (!GetWorld()->GetTimerManager().IsTimerActive(TrackTimerHandle))
+		{
+			StartTrackTimer();
+			UE_LOG(LogTemp, Log, TEXT("Track timer started in BeginPlay."));
+		}
+	}
 
 	UEOS_GameInstance* GameInstance = Cast<UEOS_GameInstance>(GetGameInstance());
 	if (GameInstance)
@@ -144,11 +177,22 @@ void AEOS_GameMode::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 
 void AEOS_GameMode::UpdateElapsedTime()
 {
-	// Get the GameState
-	AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>();
-	if (GameState)
+	if (HasAuthority())  
 	{
-		GameStateRef->ElapsedTime += 1.0f;
+		float CurrentTime = GetWorld()->GetRealTimeSeconds();
+
+		if (LastTime == 0.0f) 
+		{
+			LastTime = CurrentTime; // Initialize LastTime on the first run
+		}
+
+		float DeltaTime = CurrentTime - LastTime;
+		LastTime = CurrentTime;
+
+		if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
+		{
+			GameStateRef->ElapsedTime += DeltaTime;
+		}
 	}
 }
 
@@ -161,6 +205,9 @@ void AEOS_GameMode::CompleteTrack()
 	if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
 	{
 		UE_LOG(LogTemp, Log, TEXT("Track completed in %f seconds"), GameStateRef->ElapsedTime);
+		
+		// Reset the elapsed time before transitioning to the next track
+		GameStateRef->ElapsedTime = 0.0f;
 	}
 
 	// Transition to the next track after 5 seconds
@@ -230,3 +277,4 @@ void AEOS_GameMode::LoadMainMenu()
 {
 	UGameplayStatics::OpenLevel(GetWorld(), "ZaidTestStart"); // Replace "MainMenu" with the actual level name
 }
+

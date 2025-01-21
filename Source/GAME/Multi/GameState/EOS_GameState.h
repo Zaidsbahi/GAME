@@ -10,6 +10,7 @@ class GAME_API AEOS_GameState : public AGameStateBase
 {
 	GENERATED_BODY()
 
+
 public:
 	// Elapsed time variable (replicated to clients)
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Timer")
@@ -18,6 +19,9 @@ public:
 	// Getter function for the elapsed time
 	UFUNCTION(BlueprintCallable, Category = "Timer")
 	float GetElapsedTime() const { return ElapsedTime; }
+
+	UFUNCTION(Client, Reliable)
+	void ClientSyncElapsedTime(float Time);
 
 protected:
 	// Replication setup

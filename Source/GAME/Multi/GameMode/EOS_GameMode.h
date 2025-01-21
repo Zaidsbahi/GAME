@@ -41,6 +41,8 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Game")
 	void LoadMainMenu();
+
+	float LastTime = 0.0f;
 	
 protected:
 
