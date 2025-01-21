@@ -20,6 +20,8 @@ class GAME_API APlayerCharacter_Base : public ACharacter
 	TObjectPtr<class UInputAction> AirDash;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class UInputAction> RestartLevelAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UInputAction> RestartTrackAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= "Input",meta=(AllowPrivateAccess = "true"))
 	TObjectPtr<class UInputMappingContext> MechanicsMappingContext;
 
@@ -119,6 +121,8 @@ public:
 
 	///Restart
 	void RestartLevel();
+
+	void RestartTrack();
 
 
 	UPROPERTY()

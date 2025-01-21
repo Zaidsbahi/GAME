@@ -299,6 +299,7 @@ void APlayerCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInp
     {
         EnhancedInputComponent->BindAction(AirDash, ETriggerEvent::Started, this, &APlayerCharacter_Base::PerformAirDash);
         EnhancedInputComponent->BindAction(RestartLevelAction, ETriggerEvent::Triggered, this, &APlayerCharacter_Base::RestartLevel);
+        EnhancedInputComponent->BindAction(RestartTrackAction, ETriggerEvent::Triggered, this, &APlayerCharacter_Base::RestartTrack);
     }
 }
 void APlayerCharacter_Base::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -324,6 +325,24 @@ void APlayerCharacter_Base::RestartLevel()
         {
             UE_LOG(LogTemp, Warning, TEXT("CastedGameMode"));
             GameMode->RestartCurrentLevel();
+        }
+    }
+    else
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Only the server/host can restart the level."));
+    }
+}
+
+void APlayerCharacter_Base::RestartTrack()
+{
+    if (HasAuthority()) // Only the host can restart
+    {
+        StopTrailSpawning();
+        UE_LOG(LogTemp, Warning, TEXT("Server is restarting the level."));
+        if (AEOS_GameMode* GameMode = Cast<AEOS_GameMode>(GetWorld()->GetAuthGameMode()))
+        {
+            UE_LOG(LogTemp, Warning, TEXT("CastedGameMode"));
+            GameMode->RestartCurrentTrack();
         }
     }
     else
