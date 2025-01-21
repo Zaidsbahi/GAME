@@ -157,6 +157,7 @@ public:
 	void SpawnTrailRepeatedly();
 
 	// Function to stop trail spawning
+	UFUNCTION(BlueprintCallable)
 	void StopTrailSpawning();
 
 	////////////////

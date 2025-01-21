@@ -137,24 +137,30 @@ void APlayerCharacter_Base::Jump()
                 Super::Jump();
                 bIsGrounded = false;
                 JumpMaxCount = 2; // Set max allowed jumps while airborne
-
-                // Start trail spawning
-                bIsGeneratingTrail = true;
-                GetWorld()->GetTimerManager().SetTimer(TrailSpawnTimerHandle, this, &APlayerCharacter_Base::SpawnTrailRepeatedly, 0.2f, true);
-
+                
                 // Disable coyote time after jumping
                 DisableCoyoteTime();
+
+                if (JumpCountFromState > 0)
+                {
+                    // Start trail spawning
+                    bIsGeneratingTrail = true;
+                    GetWorld()->GetTimerManager().SetTimer(TrailSpawnTimerHandle, this, &APlayerCharacter_Base::SpawnTrailRepeatedly, 0.2f, true);
+                }
             }
             else
             {
-                Super::Jump();
-                PS->AddJumpCount(-1); // Decrement jump count
-                PS->SetActivateProximityBoostJump();
-                JumpMaxCount = JumpMaxCount + 1;
-                UE_LOG(LogTemp, Log, TEXT("Decrementing JumpCount. Remaining: %d"), PS->ReturnJumpCount());
+                if (JumpCountFromState > 0)
+                {
+                    bIsGeneratingTrail = true;
+                    GetWorld()->GetTimerManager().SetTimer(TrailSpawnTimerHandle, this, &APlayerCharacter_Base::SpawnTrailRepeatedly, 0.2f, true);
+                }
+                    Super::Jump();
+                    PS->AddJumpCount(-1); // Decrement jump count
+                    PS->SetActivateProximityBoostJump();
+                    JumpMaxCount = JumpMaxCount + 1;
+                    UE_LOG(LogTemp, Log, TEXT("Decrementing JumpCount. Remaining: %d"), PS->ReturnJumpCount());
 
-                bIsGeneratingTrail = true;
-                GetWorld()->GetTimerManager().SetTimer(TrailSpawnTimerHandle, this, &APlayerCharacter_Base::SpawnTrailRepeatedly, 0.2f, true);
             }
         }
         else if (JumpCountFromState == 0 && bIsGrounded)
