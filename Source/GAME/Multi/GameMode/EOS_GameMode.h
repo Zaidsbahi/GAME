@@ -43,7 +43,38 @@ public:
 	void LoadMainMenu();
 
 	float LastTime = 0.0f;
-	
+
+	///////////////////////////
+	/// Ready-Up Mechanism ////
+	///////////////////////////
+
+	// Widget class to use for the Ready-Up UI
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UI")
+	TSubclassOf<class UUserWidget> ReadyWidgetClass;
+
+	// Instance of the widget
+	UPROPERTY()
+	UUserWidget* ReadyWidgetInstance;
+
+	// Tracks the number of players currently ready
+	int32 PlayersReadyCount;
+
+	// Called when a player's ready status changes
+	UFUNCTION()
+	void OnPlayerReadyChanged(bool bIsReady);
+
+	// Function to check if the game should start
+	void CheckReadyState();
+
+	// Function to start gameplay
+	void StartGameplay();
+
+	// Disable player movement
+	void DisablePlayerMovement();
+
+	// Enable player movement
+	void EnablePlayerMovement();
+
 protected:
 
 	FTimerHandle TrackTimerHandle; // Handle for controlling the timer
@@ -55,6 +86,7 @@ protected:
 	void UpdateElapsedTime();
 
 	TArray<FName> TrackLevels; // List of track level names
+	UPROPERTY(Replicated)
 	int32 CurrentTrackIndex;  // Current track index
 
 

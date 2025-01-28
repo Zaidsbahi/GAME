@@ -16,6 +16,21 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void TogglePauseMenu();
+	
+	// Show the Ready-Up widget
+	UFUNCTION(Client, Reliable)
+	void ShowReadyWidget(TSubclassOf<class UUserWidget> WidgetClass);
+
+	// Disable input for the player
+	UFUNCTION(Client, Reliable)
+	void DisableInputForPlayer();
+
+	// Enable input for the player
+	UFUNCTION(Client, Reliable)
+	void EnableInputForPlayer();
+	
+	UFUNCTION(Client, Reliable)
+	void RemoveReadyWidget();
 
 protected:
 
@@ -31,6 +46,10 @@ protected:
 
 	UPROPERTY()
 	class UUserWidget* PauseMenuInstance;
+
+	// Ready-Up widget instance
+	UPROPERTY()
+	class UUserWidget* ReadyWidgetInstance;
 
 	virtual void SetupInputComponent() override;
 	

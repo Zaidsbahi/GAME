@@ -9,6 +9,8 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDashCountChanged, int32, NewDashC
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnActivateProximityBoostJump, bool, NewActivateProximityJump);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnActivateProximityBoostDash, bool, NewActivateProximityDash);
 
+// Declare delegate for readiness changes
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnReadyChanged, bool, bIsReady);
 
 UCLASS()
 class GAME_API APlayerState_Base : public APlayerState
@@ -82,7 +84,25 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool ReturnActiveProxDash();
 
-	
+	///////////////////////////
+	/// Ready-Up Mechanism ////
+	///////////////////////////
+
+	// Ready state, replicated
+	UPROPERTY(ReplicatedUsing = OnRep_IsReady, BlueprintReadOnly)
+	bool bIsReady = false;
+
+	// Delegate to broadcast when ready state changes
+	UPROPERTY(BlueprintAssignable)
+	FOnReadyChanged OnReadyChanged;
+
+	// Set ready state on the server
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void SetReady(bool bReady);
+
+	// Called when bIsReady changes
+	UFUNCTION()
+	void OnRep_IsReady();
 };
 
 

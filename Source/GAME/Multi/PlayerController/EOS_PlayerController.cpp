@@ -69,6 +69,22 @@ void AEOS_PlayerController::TogglePauseMenu()
 	}
 }
 
+void AEOS_PlayerController::RemoveReadyWidget_Implementation()
+{
+	if (ReadyWidgetInstance)
+	{
+		ReadyWidgetInstance->RemoveFromParent();
+		ReadyWidgetInstance = nullptr;
+
+		// Hide mouse cursor and reset input mode to game only
+		bShowMouseCursor = false;
+		FInputModeGameOnly InputMode;
+		SetInputMode(InputMode);
+
+		UE_LOG(LogTemp, Log, TEXT("Ready-Up widget removed for player"));
+	}
+}
+
 
 void AEOS_PlayerController::SetupInputComponent()
 {
@@ -94,4 +110,50 @@ void AEOS_PlayerController::OnNetCleanup(class UNetConnection* Connection)
 	
 	
 	Super::OnNetCleanup(Connection);
+}
+
+
+void AEOS_PlayerController::ShowReadyWidget_Implementation(TSubclassOf<UUserWidget> WidgetClass)
+{
+	if (WidgetClass && !ReadyWidgetInstance)
+	{
+		ReadyWidgetInstance = CreateWidget<UUserWidget>(this, WidgetClass);
+		if (ReadyWidgetInstance)
+		{
+			ReadyWidgetInstance->AddToViewport();
+
+			// Enable the mouse cursor and lock input to UI
+			bShowMouseCursor = true;
+			FInputModeUIOnly InputMode;
+			InputMode.SetWidgetToFocus(ReadyWidgetInstance->TakeWidget());
+			InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+			SetInputMode(InputMode);
+
+			UE_LOG(LogTemp, Log, TEXT("Ready-Up widget displayed successfully on client"));
+		}
+	}
+}
+
+void AEOS_PlayerController::DisableInputForPlayer_Implementation()
+{
+	if (APawn* ControlledPawn = GetPawn())
+	{
+		ControlledPawn->DisableInput(this);
+		UE_LOG(LogTemp, Log, TEXT("Player input disabled"));
+	}
+}
+
+void AEOS_PlayerController::EnableInputForPlayer_Implementation()
+{
+	if (APawn* ControlledPawn = GetPawn())
+	{
+		ControlledPawn->EnableInput(this);
+	}
+
+	// Hide mouse cursor and set input mode back to game
+	bShowMouseCursor = false;
+	FInputModeGameOnly InputMode;
+	SetInputMode(InputMode);
+
+	UE_LOG(LogTemp, Log, TEXT("Player input enabled"));
 }

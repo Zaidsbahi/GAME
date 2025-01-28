@@ -1,8 +1,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "OnlineSessionSettings.h"
 #include "Engine/GameInstance.h"
+#include "OnlineSubsystem.h"
 #include "Interfaces/OnlineSessionInterface.h"
+#include "Interfaces/OnlineIdentityInterface.h"
 #include "EOS_GameInstance.generated.h"
 
 UCLASS()
@@ -34,6 +37,25 @@ public:
 	UFUNCTION(BluePrintCallable, Category= "EOS Function")
 	void DestroySession();
 
+	/////////////////////////
+	/// Anonymously Login ///
+	/////////////////////////
+
+	UFUNCTION(BlueprintCallable, Category="EOS")
+	void LoginAnonymously(FString Username);
+	UFUNCTION(BlueprintCallable, Category="EOS")
+	FString GetCurrentUsername();
+	//void OnLoginComplete(int32 LocalUserNum, bool bWasSuccess, const FUniqueNetId& UserID, const FString& Error);
+	FString PlayerUsername;
+
+
+	// Second Try
+	void OnLoginComplete(int32 LocalUserNum, bool bWasSuccess, const FUniqueNetId& UserID, const FString& Error);
+	FString AnonymousUsername = TEXT("Player_") + FGuid::NewGuid().ToString();
+	///////////////////////////////
+	///////////////////////////////
+	///////////////////////////////
+
 	TSharedPtr<FOnlineSessionSearch> SessionSearch;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= "EOS Variables")
@@ -46,6 +68,8 @@ public:
 	void OnJoinSessionCompleted(FName SessionName, EOnJoinSessionCompleteResult::Type Result);
 
 	// In your GameInstance class (e.g., UEOS_GameInstance):
-	int32 CurrentTrackIndex = 0;
+	int32 CurrentTrackIndex = 1;
+	
+	FOnlineSessionSettings SessionSettings;
 	
 };

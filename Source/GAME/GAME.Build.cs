@@ -2,6 +2,7 @@
 
 using UnrealBuildTool;
 using System;
+using System.IO;
 
 public class GAME : ModuleRules
 {
@@ -9,9 +10,11 @@ public class GAME : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "OnlineSubsystem", "OnlineSubsystemEOS", "OnlineSubsystemUtils" , "EnhancedInput" });
+		PublicDependencyModuleNames.AddRange(new string[] { "EOSSDK" ,"Core", "CoreUObject", "Engine", "InputCore", "OnlineSubsystem", "OnlineSubsystemEOS", "OnlineSubsystemUtils" , "EnhancedInput" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		
+		PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "ThirdParty", "EOSSDK", "Include"));
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

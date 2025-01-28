@@ -3,12 +3,15 @@
 #include "OnlineSessionSettings.h"
 #include "OnlineSubsystem.h"
 #include "OnlineSubsystemUtils.h"
+#include "Blueprint/UserWidget.h"
 #include "Interfaces/OnlineIdentityInterface.h"
 #include "Kismet/GameplayStatics.h"
 #include "GAME/Multi/GameInstance/EOS_GameInstance.h"
 #include "Interfaces/OnlineSessionInterface.h"
 #include "Net/UnrealNetwork.h"
 #include "GAME/Multi/GameState/EOS_GameState.h"
+#include "GAME/Multi/PlayerController/EOS_PlayerController.h"
+#include "GAME/PlayerState/PlayerState_Base.h"
 #include "GameFramework/PlayerState.h"
 
 
@@ -18,9 +21,11 @@ AEOS_GameMode::AEOS_GameMode()
 
 	// Add track levels to the list
 	TrackLevels = {TEXT("Track1"), TEXT("Track2"), TEXT("Track3") , TEXT("Track4")};
-	CurrentTrackIndex = 0; // Start with the first track
+	CurrentTrackIndex = 1; // Start with the first track
 
 	ElapsedTime = 0.0f;
+	ReadyWidgetInstance = nullptr;
+	PlayersReadyCount = 0; // No players are ready at the start
 	
 	bReplicates = true;
 }
@@ -29,6 +34,35 @@ void AEOS_GameMode::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
 
+	Super::PostLogin(NewPlayer);
+
+	// Get the current level name
+	FString CurrentLevelName = UGameplayStatics::GetCurrentLevelName(GetWorld());
+
+	// Skip Ready-Up system for Track1 (tutorial level)
+	if (CurrentLevelName == "Track1")
+	{
+		UE_LOG(LogTemp, Log, TEXT("Skipping Ready-Up system for Track1."));
+		return;
+	}
+	
+	// Show the Ready-Up widget for the newly joined player
+	if (AEOS_PlayerController* PlayerController = Cast<AEOS_PlayerController>(NewPlayer))
+	{
+		PlayerController->ShowReadyWidget(ReadyWidgetClass); // Ensure widget is shown
+		PlayerController->DisableInputForPlayer(); // Disable input for the player
+	}
+
+	// Bind the ready status delegate for the new player's PlayerState
+	if (APlayerState_Base* PlayerState = NewPlayer->GetPlayerState<APlayerState_Base>())
+	{
+		PlayerState->OnReadyChanged.AddDynamic(this, &AEOS_GameMode::OnPlayerReadyChanged);
+	}
+
+	// Log the current number of connected players
+	UE_LOG(LogTemp, Log, TEXT("Player joined. Current number of players: %d"), GameState->PlayerArray.Num());
+
+	
 	if (NewPlayer)
 	{
 		FUniqueNetIdRepl UniqueNetIdRepl;
@@ -80,7 +114,7 @@ void AEOS_GameMode::PostLogin(APlayerController* NewPlayer)
 		{
 			UE_LOG(LogTemp, Error, TEXT("Failed to register the session."));
 		}
-
+		
 		// Synchronize the elapsed time for newly joined clients
 		if (HasAuthority())
 		{
@@ -93,7 +127,6 @@ void AEOS_GameMode::PostLogin(APlayerController* NewPlayer)
 		}
 		
 	}
-	
 }
 
 void AEOS_GameMode::RestartCurrentLevel()
@@ -152,11 +185,13 @@ void AEOS_GameMode::BeginPlay()
 			GameStateRef->ElapsedTime = 0.0f;  // Reset the timer at start
 		}
 		
+		/*
 		if (!GetWorld()->GetTimerManager().IsTimerActive(TrackTimerHandle))
 		{
 			StartTrackTimer();
 			UE_LOG(LogTemp, Log, TEXT("Track timer started in BeginPlay."));
 		}
+		*/
 	}
 
 	UEOS_GameInstance* GameInstance = Cast<UEOS_GameInstance>(GetGameInstance());
@@ -165,6 +200,33 @@ void AEOS_GameMode::BeginPlay()
 		CurrentTrackIndex = GameInstance->CurrentTrackIndex;
 		UE_LOG(LogTemp, Log, TEXT("GameMode: Retrieved CurrentTrackIndex = %d from GameInstance"), CurrentTrackIndex);
 	}
+
+	FString CurrentLevelName = UGameplayStatics::GetCurrentLevelName(GetWorld());
+	if (CurrentLevelName != "Track1" && ReadyWidgetClass) // Skip Track1 (tutorial)
+	{
+		// Notify all players to show the Ready-Up widget
+		for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+		{
+			if (AEOS_PlayerController* PC = Cast<AEOS_PlayerController>(It->Get()))
+			{
+				PC->ShowReadyWidget(ReadyWidgetClass);
+				PC->DisableInputForPlayer(); // Disable movement for all players
+			}
+		}
+
+		// Bind the ready status change delegate for each player's PlayerState
+		for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+		{
+			if (APlayerController* PC = It->Get())
+			{
+				if (APlayerState_Base* PlayerState = PC->GetPlayerState<APlayerState_Base>())
+				{
+					PlayerState->OnReadyChanged.AddDynamic(this, &AEOS_GameMode::OnPlayerReadyChanged);
+				}
+			}
+		}
+	}
+	
 }
 
 void AEOS_GameMode::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -173,6 +235,7 @@ void AEOS_GameMode::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 
 	// Replicate the elapsed time to clients
 	DOREPLIFETIME(AEOS_GameMode, ElapsedTime);
+	DOREPLIFETIME(AEOS_GameMode, CurrentTrackIndex);
 }
 
 void AEOS_GameMode::UpdateElapsedTime()
@@ -251,7 +314,7 @@ void AEOS_GameMode::LoadNextTrack()
 	else
 	{
 		UE_LOG(LogTemp, Log, TEXT("No more tracks. Game complete!"));
-		// TODO: End game logic
+		// Handle end-of-game logic here
 	}
 }
 
@@ -278,3 +341,75 @@ void AEOS_GameMode::LoadMainMenu()
 	UGameplayStatics::OpenLevel(GetWorld(), "ZaidTestStart"); // Replace "MainMenu" with the actual level name
 }
 
+
+
+///////////////////////////
+/// Ready-Up Mechanism ////
+///////////////////////////
+
+void AEOS_GameMode::OnPlayerReadyChanged(bool bIsReady)
+{
+	// Reset the ready count
+	PlayersReadyCount = 0;
+
+	// Count how many players are ready
+	for (APlayerState* PlayerState : GameState->PlayerArray)
+	{
+		if (APlayerState_Base* BasePlayerState = Cast<APlayerState_Base>(PlayerState))
+		{
+			if (BasePlayerState->bIsReady)
+			{
+				PlayersReadyCount++;
+			}
+		}
+	}
+
+	// Check if the game should start
+	CheckReadyState();
+}
+void AEOS_GameMode::CheckReadyState()
+{
+	if (PlayersReadyCount == 2) // Ensure both players are ready
+	{
+		StartGameplay();
+	}
+}
+void AEOS_GameMode::StartGameplay()
+{
+	UE_LOG(LogTemp, Log, TEXT("Both players are ready. Starting the game!"));
+
+	// Enable player movement
+	EnablePlayerMovement();
+
+	// Notify all players to remove the Ready-Up widget
+	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+	{
+		if (AEOS_PlayerController* PC = Cast<AEOS_PlayerController>(It->Get()))
+		{
+			PC->RemoveReadyWidget();
+		}
+	}
+	
+	// Start the timer or gameplay logic
+	StartTrackTimer();
+}
+void AEOS_GameMode::DisablePlayerMovement()
+{
+	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+	{
+		if (AEOS_PlayerController* PC = Cast<AEOS_PlayerController>(It->Get()))
+		{
+			PC->DisableInputForPlayer(); // Call Client RPC to disable input
+		}
+	}
+}
+void AEOS_GameMode::EnablePlayerMovement()
+{
+	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+	{
+		if (AEOS_PlayerController* PC = Cast<AEOS_PlayerController>(It->Get()))
+		{
+			PC->EnableInputForPlayer(); // Call Client RPC to enable input
+		}
+	}
+}

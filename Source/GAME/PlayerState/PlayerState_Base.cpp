@@ -85,6 +85,25 @@ bool APlayerState_Base::ReturnActiveProxDash()
 	return bIsActivateProximityBoostDash;
 }
 
+///////////////////////////
+/// Ready-Up Mechanism ////
+///////////////////////////
+void APlayerState_Base::SetReady_Implementation(bool bReady)
+{
+	if (HasAuthority()) // Ensure this is only set on the server
+	{
+		bIsReady = bReady;
+		OnRep_IsReady();
+	}
+}
+
+
+void APlayerState_Base::OnRep_IsReady()
+{
+	// Broadcast the change to listeners
+	OnReadyChanged.Broadcast(bIsReady);
+}
+
 /////////////////////
 /// Replications ////
 /////////////////////
@@ -92,8 +111,12 @@ void APlayerState_Base::GetLifetimeReplicatedProps(TArray<class FLifetimePropert
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
+	DOREPLIFETIME(APlayerState_Base, bIsReady);
 	DOREPLIFETIME_CONDITION(APlayerState_Base, JumpCount, COND_OwnerOnly);
 	DOREPLIFETIME_CONDITION(APlayerState_Base, DashCount, COND_OwnerOnly);
 	DOREPLIFETIME_CONDITION(APlayerState_Base, bIsActivateProximityBoostJump, COND_OwnerOnly);
 	DOREPLIFETIME_CONDITION(APlayerState_Base, bIsActivateProximityBoostDash, COND_OwnerOnly);
+	
 }
+
+
