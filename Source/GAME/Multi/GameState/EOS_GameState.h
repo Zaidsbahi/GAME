@@ -55,6 +55,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Collectibles")
 	int32 GetCollectibleCount() const { return CollectiblesCount; }
 
+	UPROPERTY(Replicated)
+	bool bShouldJog = false;
+
 protected:
 	// Replication setup
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;

@@ -178,6 +178,9 @@ public:
 	// Function to disable coyote time after it expires
 	void DisableCoyoteTime();
 
+	// Jogging speed variable
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float JoggingSpeed = 250.0f; // Adjust based on animation speeds
 	
 };
 

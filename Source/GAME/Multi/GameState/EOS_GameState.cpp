@@ -38,4 +38,6 @@ void AEOS_GameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 	DOREPLIFETIME(AEOS_GameState, CountdownTime);
 
 	DOREPLIFETIME(AEOS_GameState, CollectiblesCount);
+
+	DOREPLIFETIME(AEOS_GameState, bShouldJog);
 }

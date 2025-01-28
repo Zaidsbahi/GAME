@@ -66,6 +66,18 @@ public:
 	// Function to check if the game should start
 	void CheckReadyState();
 
+	UFUNCTION(BlueprintCallable, Category = "Game")
+	bool ArePlayersReady() const;
+
+	//UPROPERTY(ReplicatedUsing=OnRep_ShouldJog)
+	//bool bShouldJog = false;
+
+	UFUNCTION()
+	void OnRep_ShouldJog();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastStartJogging();
+
 	// Function to start gameplay
 	void StartGameplay();
 
@@ -74,6 +86,7 @@ public:
 
 	// Enable player movement
 	void EnablePlayerMovement();
+	
 
 	/////////////////////
 	/// Collectibles ////

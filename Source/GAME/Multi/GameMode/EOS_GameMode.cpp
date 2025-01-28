@@ -450,12 +450,50 @@ void AEOS_GameMode::CheckReadyState()
 		StartGameplay();
 	}
 }
+
+bool AEOS_GameMode::ArePlayersReady() const
+{
+	int32 ReadyPlayers = 0;
+
+	// Check all PlayerStates for readiness
+	for (APlayerState* PlayerState : GameState->PlayerArray)
+	{
+		if (APlayerState_Base* BasePlayerState = Cast<APlayerState_Base>(PlayerState))
+		{
+			if (BasePlayerState->bIsReady)
+			{
+				ReadyPlayers++;
+			}
+		}
+	}
+
+	// Ensure BOTH players are ready before starting movement
+	return ReadyPlayers == 2;
+}
+
+void AEOS_GameMode::OnRep_ShouldJog()
+{
+	//UE_LOG(LogTemp, Log, TEXT("[%s] OnRep_ShouldJog triggered! bShouldJog = %s"),
+	  // HasAuthority() ? TEXT("Server") : TEXT("Client"),
+	   //bShouldJog ? TEXT("True") : TEXT("False"));
+}
+
+void AEOS_GameMode::MulticastStartJogging_Implementation()
+{
+}
+
 void AEOS_GameMode::StartGameplay()
 {
 	UE_LOG(LogTemp, Log, TEXT("Both players are ready. Starting the game!"));
 
 	// Enable player movement
 	EnablePlayerMovement();
+	
+	
+	if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
+	{
+		GameStateRef->bShouldJog = true;
+	}
 
 	// Notify all players to remove the Ready-Up widget
 	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
