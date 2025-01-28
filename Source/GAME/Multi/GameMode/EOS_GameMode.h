@@ -75,6 +75,17 @@ public:
 	// Enable player movement
 	void EnablePlayerMovement();
 
+	/////////////////////
+	/// Collectibles ////
+	/////////////////////
+
+	// Required collectibles to proceed
+	UPROPERTY(EditDefaultsOnly, Category = "Game|Collectibles")
+	int32 RequiredCollectibles = 6;
+
+	// Function to check if players can progress
+	void CheckCollectibleRequirement();
+
 protected:
 
 	///////////////////////////

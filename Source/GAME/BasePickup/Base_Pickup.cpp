@@ -57,14 +57,14 @@ void ABase_Pickup::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 
 void ABase_Pickup::Pickup_Implementation(class ACharacter* OwningCharacter)
 {
+	if (!HasAuthority()) return;
+	
 	if (APlayerCharacter_Base* PlayerCharacter = Cast<APlayerCharacter_Base>(OwningCharacter))
 	{
 		if (PlayerCharacter->HasAuthority())
 		{
 			// Call the CollectPickup function on the player character
 			PlayerCharacter->CollectPickup();
-
-			
 		}
 
 		SetOwner(PlayerCharacter);

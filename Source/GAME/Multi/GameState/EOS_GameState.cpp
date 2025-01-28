@@ -11,6 +11,22 @@ void AEOS_GameState::ClientSyncCountdownTime_Implementation(float Time)
 	CountdownTime = Time;
 }
 
+void AEOS_GameState::OnRep_CollectiblesCount()
+{
+	UE_LOG(LogTemp, Log, TEXT("Collectibles count updated: %d"), CollectiblesCount);
+}
+
+void AEOS_GameState::AddCollectible()
+{
+	if (HasAuthority())
+	{
+		CollectiblesCount++;
+
+		// Notify clients
+		OnRep_CollectiblesCount();
+	}
+}
+
 void AEOS_GameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -20,4 +36,6 @@ void AEOS_GameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 
 	// Replicate the countdown time to all clients
 	DOREPLIFETIME(AEOS_GameState, CountdownTime);
+
+	DOREPLIFETIME(AEOS_GameState, CollectiblesCount);
 }

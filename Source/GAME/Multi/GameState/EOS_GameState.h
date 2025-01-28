@@ -35,6 +35,26 @@ public:
 	UFUNCTION(Client, Reliable)
 	void ClientSyncCountdownTime(float Time);
 
+	////////////////////
+	/// Collectibles ///
+	////////////////////
+	
+	// Shared collectible count (replicated)
+	UPROPERTY(ReplicatedUsing = OnRep_CollectiblesCount, BlueprintReadOnly, Category = "Collectibles")
+	int32 CollectiblesCount = 0;
+
+	// Replication function
+	UFUNCTION()
+	void OnRep_CollectiblesCount();
+
+	// Function to increase collectibles count
+	UFUNCTION(BlueprintCallable, Category = "Collectibles")
+	void AddCollectible();
+
+	// Function to get collectible count
+	UFUNCTION(BlueprintCallable, Category = "Collectibles")
+	int32 GetCollectibleCount() const { return CollectiblesCount; }
+
 protected:
 	// Replication setup
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;

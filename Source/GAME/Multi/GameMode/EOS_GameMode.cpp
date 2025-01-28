@@ -316,6 +316,16 @@ void AEOS_GameMode::UpdateElapsedTime()
 
 void AEOS_GameMode::CompleteTrack()
 {
+	AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>();
+	if (!GameStateRef || GameStateRef->GetCollectibleCount() < RequiredCollectibles)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Not enough collectibles to proceed!"));
+		return; // Prevent track from completing
+	}
+
+	// Reset collectible count for the next track
+	GameStateRef->CollectiblesCount = 0;
+	
 	// Stop the timer
 	StopTrackTimer();
 	
@@ -323,20 +333,18 @@ void AEOS_GameMode::CompleteTrack()
 	GetWorld()->GetTimerManager().ClearTimer(TrackTimerHandle);
 
 	// Log the completion and reset time
-	if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
+	if (AEOS_GameState* GameStateRefo = GetGameState<AEOS_GameState>())
 	{
 		UE_LOG(LogTemp, Log, TEXT("Track completed with %.2f seconds remaining."), CountdownTime);
 		CountdownTime = InitialCountdownTime; // Reset the timer for the next track
-	}
-	
-	// Log the final elapsed time
-	if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
-	{
+
+		// Log the final elapsed time
 		UE_LOG(LogTemp, Log, TEXT("Track completed in %f seconds"), GameStateRef->ElapsedTime);
 		
 		// Reset the elapsed time before transitioning to the next track
-		GameStateRef->ElapsedTime = 0.0f;
+		GameStateRefo->ElapsedTime = 0.0f;
 	}
+	
 
 	// Transition to the next track after 5 seconds
 	FTimerHandle TransitionHandle;
@@ -479,5 +487,14 @@ void AEOS_GameMode::EnablePlayerMovement()
 		{
 			PC->EnableInputForPlayer(); // Call Client RPC to enable input
 		}
+	}
+}
+
+void AEOS_GameMode::CheckCollectibleRequirement()
+{
+	AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>();
+	if (GameStateRef && GameStateRef->GetCollectibleCount() >= RequiredCollectibles)
+	{
+		CompleteTrack(); // Progress the track
 	}
 }
