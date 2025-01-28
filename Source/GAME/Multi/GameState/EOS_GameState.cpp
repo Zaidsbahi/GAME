@@ -6,10 +6,18 @@ void AEOS_GameState::ClientSyncElapsedTime_Implementation(float Time)
 	ElapsedTime = Time;
 }
 
+void AEOS_GameState::ClientSyncCountdownTime_Implementation(float Time)
+{
+	CountdownTime = Time;
+}
+
 void AEOS_GameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	// Replicate the elapsed time to all clients
 	DOREPLIFETIME(AEOS_GameState, ElapsedTime);
+
+	// Replicate the countdown time to all clients
+	DOREPLIFETIME(AEOS_GameState, CountdownTime);
 }

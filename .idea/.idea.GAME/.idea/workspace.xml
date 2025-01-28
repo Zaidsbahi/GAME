@@ -15,32 +15,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints/BP_FTutorialLevel.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Widgets/BP_WaitingRoom.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Widgets/WBP_ReadyWidget.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/GAME/LeaderboardManager/LeaderboardManager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/GAME/LeaderboardManager/LeaderboardManager.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/GAME/Multi/HUD/ReadyWidget.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/GAME/Multi/HUD/ReadyWidget.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_FinishLine.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_FinishLine.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_GameInstance.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_GameInstance.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/EOS_Main_GameModeBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/EOS_Main_GameModeBase.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/MenuCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/MenuCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/Track1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track1.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_Menu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_Menu.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GAME.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GAME.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/GAME.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/GAME.Build.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameInstance/EOS_GameInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameInstance/EOS_GameInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameInstance/EOS_GameInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameInstance/EOS_GameInstance.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_Timer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_Timer.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/PlayerController/EOS_PlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/PlayerController/EOS_PlayerController.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/PlayerController/EOS_PlayerController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/PlayerController/EOS_PlayerController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerState/PlayerState_Base.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerState/PlayerState_Base.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerState/PlayerState_Base.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerState/PlayerState_Base.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -324,7 +304,7 @@
       <workItem from="1737947399150" duration="2321000" />
       <workItem from="1737951343081" duration="80000" />
       <workItem from="1738004517100" duration="17699000" />
-      <workItem from="1738036484925" duration="1664000" />
+      <workItem from="1738036484925" duration="3398000" />
     </task>
     <servers />
   </component>

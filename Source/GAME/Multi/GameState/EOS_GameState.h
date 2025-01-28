@@ -16,12 +16,24 @@ public:
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Timer")
 	float ElapsedTime;
 
+	// Countdown time variable (replicated to clients)
+	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Timer")
+	float CountdownTime;
+
 	// Getter function for the elapsed time
 	UFUNCTION(BlueprintCallable, Category = "Timer")
 	float GetElapsedTime() const { return ElapsedTime; }
+	
+	// Getter function for the countdown time
+	UFUNCTION(BlueprintCallable, Category = "Timer")
+	float GetCountdownTime() const { return CountdownTime; }
 
 	UFUNCTION(Client, Reliable)
 	void ClientSyncElapsedTime(float Time);
+
+	// Function to sync countdown time on clients
+	UFUNCTION(Client, Reliable)
+	void ClientSyncCountdownTime(float Time);
 
 protected:
 	// Replication setup

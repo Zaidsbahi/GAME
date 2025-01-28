@@ -34,8 +34,6 @@ void AEOS_GameMode::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
 
-	Super::PostLogin(NewPlayer);
-
 	// Get the current level name
 	FString CurrentLevelName = UGameplayStatics::GetCurrentLevelName(GetWorld());
 
@@ -164,6 +162,12 @@ void AEOS_GameMode::RestartCurrentLevel()
 void AEOS_GameMode::StartTrackTimer()
 {
 	GetWorld()->GetTimerManager().SetTimer(TrackTimerHandle, this, &AEOS_GameMode::UpdateElapsedTime, 0.01f, true);
+
+	if (HasAuthority())
+	{
+		GetWorld()->GetTimerManager().SetTimer(TrackTimerHandle, this, &AEOS_GameMode::UpdateCountdownTime, 1.0f, true);
+		UE_LOG(LogTemp, Log, TEXT("Countdown timer started."));
+	}
 }
 
 void AEOS_GameMode::StopTrackTimer()
@@ -171,11 +175,32 @@ void AEOS_GameMode::StopTrackTimer()
 	GetWorld()->GetTimerManager().ClearTimer(TrackTimerHandle);
 	UE_LOG(LogTemp, Log, TEXT("Track timer stopped. Elapsed Time: %f seconds"), ElapsedTime);
 
+	if (HasAuthority())
+	{
+		GetWorld()->GetTimerManager().ClearTimer(TrackTimerHandle);
+		UE_LOG(LogTemp, Log, TEXT("Countdown timer stopped."));
+	}
+
 }
 
 void AEOS_GameMode::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Initialize the countdown timer
+	if (HasAuthority()) 
+	{
+		CountdownTime = InitialCountdownTime;
+
+		// Sync the countdown time to the GameState
+		if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
+		{
+			GameStateRef->CountdownTime = CountdownTime;
+			GameStateRef->ClientSyncCountdownTime(CountdownTime);
+		}
+
+		UE_LOG(LogTemp, Log, TEXT("Countdown timer initialized: %.2f seconds"), CountdownTime);
+	}
 
 	// Start the track timer when the game begins
 	if (HasAuthority()) 
@@ -236,6 +261,36 @@ void AEOS_GameMode::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 	// Replicate the elapsed time to clients
 	DOREPLIFETIME(AEOS_GameMode, ElapsedTime);
 	DOREPLIFETIME(AEOS_GameMode, CurrentTrackIndex);
+	DOREPLIFETIME(AEOS_GameMode, CountdownTime);
+}
+
+void AEOS_GameMode::UpdateCountdownTime()
+{
+	if (HasAuthority())
+	{
+		CountdownTime -= 1.0f;
+
+		// Sync the countdown time to clients
+		if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
+		{
+			GameStateRef->CountdownTime = CountdownTime;
+			GameStateRef->ClientSyncCountdownTime(CountdownTime);
+		}
+
+		// Broadcast the remaining time (optional)
+		UE_LOG(LogTemp, Log, TEXT("Time remaining: %.2f seconds"), CountdownTime);
+
+		// Check if the timer has reached zero
+		if (CountdownTime <= 0.0f)
+		{
+			CountdownTime = 0.0f; // Clamp to zero
+			StopTrackTimer();
+
+			// Restart the track when the timer ends
+			RestartCurrentTrack();
+			UE_LOG(LogTemp, Warning, TEXT("Time is up! Restarting track."));
+		}
+	}
 }
 
 void AEOS_GameMode::UpdateElapsedTime()
@@ -262,8 +317,18 @@ void AEOS_GameMode::UpdateElapsedTime()
 void AEOS_GameMode::CompleteTrack()
 {
 	// Stop the timer
+	StopTrackTimer();
+	
+	// Stop the timer
 	GetWorld()->GetTimerManager().ClearTimer(TrackTimerHandle);
 
+	// Log the completion and reset time
+	if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
+	{
+		UE_LOG(LogTemp, Log, TEXT("Track completed with %.2f seconds remaining."), CountdownTime);
+		CountdownTime = InitialCountdownTime; // Reset the timer for the next track
+	}
+	
 	// Log the final elapsed time
 	if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
 	{
@@ -323,6 +388,9 @@ void AEOS_GameMode::RestartCurrentTrack()
 	FString CurrentLevelName = GetWorld()->GetMapName();
 	CurrentLevelName.RemoveFromStart(GetWorld()->StreamingLevelsPrefix); // Remove prefix if any
 
+	// Reset the countdown timer for the new track
+	CountdownTime = InitialCountdownTime;
+	
 	// Unpause the game to reset input mode
 	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
 	if (PlayerController)

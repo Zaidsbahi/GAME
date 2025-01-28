@@ -77,8 +77,22 @@ public:
 
 protected:
 
+	///////////////////////////
+	/// Timer Configuration ///
+	///////////////////////////
+
 	FTimerHandle TrackTimerHandle; // Handle for controlling the timer
 
+	UPROPERTY(Replicated)
+	float CountdownTime; // Countdown duration in seconds (e.g., 60 seconds)
+
+	UPROPERTY(EditDefaultsOnly, Category = "Game|Timer")
+	float InitialCountdownTime = 90.0f; // Default starting countdown time
+
+	// Function to update the timer every second
+	void UpdateCountdownTime();
+
+	
 	UPROPERTY(Replicated)
 	float ElapsedTime; // Tracks elapsed time in seconds
 
