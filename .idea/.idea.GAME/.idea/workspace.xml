@@ -16,14 +16,27 @@
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_Winning.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_Winning.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Audio/Foley/DefaultFoleyEventAudioBank.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Audio/Foley/DefaultFoleyEventAudioBank.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_Jump.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_Jump.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_Land.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_Land.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_Run.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_Run.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_RunBackwards.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_RunBackwards.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_RunStrafe.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_RunStrafe.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_Tumble.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_Tumble.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_Walk.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Audio/Foley/MetaSounds/MSS_FoleySound_Walk.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AnimNotifies/BP_AnimNotify_FoleyEvent_Run_L.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AnimNotifies/BP_AnimNotify_FoleyEvent_Run_L.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_DashPickup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_DashPickup.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_JumpPickup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_JumpPickup.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Characters/UEFN_Mannequin/Animations/Run/M_Neutral_Run_Arc_Tight_L.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/UEFN_Mannequin/Animations/Run/M_Neutral_Run_Arc_Tight_L.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/Track1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track1.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Widgets/BP_Winning.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/BP_Winning.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_MainGameWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_MainGameWidget.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_Menu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_Menu.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_PauseMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_PauseMenu.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_ReadyWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_ReadyWidget.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" afterDir="false" />
     </list>
@@ -84,7 +97,7 @@
     <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/ThirdParty/EOSSDK/SDK/Include/eos_stats_types.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="Toolset" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -310,7 +323,7 @@
       <workItem from="1737951343081" duration="80000" />
       <workItem from="1738004517100" duration="17699000" />
       <workItem from="1738036484925" duration="13432000" />
-      <workItem from="1738109760622" duration="11709000" />
+      <workItem from="1738109760622" duration="17303000" />
     </task>
     <servers />
   </component>

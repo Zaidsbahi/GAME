@@ -234,6 +234,9 @@ void APlayerCharacter_Base::PerformAirDash()
             // Apply the dash using LaucnhCharacter
             LaunchCharacter(DashDirection, true, true);
 
+            // Play Dash Sound
+            PlayDashSound();
+            
             //Notify the Server
             if (HasAuthority())
             {
@@ -589,4 +592,15 @@ void APlayerCharacter_Base::AddWinningWidget()
     WinningWidget->AddToViewport();
     UE_LOG(LogTemp, Warning, TEXT("[%s] Winning Widget Added to Viewport!"), HasAuthority() ? TEXT("Server") : TEXT("Client"));
 
+}
+
+///////////////////////////
+///       Sounds        ///
+///////////////////////////
+void APlayerCharacter_Base::PlayDashSound()
+{
+    if (DashSound)
+    {
+        UGameplayStatics::PlaySoundAtLocation(this, DashSound, GetActorLocation());
+    }
 }

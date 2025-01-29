@@ -50,6 +50,17 @@ void ABase_Pickup::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 		SetActorEnableCollision(false);
 		SetActorHiddenInGame(true);
 
+		// Track pickup count per player
+		static TMap<APlayerCharacter_Base*, int32> PickupCountMap;
+		int32& PickupCount = PickupCountMap.FindOrAdd(PlayerCharacter);
+
+		UE_LOG(LogTemp, Warning, TEXT("Pickup Sound Called with Index: %d"), PickupCount);
+		// Call Blueprint function to play sound
+		PlayPickupSound(PickupCount);
+
+		// Cycle between 0, 1, 2 (so it loops through the 3 sounds)
+		PickupCount = (PickupCount + 1) % 3;
+
 		// Start the respawn timer
 		GetWorldTimerManager().SetTimer(RespawnTimerHandle, this, &ABase_Pickup::RespawnPickup, RespawnTime, false);
 	}
@@ -68,6 +79,17 @@ void ABase_Pickup::Pickup_Implementation(class ACharacter* OwningCharacter)
 		}
 
 		SetOwner(PlayerCharacter);
+
+		// Track pickup count per player
+		static TMap<APlayerCharacter_Base*, int32> PickupCountMap;
+		int32& PickupCount = PickupCountMap.FindOrAdd(PlayerCharacter);
+
+		UE_LOG(LogTemp, Warning, TEXT("Pickup Sound Called with Index: %d"), PickupCount);
+		// Call Blueprint function to play sound
+		PlayPickupSound(PickupCount);
+
+		// Cycle between 0, 1, 2 (so it loops through the 3 sounds)
+		PickupCount = (PickupCount + 1) % 3;
 	}
 	
 }

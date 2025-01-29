@@ -50,5 +50,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RespawnPickup();
 
-
+	///////////////////////////
+	///       Sounds        ///
+	///////////////////////////
+	UFUNCTION(BlueprintImplementableEvent, Category = "Audio")
+	void PlayPickupSound(int32 PickupIndex);
 };

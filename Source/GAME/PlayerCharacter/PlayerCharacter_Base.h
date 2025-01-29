@@ -190,6 +190,15 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "UI")
 	TSubclassOf<UUserWidget> WinningWidgetClass;
+	
+	///////////////////////////
+	///       Sounds        ///
+	///////////////////////////
+
+	// Dash Sound
+	UPROPERTY(EditAnywhere, Category = "Audio")
+	USoundBase* DashSound;
+	void PlayDashSound();
 };
 
 
