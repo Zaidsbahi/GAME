@@ -16,6 +16,10 @@
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_Winning.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_Winning.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/Track1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track1.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Widgets/BP_Winning.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/BP_Winning.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.cpp" afterDir="false" />
@@ -306,6 +310,7 @@
       <workItem from="1737951343081" duration="80000" />
       <workItem from="1738004517100" duration="17699000" />
       <workItem from="1738036484925" duration="13432000" />
+      <workItem from="1738109760622" duration="11709000" />
     </task>
     <servers />
   </component>

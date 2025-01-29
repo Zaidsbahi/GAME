@@ -11,6 +11,7 @@
 #include "Net/UnrealNetwork.h"
 #include "GAME/Multi/GameState/EOS_GameState.h"
 #include "GAME/Multi/PlayerController/EOS_PlayerController.h"
+#include "GAME/PlayerCharacter/PlayerCharacter_Base.h"
 #include "GAME/PlayerState/PlayerState_Base.h"
 #include "GameFramework/PlayerState.h"
 
@@ -450,7 +451,6 @@ void AEOS_GameMode::CheckReadyState()
 		StartGameplay();
 	}
 }
-
 bool AEOS_GameMode::ArePlayersReady() const
 {
 	int32 ReadyPlayers = 0;
@@ -470,18 +470,15 @@ bool AEOS_GameMode::ArePlayersReady() const
 	// Ensure BOTH players are ready before starting movement
 	return ReadyPlayers == 2;
 }
-
 void AEOS_GameMode::OnRep_ShouldJog()
 {
 	//UE_LOG(LogTemp, Log, TEXT("[%s] OnRep_ShouldJog triggered! bShouldJog = %s"),
 	  // HasAuthority() ? TEXT("Server") : TEXT("Client"),
 	   //bShouldJog ? TEXT("True") : TEXT("False"));
 }
-
 void AEOS_GameMode::MulticastStartJogging_Implementation()
 {
 }
-
 void AEOS_GameMode::StartGameplay()
 {
 	UE_LOG(LogTemp, Log, TEXT("Both players are ready. Starting the game!"));
@@ -527,7 +524,6 @@ void AEOS_GameMode::EnablePlayerMovement()
 		}
 	}
 }
-
 void AEOS_GameMode::CheckCollectibleRequirement()
 {
 	AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>();
@@ -536,3 +532,18 @@ void AEOS_GameMode::CheckCollectibleRequirement()
 		CompleteTrack(); // Progress the track
 	}
 }
+
+
+///////////////////////////
+///   Winning Condition ///
+///////////////////////////
+///
+/*
+void AEOS_GameMode::MulticastShowWinningScreen_Implementation()
+{
+	if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
+	{
+		GameStateRef->MulticastShowWinningScreen();
+	}
+}
+*/

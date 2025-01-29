@@ -5,6 +5,7 @@
 #include "GameFramework/Controller.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Blueprint/UserWidget.h"
 #include "GAME/ProximityBoost/ProximityBoost_Component.h"
 #include "GAME/Multi/GameMode/EOS_GameMode.h"
 #include "GAME/Multi/GameState/EOS_GameState.h"
@@ -81,20 +82,20 @@ void APlayerCharacter_Base::Tick(float DeltaTime)
     AEOS_GameState* GameState = Cast<AEOS_GameState>(GetWorld()->GetGameState());
     if (!GameState)
     {
-        UE_LOG(LogTemp, Warning, TEXT("[%s] GameState is nullptr"), HasAuthority() ? TEXT("Server") : TEXT("Client"));
+        //UE_LOG(LogTemp, Warning, TEXT("[%s] GameState is nullptr"), HasAuthority() ? TEXT("Server") : TEXT("Client"));
         return;
     }
 
     // Log bShouldJog from GameState
-    UE_LOG(LogTemp, Log, TEXT("[%s] bShouldJog: %s"),
-           HasAuthority() ? TEXT("Server") : TEXT("Client"),
-           GameState->bShouldJog ? TEXT("True") : TEXT("False"));
+    //UE_LOG(LogTemp, Log, TEXT("[%s] bShouldJog: %s"),
+           //HasAuthority() ? TEXT("Server") : TEXT("Client"),
+          // GameState->bShouldJog ? TEXT("True") : TEXT("False"));
 
     // Ensure it's not Track1 and both players are ready
     FString CurrentLevel = UGameplayStatics::GetCurrentLevelName(GetWorld());
     if (CurrentLevel == "Track1" || GameState->bShouldJog)
     {
-        UE_LOG(LogTemp, Log, TEXT("[%s] Jogging logic executed! Adding movement."), HasAuthority() ? TEXT("Server") : TEXT("Client"));
+        //UE_LOG(LogTemp, Log, TEXT("[%s] Jogging logic executed! Adding movement."), HasAuthority() ? TEXT("Server") : TEXT("Client"));
         AddMovementInput(GetActorForwardVector(), JoggingSpeed * DeltaTime);
     }
 }
@@ -556,4 +557,36 @@ void APlayerCharacter_Base::DisableCoyoteTime()
 {
     bCanUseCoyoteTime = false;
     UE_LOG(LogTemp, Log, TEXT("Coyote time ended."));
+}
+
+///////////////////////////
+///   Winning Condition ///
+///////////////////////////
+void APlayerCharacter_Base::AddWinningWidget()
+{
+    if (!WinningWidgetClass)
+    {
+        UE_LOG(LogTemp, Error, TEXT("[%s] WinningWidgetClass is not set!"), HasAuthority() ? TEXT("Server") : TEXT("Client"));
+        return;
+    }
+
+    APlayerController* PlayerController = Cast<APlayerController>(GetController());
+    if (!PlayerController)
+    {
+        UE_LOG(LogTemp, Error, TEXT("[%s] PlayerController is nullptr!"), HasAuthority() ? TEXT("Server") : TEXT("Client"));
+        return;
+    }
+
+    // Create the widget
+    UUserWidget* WinningWidget = CreateWidget<UUserWidget>(PlayerController, WinningWidgetClass);
+    if (!WinningWidget)
+    {
+        UE_LOG(LogTemp, Error, TEXT("[%s] Failed to create Winning Widget!"), HasAuthority() ? TEXT("Server") : TEXT("Client"));
+        return;
+    }
+
+    // Add to viewport
+    WinningWidget->AddToViewport();
+    UE_LOG(LogTemp, Warning, TEXT("[%s] Winning Widget Added to Viewport!"), HasAuthority() ? TEXT("Server") : TEXT("Client"));
+
 }

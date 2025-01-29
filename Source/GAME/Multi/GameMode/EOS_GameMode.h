@@ -99,7 +99,14 @@ public:
 	// Function to check if players can progress
 	void CheckCollectibleRequirement();
 
-protected:
+	///////////////////////////
+	///   Winning Condition ///
+	///////////////////////////
+	//UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	//void MulticastShowWinningScreen();
+
+	
+protected:	
 
 	///////////////////////////
 	/// Timer Configuration ///

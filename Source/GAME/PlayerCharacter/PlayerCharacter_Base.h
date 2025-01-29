@@ -181,7 +181,15 @@ public:
 	// Jogging speed variable
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float JoggingSpeed = 250.0f; // Adjust based on animation speeds
-	
+
+	///////////////////////////
+	///   Winning Condition ///
+	///////////////////////////
+	UFUNCTION(BlueprintCallable)
+	void AddWinningWidget();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "UI")
+	TSubclassOf<UUserWidget> WinningWidgetClass;
 };
 
 

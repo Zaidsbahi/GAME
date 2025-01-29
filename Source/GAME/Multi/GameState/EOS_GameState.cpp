@@ -1,4 +1,6 @@
 #include "EOS_GameState.h"
+
+#include "GAME/PlayerCharacter/PlayerCharacter_Base.h"
 #include "Net/UnrealNetwork.h"
 
 void AEOS_GameState::ClientSyncElapsedTime_Implementation(float Time)
@@ -24,6 +26,38 @@ void AEOS_GameState::AddCollectible()
 
 		// Notify clients
 		OnRep_CollectiblesCount();
+	}
+}
+
+///////////////////////////
+///   Winning Condition ///
+///////////////////////////
+void AEOS_GameState::MulticastShowWinningScreen_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("[%s] MulticastShowWinningScreen Called!"), HasAuthority() ? TEXT("Server") : TEXT("Client"));
+
+	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+	{
+		APlayerController* PlayerController = It->Get();
+		if (!PlayerController)
+		{
+			UE_LOG(LogTemp, Error, TEXT("PlayerController is nullptr! Skipping..."));
+			continue;
+		}
+
+		APlayerCharacter_Base* PlayerCharacter = Cast<APlayerCharacter_Base>(PlayerController->GetPawn());
+		if (!PlayerCharacter)
+		{
+			UE_LOG(LogTemp, Error, TEXT("PlayerCharacter is nullptr for controller: %s. Skipping..."), *PlayerController->GetName());
+			continue;
+		}
+
+		UE_LOG(LogTemp, Warning, TEXT("[%s] Found Player Character: %s"),
+			   HasAuthority() ? TEXT("Server") : TEXT("Client"),
+			   *PlayerCharacter->GetName());
+
+		// Add UI on **all** clients
+		PlayerCharacter->AddWinningWidget();
 	}
 }
 

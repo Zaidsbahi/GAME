@@ -58,6 +58,12 @@ public:
 	UPROPERTY(Replicated)
 	bool bShouldJog = false;
 
+	///////////////////////////
+	///   Winning Condition ///
+	///////////////////////////
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	void MulticastShowWinningScreen();
+
 protected:
 	// Replication setup
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
