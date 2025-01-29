@@ -105,7 +105,14 @@ public:
 	//UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
 	//void MulticastShowWinningScreen();
 
-	
+	//////////////////////
+	///   Player Start ///
+	//////////////////////
+	//UPROPERTY(Replicated)
+	int32 LastUsedSpawnIndex = -1; // -1 means no spawn yet
+	virtual AActor* FindPlayerStart_Implementation(AController* Player, const FString& IncomingName = TEXT("")) override;
+	//TArray<AActor*> AvailablePlayerStarts;
+
 protected:	
 
 	///////////////////////////

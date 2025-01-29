@@ -13,6 +13,7 @@
 #include "GAME/Multi/PlayerController/EOS_PlayerController.h"
 #include "GAME/PlayerCharacter/PlayerCharacter_Base.h"
 #include "GAME/PlayerState/PlayerState_Base.h"
+#include "GameFramework/PlayerStart.h"
 #include "GameFramework/PlayerState.h"
 
 
@@ -263,6 +264,7 @@ void AEOS_GameMode::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 	DOREPLIFETIME(AEOS_GameMode, ElapsedTime);
 	DOREPLIFETIME(AEOS_GameMode, CurrentTrackIndex);
 	DOREPLIFETIME(AEOS_GameMode, CountdownTime);
+	//DOREPLIFETIME(AEOS_GameMode, LastUsedSpawnIndex);
 }
 
 void AEOS_GameMode::UpdateCountdownTime()
@@ -531,6 +533,35 @@ void AEOS_GameMode::CheckCollectibleRequirement()
 	{
 		CompleteTrack(); // Progress the track
 	}
+}
+
+
+AActor* AEOS_GameMode::FindPlayerStart_Implementation(AController* Player, const FString& IncomingName)
+{
+	TArray<AActor*> PlayerStarts;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerStart::StaticClass(), PlayerStarts);
+
+	if (PlayerStarts.Num() < 2)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Not enough PlayerStarts found! Spawning at default location."));
+		return PlayerStarts.Num() > 0 ? PlayerStarts[0] : nullptr;
+	}
+
+	// Sort PlayerStarts for consistency (optional, if needed)
+	PlayerStarts.Sort([](const AActor& A, const AActor& B) {
+		return A.GetName() < B.GetName();
+	});
+
+	// Assign based on the number of currently logged-in players
+	int32 PlayerIndex = GameState->PlayerArray.Num() - 1;  // Index of this player
+	int32 SpawnIndex = PlayerIndex % PlayerStarts.Num();   // Alternate between spawns
+
+	AActor* ChosenStart = PlayerStarts[SpawnIndex];
+
+	UE_LOG(LogTemp, Log, TEXT("Player %d assigned to spawn: %s"), PlayerIndex + 1, *ChosenStart->GetName());
+
+	return ChosenStart;
+
 }
 
 
