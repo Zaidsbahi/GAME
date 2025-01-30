@@ -199,6 +199,11 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Audio")
 	USoundBase* DashSound;
 	void PlayDashSound();
+
+	///////////////////////////
+	///      Crosshair      ///
+	///////////////////////////
+	FVector GetCrosshairDirection();
 };
 
 

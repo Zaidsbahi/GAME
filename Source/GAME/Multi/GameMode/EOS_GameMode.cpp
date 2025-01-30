@@ -557,24 +557,24 @@ AActor* AEOS_GameMode::FindPlayerStart_Implementation(AController* Player, const
 	int32 SpawnIndex = PlayerIndex % PlayerStarts.Num();   // Alternate between spawns
 
 	AActor* ChosenStart = PlayerStarts[SpawnIndex];
-
-	UE_LOG(LogTemp, Log, TEXT("Player %d assigned to spawn: %s"), PlayerIndex + 1, *ChosenStart->GetName());
-
-	return ChosenStart;
-
-}
-
-
-///////////////////////////
-///   Winning Condition ///
-///////////////////////////
-///
-/*
-void AEOS_GameMode::MulticastShowWinningScreen_Implementation()
-{
-	if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
-	{
-		GameStateRef->MulticastShowWinningScreen();
-	}
-}
-*/
+  
+  	UE_LOG(LogTemp, Log, TEXT("Player %d assigned to spawn: %s"), PlayerIndex + 1, *ChosenStart->GetName());
+  
+  	return ChosenStart;
+  
+  }
+  
+  
+  ///////////////////////////
+  ///   Winning Condition ///
+  ///////////////////////////
+  ///
+  /*
+  void AEOS_GameMode::MulticastShowWinningScreen_Implementation()
+  {
+  	if (AEOS_GameState* GameStateRef = GetGameState<AEOS_GameState>())
+  	{
+  		GameStateRef->MulticastShowWinningScreen();
+  	}
+  }
+  */

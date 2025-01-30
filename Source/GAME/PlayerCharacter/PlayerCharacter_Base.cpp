@@ -224,32 +224,41 @@ void APlayerCharacter_Base::PerformAirDash()
 
             PS->AddDashCount(-1);
             PS->SetActivateProximityBoostDash();
-
-            // Calculating The AirDash Direction based on Input
-            FVector DashDirection = GetActorForwardVector() * AirDashSpeed;
-
-            bIsGeneratingTrail = true;
-            GetWorld()->GetTimerManager().SetTimer(TrailSpawnTimerHandle, this, &APlayerCharacter_Base::SpawnTrailRepeatedly, 0.2f, true);
-
-            // Apply the dash using LaucnhCharacter
-            LaunchCharacter(DashDirection, true, true);
-
-            // Play Dash Sound
-            PlayDashSound();
             
-            //Notify the Server
-            if (HasAuthority())
-            {
-                PerformAirDash_NetMulticast();
-            }
-            else
-            {
-                PerformAirDash_Server();
-            }
+            // Calculating The AirDash Direction based on Input
+            //FVector DashDirection = GetActorForwardVector() * AirDashSpeed;
 
-            // Starting the timer to end the dash
-            GetWorldTimerManager().SetTimer(AirDashTimerHandle, this, &APlayerCharacter_Base::EndAirDash, AirDashDuration, false);
+            // **Get Dash Direction from Crosshair**
+            FVector DashDirection = GetCrosshairDirection();
 
+            // Ensure DashDirection is valid
+            if (!DashDirection.IsNearlyZero())
+            {
+                DashDirection.Normalize(); // Normalize the direction before applying force
+                FVector DashVelocity = DashDirection * AirDashSpeed;
+
+                bIsGeneratingTrail = true;
+                GetWorld()->GetTimerManager().SetTimer(TrailSpawnTimerHandle, this, &APlayerCharacter_Base::SpawnTrailRepeatedly, 0.2f, true);
+
+                // Apply the dash using LaucnhCharacter
+                LaunchCharacter(DashVelocity, true, true);
+
+                // Play Dash Sound
+                PlayDashSound();
+            
+                //Notify the Server
+                if (HasAuthority())
+                {
+                    PerformAirDash_NetMulticast();
+                }
+                else
+                {
+                    PerformAirDash_Server();
+                }
+
+                // Starting the timer to end the dash
+                GetWorldTimerManager().SetTimer(AirDashTimerHandle, this, &APlayerCharacter_Base::EndAirDash, AirDashDuration, false);
+            }
         }
     }
 }
@@ -272,6 +281,37 @@ void APlayerCharacter_Base::PerformAirDash_Server_Implementation()
 {
     PerformAirDash();
 }
+
+
+////////////////////////////////////////
+//////////  AirDash Logic  /////////////
+////////////////////////////////////////
+FVector APlayerCharacter_Base::GetCrosshairDirection()
+{
+    APlayerController* PC = Cast<APlayerController>(GetController());
+    if (!PC) return FVector::ZeroVector;
+
+    FVector CameraLocation;
+    FRotator CameraRotation;
+
+    PC->GetPlayerViewPoint(CameraLocation, CameraRotation); // Get camera location & rotation
+
+    FVector TraceStart = CameraLocation;
+    FVector TraceEnd = TraceStart + (CameraRotation.Vector() * 5000.f); // Long trace
+
+    FHitResult HitResult;
+    FCollisionQueryParams Params;
+    Params.AddIgnoredActor(this); // Ignore the player
+
+    if (GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ECC_Visibility, Params))
+    {
+        return (HitResult.ImpactPoint - GetActorLocation()).GetSafeNormal();
+    }
+
+    return CameraRotation.Vector(); // Default to camera forward if nothing is hit
+
+}
+
 
 ////////////////////////////////////////
 //////      Pickup Logic        ////////
@@ -359,7 +399,6 @@ void APlayerCharacter_Base::RestartLevel()
         UE_LOG(LogTemp, Warning, TEXT("Only the server/host can restart the level."));
     }
 }
-
 void APlayerCharacter_Base::RestartTrack()
 {
     if (HasAuthority()) // Only the host can restart
