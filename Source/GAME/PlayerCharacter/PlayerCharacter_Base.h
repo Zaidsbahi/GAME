@@ -3,7 +3,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "GAME/ProximityBoost/ProximityBoost_Component.h"
+#include "NiagaraComponent.h"
+#include "NiagaraFunctionLibrary.h"
 #include "PlayerCharacter_Base.generated.h"
+
 
 UCLASS()
 class GAME_API APlayerCharacter_Base : public ACharacter
@@ -204,6 +207,19 @@ public:
 	///      Crosshair      ///
 	///////////////////////////
 	FVector GetCrosshairDirection();
+
+	///////////////////////////////
+	///      Niagra System      ///
+	///////////////////////////////
+	// Ghost Trail Niagara Component
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
+	//UNiagaraSystem* GhostTrailEffect;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VFX")
+    UNiagaraComponent* TrailEffect;
+
+	UFUNCTION(BlueprintCallable, Category = "VFX")
+	void DeativateNiagraSystem();
 };
 
 
@@ -213,6 +229,12 @@ inline void APlayerCharacter_Base::Landed(const FHitResult& Hit)
 	bIsGrounded = true;
 	StopTrailSpawning();
 	UE_LOG(LogTemp, Log , TEXT("Landed Bro!"))
+
+	// ✅ Deactivate the Niagara Trail Effect
+	if (TrailEffect)
+	{
+		TrailEffect->Deactivate();
+	}
 
 	// Reset coyote time availability
 	bCanUseCoyoteTime = false;

@@ -10,9 +10,9 @@ public class GAME : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "EOSSDK" ,"Core", "CoreUObject", "Engine", "InputCore", "OnlineSubsystem", "OnlineSubsystemEOS", "OnlineSubsystemUtils" , "EnhancedInput" });
+		PublicDependencyModuleNames.AddRange(new string[] { "EOSSDK" ,"Core", "CoreUObject", "Engine", "InputCore", "OnlineSubsystem", "OnlineSubsystemEOS", "OnlineSubsystemUtils" , "EnhancedInput", "Niagara"});
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] { });
 		
 		PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "ThirdParty", "EOSSDK", "Include"));
 

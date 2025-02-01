@@ -26,7 +26,7 @@ ATrailActor::ATrailActor()
 	// Static Mesh Component
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 	StaticMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision); // Disable collision
-	StaticMesh->SetVisibility(true); // Ensure it's visible
+	StaticMesh->SetVisibility(false); // Ensure it's visible
 	
 	
 	bReplicates = true;
@@ -67,7 +67,7 @@ void ATrailActor::BeginPlay()
 	Super::BeginPlay();
 
 	// Draw a debug sphere with a limited lifetime
-	DrawDebugSphere(GetWorld(), GetActorLocation(), SphereRadius, 16, FColor::Red, false, 5.0f, 0, 2.0f);
+	//DrawDebugSphere(GetWorld(), GetActorLocation(), SphereRadius, 16, FColor::Red, false, 5.0f, 0, 2.0f);
 	
 
 	if (Sphere)
@@ -97,7 +97,7 @@ void ATrailActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifet
  void ATrailActor::DestroySelf()
 {
 	// Clear debug sphere by redrawing it with zero lifetime
-	DrawDebugSphere(GetWorld(), GetActorLocation(), SphereRadius, 16, FColor::Red, false, 0.0f, 0, 2.0f);
+	//DrawDebugSphere(GetWorld(), GetActorLocation(), SphereRadius, 16, FColor::Red, false, 0.0f, 0, 2.0f);
 
 	UE_LOG(LogTemp, Log, TEXT("TrailActor %s is being destroyed"), *GetName());
 	Destroy();

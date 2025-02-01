@@ -62,6 +62,13 @@ void APlayerCharacter_Base::BeginPlay()
         }
     }
     
+        // Find the Niagara Component
+        TrailEffect = FindComponentByClass<UNiagaraComponent>();
+    
+        if (TrailEffect)
+        {
+            TrailEffect->SetAutoActivate(false);  // Ensure it starts deactivated
+        }
 
     // Configure the maximum allowed jumps using JumpMaxCount
     JumpMaxCount = (CurrentJumpCount > 1) ? 2 : 1;
@@ -170,6 +177,11 @@ void APlayerCharacter_Base::Jump()
                     // Start trail spawning
                     bIsGeneratingTrail = true;
                     GetWorld()->GetTimerManager().SetTimer(TrailSpawnTimerHandle, this, &APlayerCharacter_Base::SpawnTrailRepeatedly, 0.2f, true);
+                    // ✅ Activate the Niagara Trail Effect
+                    if (TrailEffect)
+                    {
+                        TrailEffect->Activate();
+                    }
                 }
             }
             else
@@ -178,6 +190,11 @@ void APlayerCharacter_Base::Jump()
                 {
                     bIsGeneratingTrail = true;
                     GetWorld()->GetTimerManager().SetTimer(TrailSpawnTimerHandle, this, &APlayerCharacter_Base::SpawnTrailRepeatedly, 0.2f, true);
+                    // ✅ Activate the Niagara Trail Effect
+                    if (TrailEffect)
+                    {
+                        TrailEffect->Activate();
+                    }
                 }
                     Super::Jump();
                     PS->AddJumpCount(-1); // Decrement jump count
@@ -240,8 +257,15 @@ void APlayerCharacter_Base::PerformAirDash()
                 bIsGeneratingTrail = true;
                 GetWorld()->GetTimerManager().SetTimer(TrailSpawnTimerHandle, this, &APlayerCharacter_Base::SpawnTrailRepeatedly, 0.2f, true);
 
+                // ✅ Activate the Niagara Trail Effect
+                if (TrailEffect)
+                {
+                    TrailEffect->Activate();
+                }
+
                 // Apply the dash using LaucnhCharacter
                 LaunchCharacter(DashVelocity, true, true);
+               
 
                 // Play Dash Sound
                 PlayDashSound();
@@ -310,6 +334,15 @@ FVector APlayerCharacter_Base::GetCrosshairDirection()
 
     return CameraRotation.Vector(); // Default to camera forward if nothing is hit
 
+}
+
+void APlayerCharacter_Base::DeativateNiagraSystem()
+{
+    // ✅ Deactivate the Niagara Trail Effect
+    if (TrailEffect)
+    {
+        TrailEffect->Deactivate();
+    }
 }
 
 
@@ -503,6 +536,7 @@ void APlayerCharacter_Base::SpawnTrailActors()
 
             ATrailActor* SpawnedTrail = World->SpawnActor<ATrailActor>(ATrailActor::StaticClass(), SpawnLocation, SpawnRotation, SpawnParams);
 
+            
             if (SpawnedTrail)
             {
                 UE_LOG(LogTemp, Log, TEXT("Successfully spawned TrailActor: %s"), *SpawnedTrail->GetName());
@@ -547,6 +581,8 @@ void APlayerCharacter_Base::SpawnTrailRepeatedly()
 
             ATrailActor* SpawnedTrail = World->SpawnActor<ATrailActor>(ATrailActor::StaticClass(), SpawnLocation, SpawnRotation, SpawnParams);
 
+          
+            
             if (SpawnedTrail)
             {
                 UE_LOG(LogTemp, Log, TEXT("Trail Actor Spawned: %s"), *SpawnedTrail->GetName());

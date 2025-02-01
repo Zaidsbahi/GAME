@@ -16,7 +16,16 @@
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_DashPickup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_DashPickup.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Characters/UEFN_Mannequin/Meshes/SKM_UEFN_Mannequin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/UEFN_Mannequin/Meshes/SKM_UEFN_Mannequin.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Khaleds_Assets/ENV_Kit_01/Tokens/DSH_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Khaleds_Assets/ENV_Kit_01/Tokens/DSH_01.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/Track1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track1.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/GAME.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/GAME.Build.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/TrailActor/TrailActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/TrailActor/TrailActor.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +107,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.reader.mode&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -305,6 +314,16 @@
       <workItem from="1738182510788" duration="2938000" />
       <workItem from="1738200210338" duration="3655000" />
       <workItem from="1738326341111" duration="135000" />
+      <workItem from="1738353678702" duration="1519000" />
+      <workItem from="1738355852418" duration="901000" />
+      <workItem from="1738357077565" duration="612000" />
+      <workItem from="1738357820069" duration="1774000" />
+      <workItem from="1738360201677" duration="1307000" />
+      <workItem from="1738367432493" duration="343000" />
+      <workItem from="1738379646790" duration="1055000" />
+      <workItem from="1738380758906" duration="841000" />
+      <workItem from="1738381638946" duration="348000" />
+      <workItem from="1738382182748" duration="2637000" />
     </task>
     <servers />
   </component>
