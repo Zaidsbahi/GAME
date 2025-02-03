@@ -5,6 +5,7 @@
     <projectFile profileName="EpicGames.AspNet">../../../UnrealEngine/UE_5.5/Engine/Source/Programs/Shared/EpicGames.AspNet/EpicGames.AspNet.csproj</projectFile>
     <projectFile kind="Docker">../../../UnrealEngine/UE_5.5/Engine/Source/Programs/Shared/EpicGames.Perforce.Fixture/EpicGames.Perforce.Fixture.csproj</projectFile>
     <projectFile>../../../UnrealEngine/UE_5.5/Engine/Source/Programs/UnrealBuildTool/UnrealBuildTool.csproj</projectFile>
+    <projectFile kind="Docker">../../UnrealEngine/UE_5.5/Engine/Source/Programs/Shared/EpicGames.Perforce.Fixture/EpicGames.Perforce.Fixture.csproj</projectFile>
     <projectFile kind="Docker">$PROJECT_DIR$/../../Program Files/Epic Games/UE_5.5/Engine/Source/Programs/Shared/EpicGames.Perforce.Fixture/EpicGames.Perforce.Fixture.csproj</projectFile>
     <projectFile>Intermediate/ProjectFiles/GAME.vcxproj</projectFile>
     <projectFile>Intermediate/ProjectFiles/UE5.vcxproj</projectFile>
@@ -16,16 +17,14 @@
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_DashPickup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_DashPickup.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Characters/UEFN_Mannequin/Meshes/SKM_UEFN_Mannequin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/UEFN_Mannequin/Meshes/SKM_UEFN_Mannequin.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Khaleds_Assets/ENV_Kit_01/Tokens/DSH_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Khaleds_Assets/ENV_Kit_01/Tokens/DSH_01.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/EOS_Main_GameModeBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/EOS_Main_GameModeBase.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/Track1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track1.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GAME.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GAME.sln.DotSettings.user" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/GAME.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/GAME.Build.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/TrailActor/TrailActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/TrailActor/TrailActor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/LeaderboardManager/LeaderboardManager.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/LeaderboardManager/LeaderboardManager.h" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +38,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../UnrealEngine/UE_5.5/Engine/Source/Runtime/GameplayTags/Classes/GameplayTagsManager.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -58,30 +58,6 @@
     <setting file="file://$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/TrailActor/TrailActor.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/TrailActor/TrailActor.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Programs/AutomationTool/Scripts/CheckCsprojDotNetVersion.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Core/Public/Templates/SharedPointer.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/CoreUObject/Public/UObject/CoreNetTypes.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/CoreUObject/Public/UObject/FastReferenceCollector.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Classes/Engine/EngineTypes.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Classes/Engine/GameInstance.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Classes/Engine/World.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Classes/GameFramework/Character.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Classes/GameFramework/CharacterMovementComponent.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Classes/GameFramework/Controller.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Classes/GameFramework/GameModeBase.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Classes/GameFramework/NavMovementComponent.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Classes/GameFramework/NavMovementInterface.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Classes/GameFramework/PlayerState.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Private/Character.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/Runtime/Engine/Private/Components/CharacterMovementComponent.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/ThirdParty/EOSSDK/EOSSDK.Build.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/ThirdParty/EOSSDK/SDK/Include/eos_auth_types.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/ThirdParty/EOSSDK/SDK/Include/eos_base.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/ThirdParty/EOSSDK/SDK/Include/eos_common.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/ThirdParty/EOSSDK/SDK/Include/eos_init.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/ThirdParty/EOSSDK/SDK/Include/eos_leaderboards_types.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/ThirdParty/EOSSDK/SDK/Include/eos_sdk.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://K:/UnrealEngine/UE_5.5/Engine/Source/ThirdParty/EOSSDK/SDK/Include/eos_stats_types.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="Toolset" />
@@ -107,12 +83,12 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;SolutionBuilderGeneralOptionsPage&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RiderProblemsViewState">
-    <option name="proportion" value="0.34128746" />
+    <option name="proportion" value="0.46575344" />
   </component>
   <component name="RunManager" selected="C/C++ Project.GAME">
     <configuration name="GAME" type="CppProject" factoryName="C++ Project">
@@ -211,6 +187,17 @@
           <option name="containerName" value="epicgames.perforce.fixture" />
           <option name="contextFolderPath" value="C:\UnrealEngineProject\GAME" />
           <option name="sourceFilePath" value="K:/UnrealEngine/UE_5.5/Engine/Source/Programs/Shared/EpicGames.Perforce.Fixture/Dockerfile" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="EpicGames.Perforce.Fixture/Dockerfile (3)" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="containerName" value="epicgames.perforce.fixture" />
+          <option name="contextFolderPath" value="C:\UnrealEngineProject\GAME" />
+          <option name="sourceFilePath" value="../../UnrealEngine/UE_5.5/Engine/Source/Programs/Shared/EpicGames.Perforce.Fixture/Dockerfile" />
         </settings>
       </deployment>
       <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
@@ -324,6 +311,30 @@
       <workItem from="1738380758906" duration="841000" />
       <workItem from="1738381638946" duration="348000" />
       <workItem from="1738382182748" duration="2637000" />
+      <workItem from="1738455729072" duration="514000" />
+      <workItem from="1738464792066" duration="1098000" />
+      <workItem from="1738468481711" duration="4831000" />
+      <workItem from="1738478305643" duration="625000" />
+      <workItem from="1738479075793" duration="160000" />
+      <workItem from="1738479325738" duration="556000" />
+      <workItem from="1738479900440" duration="668000" />
+      <workItem from="1738480681516" duration="146000" />
+      <workItem from="1738483684397" duration="901000" />
+      <workItem from="1738484899492" duration="279000" />
+      <workItem from="1738487371418" duration="657000" />
+      <workItem from="1738488061865" duration="379000" />
+      <workItem from="1738518540964" duration="1903000" />
+      <workItem from="1738520664695" duration="96000" />
+      <workItem from="1738537512804" duration="2061000" />
+      <workItem from="1738540934506" duration="1824000" />
+      <workItem from="1738542997552" duration="759000" />
+      <workItem from="1738545065140" duration="859000" />
+      <workItem from="1738546468519" duration="275000" />
+      <workItem from="1738547246070" duration="431000" />
+      <workItem from="1738547823189" duration="915000" />
+      <workItem from="1738550043867" duration="1715000" />
+      <workItem from="1738554650555" duration="2193000" />
+      <workItem from="1738557069317" duration="835000" />
     </task>
     <servers />
   </component>

@@ -1,14 +1,20 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=3F90C205_002D9B74_002D321B_002DA772_002D88D9E1FFD5AE_002Fdl_003ASource_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002E_002E_003FUnrealEngine_003FUE_005F5_002E5_003FEngine_003FSource_002Fd_003ARuntime_002Fd_003AGameplayTags_002Fd_003AClasses_002Ff_003AGameplayTagsManager_002Eh/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=42E31692_002D887D_002D3AC6_002D8940_002D070EBDA88B11_002Fd_003AStorage_002Ff_003ABatchReader_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003Aeos_005Fbase_002Eh_002Fl_003AK_0021_003FUnrealEngine_003FUE_005F5_002E5_003FEngine_003FSource_003FThirdParty_003FEOSSDK_003FSDK_003FInclude_003Feos_005Fbase_002Eh/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003Aeos_005Fleaderboards_005Ftypes_002Eh_002Fl_003AK_0021_003FUnrealEngine_003FUE_005F5_002E5_003FEngine_003FSource_003FThirdParty_003FEOSSDK_003FSDK_003FInclude_003Feos_005Fleaderboards_005Ftypes_002Eh/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003Aeos_005Fstats_005Ftypes_002Eh_002Fl_003AK_0021_003FUnrealEngine_003FUE_005F5_002E5_003FEngine_003FSource_003FThirdParty_003FEOSSDK_003FSDK_003FInclude_003Feos_005Fstats_005Ftypes_002Eh/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AUgsMetadata_002Ecs_002Fl_003AK_0021_003FUnrealEngine_003FUE_005F5_002E5_003FEngine_003FSource_003FPrograms_003FShared_003FEpicGames_002EHorde_003FUgs_003FUgsMetadata_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/CustomBuildToolPath/@EntryValue">C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe</s:String>
 	
-	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/DotNetCliExePath/@EntryValue">K:\UnrealEngine\UE_5.5\Engine\Binaries\ThirdParty\DotNet\8.0.300\win-x64\dotnet.exe</s:String>
+	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/DotNetCliExePath/@EntryValue">C:\UnrealEngine\UE_5.5\Engine\Binaries\ThirdParty\DotNet\8.0.300\win-x64\dotnet.exe</s:String>
 	<s:Int64 x:Key="/Default/Environment/Hierarchy/Build/BuildTool/MsBuildSolutionLoadingNodeCount/@EntryValue">12</s:Int64>
+	
+	
 	
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/SolBuilderDuo/UseMsbuildSolutionBuilder/@EntryValue">NewVersion</s:String>
 	<s:Int64 x:Key="/Default/Environment/Hierarchy/Build/SolutionBuilderNext/ParallelProcessesCount2/@EntryValue">12</s:Int64>
+	<s:Boolean x:Key="/Default/Environment/Hierarchy/Build/SolutionBuilderNext/ShouldRestoreNugetPackages/@EntryValue">True</s:Boolean>
 	
 	
 	
