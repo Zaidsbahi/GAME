@@ -17,14 +17,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/EOS_Main_GameModeBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/EOS_Main_GameModeBase.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/Track1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track1.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GAME.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/GAME.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/GAME.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/GAME.Build.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/LeaderboardManager/LeaderboardManager.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/LeaderboardManager/LeaderboardManager.h" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -335,6 +330,7 @@
       <workItem from="1738550043867" duration="1715000" />
       <workItem from="1738554650555" duration="2193000" />
       <workItem from="1738557069317" duration="835000" />
+      <workItem from="1738614462011" duration="795000" />
     </task>
     <servers />
   </component>
