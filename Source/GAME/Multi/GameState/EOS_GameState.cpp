@@ -1,5 +1,6 @@
 #include "EOS_GameState.h"
 
+#include "GAME/Multi/GameMode/EOS_GameMode.h"
 #include "GAME/PlayerCharacter/PlayerCharacter_Base.h"
 #include "Net/UnrealNetwork.h"
 
@@ -36,6 +37,17 @@ void AEOS_GameState::MulticastShowWinningScreen_Implementation()
 {
 	UE_LOG(LogTemp, Warning, TEXT("[%s] MulticastShowWinningScreen Called!"), HasAuthority() ? TEXT("Server") : TEXT("Client"));
 
+	// Stop the timer on the GameMode
+	if (HasAuthority())  // Only the server should stop the timer
+	{
+		AEOS_GameMode* GameModeRef = GetWorld()->GetAuthGameMode<AEOS_GameMode>();
+		if (GameModeRef)
+		{
+			GameModeRef->StopTrackTimer();
+			UE_LOG(LogTemp, Warning, TEXT("Track timer stopped due to winning condition!"));
+		}
+	}
+	
 	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
 	{
 		APlayerController* PlayerController = It->Get();

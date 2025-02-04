@@ -55,4 +55,10 @@ public:
 	///////////////////////////
 	UFUNCTION(BlueprintImplementableEvent, Category = "Audio")
 	void PlayPickupSound(int32 PickupIndex);
+
+	///////////////////////////
+	///       Respawning    ///
+	///////////////////////////
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category= "Pickup")
+	bool bShouldRespawn;
 };

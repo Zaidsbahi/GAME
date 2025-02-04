@@ -23,6 +23,7 @@ ABase_Pickup::ABase_Pickup()
 	// Default Respawn Time
 	RespawnTime = 10.0f;
 
+	bShouldRespawn = true;
 }
 
 
@@ -61,8 +62,11 @@ void ABase_Pickup::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 		// Cycle between 0, 1, 2 (so it loops through the 3 sounds)
 		PickupCount = (PickupCount + 1) % 3;
 
-		// Start the respawn timer
-		GetWorldTimerManager().SetTimer(RespawnTimerHandle, this, &ABase_Pickup::RespawnPickup, RespawnTime, false);
+		if (bShouldRespawn)
+		{
+			// Start the respawn timer
+			GetWorldTimerManager().SetTimer(RespawnTimerHandle, this, &ABase_Pickup::RespawnPickup, RespawnTime, false);
+		}
 	}
 }
 

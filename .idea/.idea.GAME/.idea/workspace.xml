@@ -17,9 +17,18 @@
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_4.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_4.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_5.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_5.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_6.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_6.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/EOS_Main_GameModeBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/EOS_Main_GameModeBase.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/Track1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track1.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/Track2.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track2.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +43,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../../UnrealEngine/UE_5.5/Engine/Source/Runtime/GameplayTags/Classes/GameplayTagsManager.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/GAME/UHT/EOS_GameState.gen.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -331,6 +341,7 @@
       <workItem from="1738554650555" duration="2193000" />
       <workItem from="1738557069317" duration="835000" />
       <workItem from="1738614462011" duration="795000" />
+      <workItem from="1738622291665" duration="3324000" />
     </task>
     <servers />
   </component>
