@@ -18,12 +18,16 @@
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/CBP_SandboxCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Input/IMC_Mechanics.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Input/IMC_Mechanics.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/BP_MiddleCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/BP_MiddleCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/BP_OldCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/BP_OldCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/BP_YoungCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/RetargetedCharacters/BP_YoungCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/Track1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track1.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Widgets/Material.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/Material.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Widgets/Material01.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/ProximityBoost/ProximityBoost_Component.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -337,6 +341,7 @@
       <workItem from="1738557069317" duration="835000" />
       <workItem from="1738614462011" duration="795000" />
       <workItem from="1738622291665" duration="5606000" />
+      <workItem from="1738632002549" duration="7798000" />
     </task>
     <servers />
   </component>

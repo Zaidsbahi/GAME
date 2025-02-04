@@ -37,7 +37,21 @@ UProximityBoost_Component::UProximityBoost_Component()
 	StaticMesh->SetupAttachment(Sphere);
 	StaticMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision); // Disable collision
 	StaticMesh->SetVisibility(true); // Ensure it's visible
+
 	
+	// Set default materials (optional)
+	static ConstructorHelpers::FObjectFinder<UMaterialInterface> ActiveMat(TEXT("/Game/Widgets/MaterialActive.MaterialActive"));
+	static ConstructorHelpers::FObjectFinder<UMaterialInterface> InactiveMat(TEXT("/Game/Widgets/MaterialInactive.MaterialInactive"));
+
+	if (ActiveMat.Succeeded())
+	{
+		ActiveMaterial = ActiveMat.Object;
+	}
+
+	if (InactiveMat.Succeeded())
+	{
+		InactiveMaterial = InactiveMat.Object;
+	}
 }
 void UProximityBoost_Component::BeginPlay()
 {
@@ -94,7 +108,8 @@ void UProximityBoost_Component::OnSphereOverlapBegin(UPrimitiveComponent* Overla
 				bIsActivatedProximity = true;
 				
 				ActivateProximityBoost();
-				
+
+				/*
 				// Changing Colors to Green for the Static Mesh
 				if (StaticMesh)
 				{
@@ -103,6 +118,12 @@ void UProximityBoost_Component::OnSphereOverlapBegin(UPrimitiveComponent* Overla
 					{
 						DynamicMaterial->SetVectorParameterValue("BaseColor", FColor::Green);
 					}
+				}
+				*/
+				// ✅ Set the material to **ActiveMaterial** (Green)
+				if (StaticMesh && ActiveMaterial)
+				{
+					StaticMesh->SetMaterial(0, ActiveMaterial);
 				}
 			}
 		}
@@ -168,7 +189,8 @@ void UProximityBoost_Component::DeactivateProximityBoost()
 	bCanInfiniteDashAndDoubleJump = false;
 
 	bIsActivatedProximity = false;
-	
+
+	/*
 	// Changing Colors to Green for the Static Mesh
 	if (StaticMesh)
 	{
@@ -178,6 +200,13 @@ void UProximityBoost_Component::DeactivateProximityBoost()
 			DynamicMaterial->SetVectorParameterValue("BaseColor", FColor::Red);
 		}
 	}
+	*/
+	// ✅ Set the material to **InactiveMaterial** (Red)
+	if (StaticMesh && InactiveMaterial)
+	{
+		StaticMesh->SetMaterial(0, InactiveMaterial);
+	}
+
 
 	if (APlayerCharacter_Base* PlayerCharacter = Cast<APlayerCharacter_Base>(GetOwner()))
 	{
@@ -202,7 +231,8 @@ void UProximityBoost_Component::ActivateProximityOnBeginOverlap()
 	bIsActivatedProximity = true;
 				
 	ActivateProximityBoost();
-				
+
+	/*
 	// Changing Colors to Green for the Static Mesh
 	if (StaticMesh)
 	{
@@ -211,6 +241,12 @@ void UProximityBoost_Component::ActivateProximityOnBeginOverlap()
 		{
 			DynamicMaterial->SetVectorParameterValue("BaseColor", FColor::Green);
 		}
+	}
+	*/
+	// ✅ Set the material to **ActiveMaterial** (Green)
+	if (StaticMesh && ActiveMaterial)
+	{
+		StaticMesh->SetMaterial(0, ActiveMaterial);
 	}
 }
 void UProximityBoost_Component::DeActivateProximityOnEndOverlap()
@@ -231,7 +267,8 @@ void UProximityBoost_Component::ServerActivateProximityBoost_Implementation()
 				
 	ActivateProximityBoost();
 	MulticastActivateProximityBoost();
-	
+
+	/*
 	// Changing Colors to Green for the Static Mesh
 	if (StaticMesh)
 	{
@@ -240,6 +277,12 @@ void UProximityBoost_Component::ServerActivateProximityBoost_Implementation()
 		{
 			DynamicMaterial->SetVectorParameterValue("BaseColor", FColor::Green);
 		}
+	}
+	*/
+	// ✅ Set the material to **ActiveMaterial** (Green)
+	if (StaticMesh && ActiveMaterial)
+	{
+		StaticMesh->SetMaterial(0, ActiveMaterial);
 	}
 }
 bool UProximityBoost_Component::ServerActivateProximityBoost_Validate()
@@ -253,7 +296,13 @@ void UProximityBoost_Component::MulticastActivateProximityBoost_Implementation()
 	bIsActivatedProximity = true;
 				
 	ActivateProximityBoost();
-	
+
+	// ✅ Set the material to **ActiveMaterial** (Green)
+	if (StaticMesh && ActiveMaterial)
+	{
+		StaticMesh->SetMaterial(0, ActiveMaterial);
+	}
+	/*
 	// Changing Colors to Green for the Static Mesh
 	if (StaticMesh)
 	{
@@ -263,6 +312,7 @@ void UProximityBoost_Component::MulticastActivateProximityBoost_Implementation()
 			DynamicMaterial->SetVectorParameterValue("BaseColor", FColor::Green);
 		}
 	}
+	*/
 }
 
 //////////////////////////////////
@@ -289,6 +339,7 @@ void UProximityBoost_Component::MulticastDeActivateProximityBoost_Implementation
 	bCanInfiniteDashAndDoubleJump = false;
 	bIsActivatedProximity = false;
 
+	/*
 	// Change color to red when the effect ends
 	if (StaticMesh)
 	{
@@ -298,7 +349,14 @@ void UProximityBoost_Component::MulticastDeActivateProximityBoost_Implementation
 			DynamicMaterial->SetVectorParameterValue("BaseColor", FColor::Red);
 		}
 	}
+	*/
 
+	// ✅ Set the material to **InactiveMaterial** (Red)
+	if (StaticMesh && InactiveMaterial)
+	{
+		StaticMesh->SetMaterial(0, InactiveMaterial);
+	}
+	
 	UE_LOG(LogTemp, Log, TEXT("Proximity Boost deactivated for all clients."));
 
 	if (APlayerCharacter_Base* PlayerCharacter = Cast<APlayerCharacter_Base>(GetOwner()))

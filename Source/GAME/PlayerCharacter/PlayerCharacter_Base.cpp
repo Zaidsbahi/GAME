@@ -1,4 +1,5 @@
 #include "PlayerCharacter_Base.h"
+#include "EngineUtils.h"
 #include "GAME/PlayerState/PlayerState_Base.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/InputComponent.h"
@@ -12,6 +13,9 @@
 #include "GAME/TrailActor/TrailActor.h"
 #include "Net/UnrealNetwork.h"
 #include "Kismet/GameplayStatics.h"
+#include "Materials/MaterialInstanceDynamic.h"
+#include "Engine/World.h"
+#include "Components/PostProcessComponent.h"
 
 ////////////////////////////////////////
 ///  Constructor & BeginPlay & TICK  ///
@@ -62,22 +66,45 @@ void APlayerCharacter_Base::BeginPlay()
         }
     }
     
-        // Find the Niagara Component
-        TrailEffect = FindComponentByClass<UNiagaraComponent>();
+    // Find the Niagara Component
+    TrailEffect = FindComponentByClass<UNiagaraComponent>();
     
-        if (TrailEffect)
-        {
-            TrailEffect->SetAutoActivate(false);  // Ensure it starts deactivated
-        }
+    if (TrailEffect)
+    {
+        TrailEffect->SetAutoActivate(false);  // Ensure it starts deactivated
+    }
 
     // Configure the maximum allowed jumps using JumpMaxCount
     JumpMaxCount = (CurrentJumpCount > 1) ? 2 : 1;
 
     UE_LOG(LogTemp, Log, TEXT("BeginPlay: JumpMaxCount set to %d"), JumpMaxCount);
+
+    ///////////////////////////////
+    ///     Vignette Effect     ///
+    ///////////////////////////////
+    // Get the player’s post-process volume
+    APostProcessVolume* PostProcessVolume = nullptr;
+    for (TActorIterator<APostProcessVolume> It(GetWorld()); It; ++It)
+    {
+        PostProcessVolume = *It;
+        break; // Take the first available Post Process Volume
+    }
+
+    if (PostProcessVolume && SpeedEffectMaterial)
+    {
+        // Create a Dynamic Material Instance
+        SpeedEffectMaterialInstance = UMaterialInstanceDynamic::Create(SpeedEffectMaterial, this);
+        PostProcessVolume->AddOrUpdateBlendable(SpeedEffectMaterialInstance);
+    }
+  
 }
+
 void APlayerCharacter_Base::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+
+    float CurrentSpeed = GetVelocity().Size();
+    UpdateSprintEffects(CurrentSpeed);
     
     if (!GetCharacterMovement()->IsMovingOnGround() && bIsGrounded)
     {
@@ -359,6 +386,30 @@ void APlayerCharacter_Base::ToggleJogging()
     {
         ToggleJogging_Server(); // Call the server function to sync across clients
     }
+}
+
+
+///////////////////////////////
+///     Vignette Effect     ///
+///////////////////////////////
+void APlayerCharacter_Base::UpdateSprintEffects(float Speed)
+{
+    if (!SpeedEffectMaterialInstance) return;
+
+    float SpeedThreshold = 400.0f; // Minimum speed for effect
+    float MaxEffectSpeed = 800.0f; // Maximum speed effect intensity
+    float MaxIntensity = 1.5f;
+    float MinIntensity = 0.0f;
+
+    // Calculate intensity based on speed
+    float EffectIntensity = FMath::Clamp((Speed - SpeedThreshold) / (MaxEffectSpeed - SpeedThreshold), MinIntensity, MaxIntensity);
+
+    // Debug Log
+    UE_LOG(LogTemp, Warning, TEXT("Current Speed: %f, Effect Intensity: %f"), Speed, EffectIntensity);
+    
+    // Update material parameter
+    SpeedEffectMaterialInstance->SetScalarParameterValue(TEXT("Speed"), EffectIntensity);
+
 }
 
 void APlayerCharacter_Base::ToggleJogging_Server_Implementation()

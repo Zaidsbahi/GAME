@@ -102,6 +102,13 @@ public:
 
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastDeActivateProximityBoost();
-	
+
+	///////////////////////
+	/////  Materials //////
+	///////////////////////
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Materials", meta = (AllowPrivateAccess = "true"))
+	UMaterialInterface* ActiveMaterial;  // Green material when activated
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Materials", meta = (AllowPrivateAccess = "true"))
+	UMaterialInterface* InactiveMaterial;  // Red material when deactivated
 	
 };

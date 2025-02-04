@@ -234,6 +234,19 @@ public:
 
 	UFUNCTION(Server, Reliable, WithValidation)
 	void ToggleJogging_Server();
+
+	///////////////////////////////
+	///     Vignette Effect     ///
+	///////////////////////////////
+	/** The dynamic material instance for the speed effect */
+	UPROPERTY(EditDefaultsOnly, Category = "PostProcess")
+	UMaterialInterface* SpeedEffectMaterial;
+
+	UPROPERTY()
+	UMaterialInstanceDynamic* SpeedEffectMaterialInstance;
+
+	/** Apply the vignette & speed effect dynamically */
+	void UpdateSprintEffects(float Speed);
 };
 
 
