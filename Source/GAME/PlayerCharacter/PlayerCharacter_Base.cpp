@@ -99,8 +99,8 @@ void APlayerCharacter_Base::Tick(float DeltaTime)
           // GameState->bShouldJog ? TEXT("True") : TEXT("False"));
 
     // Ensure it's not Track1 and both players are ready
-    FString CurrentLevel = UGameplayStatics::GetCurrentLevelName(GetWorld());
-    if (CurrentLevel == "Track1" || GameState->bShouldJog)
+    //FString CurrentLevel = UGameplayStatics::GetCurrentLevelName(GetWorld());
+    if (bIsJogging)
     {
         //UE_LOG(LogTemp, Log, TEXT("[%s] Jogging logic executed! Adding movement."), HasAuthority() ? TEXT("Server") : TEXT("Client"));
         AddMovementInput(GetActorForwardVector(), JoggingSpeed * DeltaTime);
@@ -345,6 +345,32 @@ void APlayerCharacter_Base::DeativateNiagraSystem()
     }
 }
 
+///////////////////////////////
+///      Toggle Jogging     ///
+///////////////////////////////
+void APlayerCharacter_Base::ToggleJogging()
+{
+    if (HasAuthority())
+    {
+        bIsJogging = !bIsJogging; // Toggle jogging
+        UE_LOG(LogTemp, Log, TEXT("Jogging Toggled: %s"), bIsJogging ? TEXT("Enabled") : TEXT("Disabled"));
+    }
+    else
+    {
+        ToggleJogging_Server(); // Call the server function to sync across clients
+    }
+}
+
+void APlayerCharacter_Base::ToggleJogging_Server_Implementation()
+{
+    ToggleJogging(); // Ensure the server updates the variable
+}
+
+bool APlayerCharacter_Base::ToggleJogging_Server_Validate()
+{
+    return true;
+}
+
 
 ////////////////////////////////////////
 //////      Pickup Logic        ////////
@@ -400,6 +426,7 @@ void APlayerCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInp
         EnhancedInputComponent->BindAction(AirDash, ETriggerEvent::Started, this, &APlayerCharacter_Base::PerformAirDash);
         EnhancedInputComponent->BindAction(RestartLevelAction, ETriggerEvent::Triggered, this, &APlayerCharacter_Base::RestartLevel);
         EnhancedInputComponent->BindAction(RestartTrackAction, ETriggerEvent::Triggered, this, &APlayerCharacter_Base::RestartTrack);
+        EnhancedInputComponent->BindAction(JoggingToggleAction, ETriggerEvent::Triggered, this, &APlayerCharacter_Base::ToggleJogging);
     }
 }
 void APlayerCharacter_Base::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -414,6 +441,7 @@ void APlayerCharacter_Base::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
     // Replicate AirDash Variables
     DOREPLIFETIME(APlayerCharacter_Base, bIsAirDashing);
     DOREPLIFETIME(APlayerCharacter_Base, AirDashSpeed);
+    DOREPLIFETIME(APlayerCharacter_Base, bIsJogging);
 }
 void APlayerCharacter_Base::RestartLevel()
 {

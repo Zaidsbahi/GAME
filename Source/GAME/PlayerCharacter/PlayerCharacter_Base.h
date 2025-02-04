@@ -26,6 +26,8 @@ class GAME_API APlayerCharacter_Base : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class UInputAction> RestartTrackAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= "Input",meta=(AllowPrivateAccess = "true"))
+	TObjectPtr<class UInputAction> JoggingToggleAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= "Input",meta=(AllowPrivateAccess = "true"))
 	TObjectPtr<class UInputMappingContext> MechanicsMappingContext;
 
 	///// Timer /////
@@ -220,6 +222,18 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "VFX")
 	void DeativateNiagraSystem();
+
+	///////////////////////////////
+	///      Toggle Jogging     ///
+	///////////////////////////////
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
+	bool bIsJogging;  // Player-controlled jogging toggle
+	
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+	void ToggleJogging();  // Function to toggle jogging
+
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ToggleJogging_Server();
 };
 
 

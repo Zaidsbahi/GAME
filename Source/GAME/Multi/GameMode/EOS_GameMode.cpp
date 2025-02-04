@@ -478,9 +478,11 @@ void AEOS_GameMode::OnRep_ShouldJog()
 	  // HasAuthority() ? TEXT("Server") : TEXT("Client"),
 	   //bShouldJog ? TEXT("True") : TEXT("False"));
 }
-void AEOS_GameMode::MulticastStartJogging_Implementation()
-{
-}
+
+//void AEOS_GameMode::MulticastStartJogging_Implementation()
+//{
+//}
+
 void AEOS_GameMode::StartGameplay()
 {
 	UE_LOG(LogTemp, Log, TEXT("Both players are ready. Starting the game!"));

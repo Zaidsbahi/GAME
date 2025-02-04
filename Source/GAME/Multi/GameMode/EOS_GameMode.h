@@ -75,8 +75,8 @@ public:
 	UFUNCTION()
 	void OnRep_ShouldJog();
 
-	UFUNCTION(NetMulticast, Reliable)
-	void MulticastStartJogging();
+	//UFUNCTION(NetMulticast, Reliable)
+	//void MulticastStartJogging();
 
 	// Function to start gameplay
 	void StartGameplay();
