@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "NiagaraComponent.h"
 #include "Base_Pickup.generated.h"
 
 UCLASS()
@@ -61,4 +62,11 @@ public:
 	///////////////////////////
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category= "Pickup")
 	bool bShouldRespawn;
+
+	///////////////////////////
+	///          VFX        ///
+	///////////////////////////
+	UPROPERTY(EditAnywhere, Category = "Effects")
+	UNiagaraSystem* PickupEffect;
+	
 };

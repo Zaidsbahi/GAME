@@ -16,15 +16,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/UI/UI_Collectible.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/UI/UI_Collectible.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_CollectiblePickup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_CollectiblePickup.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_DashPickup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_DashPickup.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_JumpPickup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_JumpPickup.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_4.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_4.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_5.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_5.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_6.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Collectible/BP_CollectiblePickup_6.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/Track1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track1.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/Track2.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track2.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/Track3.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track3.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/Font/GrenzeGotisch.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/Font/GrenzeGotisch.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Widgets/BP_WaitingRoom.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/BP_WaitingRoom.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_MainGameWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_MainGameWidget.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameState/EOS_GameState.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/PlayerCharacter/PlayerCharacter_Base.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_Timer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_Timer.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME.Target.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME.Target.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/BasePickup/Base_Pickup.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -342,6 +350,7 @@
       <workItem from="1738632002549" duration="7798000" />
       <workItem from="1738640666709" duration="2524000" />
       <workItem from="1738643882222" duration="22000" />
+      <workItem from="1738656685035" duration="4676000" />
     </task>
     <servers />
   </component>

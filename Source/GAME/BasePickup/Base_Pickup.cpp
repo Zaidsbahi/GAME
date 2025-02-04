@@ -3,7 +3,7 @@
 #include "Components/SphereComponent.h"
 #include "GAME/PlayerCharacter/PlayerCharacter_Base.h"
 #include "TimerManager.h"
-
+#include "NiagaraFunctionLibrary.h"
 
 ABase_Pickup::ABase_Pickup()
 {
@@ -46,6 +46,11 @@ void ABase_Pickup::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 		// Destroy the pickup after applying the effect
        // Destroy();
 
+		// Play the VFX at the pickup's location
+		if (PickupEffect)
+		{
+			UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), PickupEffect, GetActorLocation());
+		}
 		
 		// Disable the pickup temporarily instead of destroying it
 		SetActorEnableCollision(false);
@@ -84,6 +89,14 @@ void ABase_Pickup::Pickup_Implementation(class ACharacter* OwningCharacter)
 
 		SetOwner(PlayerCharacter);
 
+		// Play the VFX at the pickup's location
+		if (PickupEffect)
+		{
+			UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), PickupEffect, GetActorLocation());
+		}
+
+		UE_LOG(LogTemp, Warning, TEXT("Pickup Collected! Playing VFX."));
+		
 		// Track pickup count per player
 		static TMap<APlayerCharacter_Base*, int32> PickupCountMap;
 		int32& PickupCount = PickupCountMap.FindOrAdd(PlayerCharacter);
