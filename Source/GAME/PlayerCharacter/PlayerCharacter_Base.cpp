@@ -397,7 +397,7 @@ void APlayerCharacter_Base::UpdateSprintEffects(float Speed)
     if (!SpeedEffectMaterialInstance) return;
 
     float SpeedThreshold = 400.0f; // Minimum speed for effect
-    float MaxEffectSpeed = 800.0f; // Maximum speed effect intensity
+    float MaxEffectSpeed = 1800.0f; // Maximum speed effect intensity
     float MaxIntensity = 1.5f;
     float MinIntensity = 0.0f;
 

@@ -4,6 +4,7 @@
 #include "GameFramework/GameStateBase.h"
 #include "EOS_GameState.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCollectiblesUpdated, int32, CollectiblesCount);
 
 UCLASS()
 class GAME_API AEOS_GameState : public AGameStateBase
@@ -63,6 +64,12 @@ public:
 	///////////////////////////
 	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
 	void MulticastShowWinningScreen();
+
+	///////////////////////////
+	///   Collectables UI   ///
+	///////////////////////////
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+	FOnCollectiblesUpdated OnCollectiblesUpdated;
 
 protected:
 	// Replication setup

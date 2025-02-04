@@ -24,9 +24,12 @@ void AEOS_GameState::AddCollectible()
 	if (HasAuthority())
 	{
 		CollectiblesCount++;
-
+		
 		// Notify clients
 		OnRep_CollectiblesCount();
+
+		// Broadcast the event to update UI
+		OnCollectiblesUpdated.Broadcast(CollectiblesCount);
 	}
 }
 
