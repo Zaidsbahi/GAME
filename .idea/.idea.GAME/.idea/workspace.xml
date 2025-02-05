@@ -17,9 +17,11 @@
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Input/IMC_PauseMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Input/IMC_PauseMenu.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/Track1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track1.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Widgets/WBP_MainGameWidget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Widgets/WBP_MainGameWidget.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/Track3.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track3.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/Track4.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track4.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -339,6 +341,7 @@
       <workItem from="1738643882222" duration="22000" />
       <workItem from="1738656685035" duration="4676000" />
       <workItem from="1738663689941" duration="2197000" />
+      <workItem from="1738713159243" duration="811000" />
     </task>
     <servers />
   </component>

@@ -22,7 +22,7 @@ AEOS_GameMode::AEOS_GameMode()
 	GameStateClass = AEOS_GameState::StaticClass();
 
 	// Add track levels to the list
-	TrackLevels = {TEXT("Track1"), TEXT("Track2"), TEXT("Track3") , TEXT("Track4")};
+	TrackLevels = {TEXT("Track1"), TEXT("Track2"), TEXT("Track3") , TEXT("Track4") , TEXT("Track5")};
 	CurrentTrackIndex = 1; // Start with the first track
 
 	ElapsedTime = 0.0f;
