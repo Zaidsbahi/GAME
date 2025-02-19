@@ -17,12 +17,12 @@ void UEOS_GameInstance::LoginWithEOS(FString ID, FString Token, FString LoginTyp
 		if (IdentityPtrRef)
 		{
 			FOnlineAccountCredentials AccountDetails;
-			//AccountDetails.Id = ID;
-			//AccountDetails.Token = Token;
-			//AccountDetails.Type = LoginType;
-			AccountDetails.Id = TEXT(""); // No need to specify user ID for persistent auth
-			AccountDetails.Token = TEXT(""); // Token will be retrieved internally
-			AccountDetails.Type = TEXT("persistentauth"); // Use persistent authentication
+			AccountDetails.Id = ID;
+			AccountDetails.Token = Token;
+			AccountDetails.Type = LoginType;
+			//AccountDetails.Id = TEXT(""); // No need to specify user ID for persistent auth
+			//AccountDetails.Token = TEXT(""); // Token will be retrieved internally
+			//AccountDetails.Type = TEXT("persistentauth"); // Use persistent authentication
 			IdentityPtrRef->OnLoginCompleteDelegates->AddUObject(this, &UEOS_GameInstance::LoginWithEOS_Return);
 			IdentityPtrRef->Login(0, AccountDetails);
 		}

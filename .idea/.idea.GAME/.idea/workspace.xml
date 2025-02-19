@@ -16,12 +16,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9618cbd4-066c-4891-ac5b-c25fdfbf9b8f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/Track3.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track3.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/Track4.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/Track4.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/ZaidTestStart.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameMode/EOS_GameMode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GAME/Multi/GameInstance/EOS_GameInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GAME/Multi/GameInstance/EOS_GameInstance.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -342,6 +339,7 @@
       <workItem from="1738656685035" duration="4676000" />
       <workItem from="1738663689941" duration="2197000" />
       <workItem from="1738713159243" duration="811000" />
+      <workItem from="1738955702394" duration="3578000" />
     </task>
     <servers />
   </component>
